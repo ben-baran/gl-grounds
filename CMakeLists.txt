@@ -28,7 +28,9 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES src/main.cpp
+                 src/Resources.cpp
+                 src/Resources.h)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

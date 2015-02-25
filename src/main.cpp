@@ -9,6 +9,8 @@
 #include <fstream>
 #include <sstream>
 
+#include "Resources.h"
+
 using namespace glm;
 using std::stringstream;
 
@@ -77,12 +79,7 @@ int main()
 
     {
         //Making the vertex shader
-
-        stringstream vSStream;
-        std::ifstream vStream("res/shader/default.v");
-        vSStream << vStream.rdbuf();
-        const GLchar *vShaderChars = vSStream.str().c_str();
-        vStream.close();
+        const GLchar *vShaderChars = Res::loadStr("res/shader/default.v")->c_str();
 
         vShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vShader, 1, &vShaderChars, nullptr);
@@ -101,12 +98,7 @@ int main()
 
     {
         //Making the fragment shader
-
-        stringstream fSStream;
-        std::ifstream fStream("res/shader/default.f");
-        fSStream << fStream.rdbuf();
-        const GLchar *fShaderChars = fSStream.str().c_str();
-        fStream.close();
+        const GLchar *fShaderChars = Res::loadStr("res/shader/default.f")->c_str();
 
         fShader = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fShader, 1, &fShaderChars, nullptr);

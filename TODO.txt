@@ -1,0 +1,3 @@
+Create VBA, VBO, EBO classes
+Load textures
+Create camera class
