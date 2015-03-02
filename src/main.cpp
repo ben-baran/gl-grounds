@@ -25,7 +25,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 int main()
 {
-    if(!glfwInit())
+    if (!glfwInit())
     {
         fprintf(stderr, "Failed to initialize GLFW\n");
         return -1;
@@ -33,14 +33,13 @@ int main()
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     GLFWwindow *window;
     window = glfwCreateWindow(500, 500, "GLFW Test", nullptr, nullptr);
 
-    if(!window)
+    if (!window)
     {
         fprintf(stderr, "Failed to open GLFW window\n");
         return -1;
@@ -49,7 +48,7 @@ int main()
     glfwMakeContextCurrent(window);
     glewExperimental = GL_TRUE;
 
-    if(glewInit() != GLEW_OK)
+    if (glewInit() != GLEW_OK)
     {
         fprintf(stderr, "Failed to initialize GLEW\n");
         return -1;
@@ -84,8 +83,7 @@ int main()
         GLchar infoLog[512];
         glGetShaderiv(vShader, GL_COMPILE_STATUS, &success);
 
-        if(!success)
-        {
+        if (!success) {
             glGetShaderInfoLog(vShader, 512, nullptr, infoLog);
             std::cout << "Failed to compile vertex shader: \n" << infoLog << std::endl;
         }
@@ -103,8 +101,7 @@ int main()
         GLchar infoLog[512];
         glGetShaderiv(fShader, GL_COMPILE_STATUS, &success);
 
-        if(!success)
-        {
+        if (!success) {
             glGetShaderInfoLog(fShader, 512, nullptr, infoLog);
             std::cout << "Failed to compile fragment shader: \n" << infoLog << std::endl;
         }
@@ -123,8 +120,7 @@ int main()
         GLchar infoLog[512];
         glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
 
-        if(!success)
-        {
+        if (!success) {
             glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
             std::cout << "Failed to link program: \n" << infoLog << std::endl;
         }
@@ -134,7 +130,7 @@ int main()
     }
 
     int attributes[2]{3, 3};
-    VAO vao(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes), GL_STATIC_DRAW);
+    VAO vao(vertices, sizeof(vertices) / sizeof(GLfloat), indices, sizeof(indices) / sizeof(GLuint), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
 
     while(!glfwWindowShouldClose(window))
     {
@@ -143,14 +139,7 @@ int main()
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        GLfloat time = glfwGetTime();
-        GLfloat gValue = sin(time) / 2 + 0.5;
-        GLint uniformColorLoc = glGetUniformLocation(shaderProgram, "globalColor");
-
         glUseProgram(shaderProgram);
-
-        glUniform4f(uniformColorLoc, 0.0f, gValue, 0.0f, 1.0f);
-
         vao.draw();
 
         glfwSwapBuffers(window);

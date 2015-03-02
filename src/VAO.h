@@ -8,6 +8,6 @@ public:
     VAO(GLfloat data[], int dataSize, GLuint indices[], int indicesSize, int attributes[], int attributesLength, GLenum usage);
     void draw();
 private:
-    int sum;
+    int nVertices;
     GLuint vao, vbo, ebo;
 };

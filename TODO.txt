@@ -1,3 +1,4 @@
-Create VBA, VBO, EBO classes
+Create VAO class
+Create Shader class
 Load textures
 Create camera class

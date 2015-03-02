@@ -30,7 +30,9 @@ add_definitions(
 
 set(SOURCE_FILES src/main.cpp
                  src/Resources.cpp
-                 src/Resources.h)
+                 src/Resources.h
+                 src/VAO.cpp
+                 src/VAO.h)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
