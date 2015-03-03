@@ -29,8 +29,8 @@ add_definitions(
 )
 
 set(SOURCE_FILES src/main.cpp
-                 src/Resources.cpp
-                 src/Resources.h
+                 src/Res.cpp
+                 src/Res.h
                  src/VAO.cpp
                  src/VAO.h
                  src/Shader.cpp

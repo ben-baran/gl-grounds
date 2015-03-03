@@ -1,7 +1,12 @@
 #include <string>
+#include <GL/glew.h>
 
 class Shader
 {
+private:
+    GLuint program;
 public:
-    Shader(std::string vsource, std::string fsource);
+    Shader(const std::string &vsource, const std::string &fsource);
+    void use();
+    void clean();
 };

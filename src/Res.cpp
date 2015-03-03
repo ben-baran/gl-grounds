@@ -1,4 +1,4 @@
-#include "Resources.h"
+#include "Res.h"
 #include <fstream>
 
 using std::unordered_map;

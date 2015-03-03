@@ -1,4 +1,8 @@
-Create VAO class
+Part 1: The Basics
+
+Create VAO class (DONE)
 Create Shader class
-Load textures
+Wrap around windowing
+Create logging interface
+Load textures, create class
 Create camera class
