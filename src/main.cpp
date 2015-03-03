@@ -33,7 +33,8 @@ int main()
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     GLFWwindow *window;
@@ -130,7 +131,7 @@ int main()
     }
 
     int attributes[2]{3, 3};
-    VAO vao(vertices, sizeof(vertices) / sizeof(GLfloat), indices, sizeof(indices) / sizeof(GLuint), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
+    VAO vao(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
 
     while(!glfwWindowShouldClose(window))
     {
@@ -145,6 +146,7 @@ int main()
         glfwSwapBuffers(window);
     }
 
+    vao.clean();
     glfwTerminate();
     return 0;
 }

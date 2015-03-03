@@ -2,7 +2,7 @@
 
 VAO::VAO(GLfloat data[], int dataSize, GLuint indices[], int indicesSize, int attributes[], int attributesLength, GLenum usage)
 {
-    nVertices = indicesSize;
+    nVertices = indicesSize / sizeof(GLuint);
 
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
@@ -34,4 +34,11 @@ void VAO::draw()
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, nVertices, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+}
+
+void VAO::clean()
+{
+    glDeleteVertexArrays(1, &vao);
+    glDeleteBuffers(1, &vbo);
+    glDeleteBuffers(1, &ebo);
 }
