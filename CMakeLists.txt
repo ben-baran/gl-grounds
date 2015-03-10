@@ -34,7 +34,9 @@ set(SOURCE_FILES src/main.cpp
                  src/VAO.cpp
                  src/VAO.h
                  src/Shader.cpp
-                 src/Shader.h)
+                 src/Shader.h
+                 src/Window.h
+                 src/Window.cpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

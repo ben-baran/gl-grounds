@@ -1,8 +1,32 @@
-Part 1: The Basics
+Part 1: Low Level Classes
 
+Make all functions use const references
 Create VAO class (DONE)
 Create Shader class
-Wrap around windowing
+Load Shader from Res
+Wrap around windowing (DONE)
+Key Handler
+Mouse Handler
+Get frame delta (DONE)
 Create logging interface
+PNG Importer
 Load textures, create class
 Create camera class
+
+Part 2: Utility Systems
+
+Part 3: Low Level Engine Components
+
+Part 4: Basic Graphical Features
+
+Part 5: Basic Editor Features
+
+Part 6: High Level Utilities
+
+Part 7: Advanced Graphical Features
+
+Part 8: Advanced Editor Features
+
+Part 9: Data Management
+
+Part 10: Content Specific
