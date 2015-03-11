@@ -1,5 +1,4 @@
 #include "Shader.h"
-#include "Res.h"
 #include <iostream>
 
 using std::string;
@@ -68,5 +67,5 @@ void Shader::clean()
 
 GLuint Shader::getLocation(string name)
 {
-    glGetUniformLocation(program, name.c_str());
+    return glGetUniformLocation(program, name.c_str());
 }

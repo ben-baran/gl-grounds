@@ -5,7 +5,10 @@
 class VAO
 {
 public:
-    VAO(GLfloat data[], int dataSize, GLuint indices[], int indicesSize, int attributes[], int attributesLength, GLenum usage);
+    VAO(const GLfloat data[], const int &dataSize,
+        const GLuint indices[], const int &indicesSize,
+        const int attributes[], const int &attributesLength,
+        const GLenum &usage);
     void draw();
     void clean();
 private:

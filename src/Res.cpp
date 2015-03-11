@@ -1,6 +1,7 @@
 #include "Res.h"
 #include <fstream>
 #include <iostream>
+#include <cstring>
 
 using std::unordered_map;
 using std::string;
@@ -36,14 +37,9 @@ const GLuint *Res::loadTex(const string &name, const string &file)
     unordered_map<string, GLuint>::const_iterator find = loadedTextures.find(name);
     if(find != loadedTextures.end()) return &(find->second);
 
-    ifstream f(file, std::ios::binary);
-    if(f.is_open())
+    if(strcmp(&file[file.length() - 4], ".png") == 0)
     {
-        char header[8];
-        f.read(header, 8);
-        std::cout << ((uint) header[0]) << " " << ((int) header[1]) << std::endl;
 
-        f.close();
     }
 
     return nullptr;

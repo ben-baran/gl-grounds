@@ -39,6 +39,7 @@ int main()
     GLFWwindow *window = Window::init("Engine V1", false, 1280, 720);
     glfwSetKeyCallback(window, key_callback);
 
+    Res::loadTex("res/brick_wall.png");
     shader = new Shader(*Res::loadStr("res/shader/default.v"), *Res::loadStr("res/shader/default.f"));
 
     GLfloat vertices[] = {

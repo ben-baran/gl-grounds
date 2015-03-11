@@ -1,8 +1,11 @@
 #include "VAO.h"
 
-VAO::VAO(GLfloat data[], int dataSize, GLuint indices[], int indicesSize, int attributes[], int attributesLength, GLenum usage)
+VAO::VAO(const GLfloat data[], const int &dataSize,
+         const GLuint indices[], const int &indicesSize,
+         const int attributes[], const int &attributesLength,
+         const GLenum &usage)
 {
-    nVertices = indicesSize / sizeof(GLuint);
+    nVertices = (int) (indicesSize / sizeof(GLuint));
 
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);

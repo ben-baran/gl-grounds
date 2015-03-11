@@ -7,7 +7,7 @@ GLFWwindow *Window::window;
 void (*Window::handler)(double);
 bool Window::paused;
 
-GLFWwindow *Window::init(std::string title, bool fullscreen, int resX, int resY)
+GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, int resY)
 {
     refresh = REFRESH_RATE_DEFAULT;
     Window::resX = resX;

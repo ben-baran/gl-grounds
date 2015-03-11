@@ -14,7 +14,7 @@ public:
         NORMAL
     };
 
-    static GLFWwindow *init(std::string title, bool fullscreen, int resX = -1, int resY = -1);
+    static GLFWwindow *init(const std::string &title, bool fullscreen, int resX = -1, int resY = -1);
     static GLFWwindow *getWindow();
 
     static void start(void (*handler)(double));
