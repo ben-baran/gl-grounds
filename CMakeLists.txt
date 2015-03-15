@@ -4,6 +4,7 @@ project(OpenGL_Test)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 find_package(OpenGL REQUIRED)
+find_package(PNG REQUIRED)
 
 add_subdirectory(libs)
 
@@ -11,11 +12,13 @@ include_directories(
     libs/glfw-3.1/include/
     libs/glm/
     libs/glew-1.12.0/include/
+    ${PNG_INCLUDE_DIR}
     .
 )
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
+    ${PNG_LIBRARY}
     glfw
     GLEW_1120
 )
@@ -36,7 +39,8 @@ set(SOURCE_FILES src/main.cpp
                  src/Shader.cpp
                  src/Shader.h
                  src/Window.h
-                 src/Window.cpp)
+                 src/Window.cpp
+                 src/Texture.h)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
@@ -46,7 +50,3 @@ add_custom_target(copy_shaders ALL
     COMMENT "Copy res directory to build tree"
     VERBATIM)
 add_dependencies(OpenGL_Test copy_shaders)
-
-#add_custom_command(TARGET OpenGL_Test PRE_BUILD
-#                   COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/res $<TARGET_FILE_DIR:OpenGL_Test>/res
-#)
