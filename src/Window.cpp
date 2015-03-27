@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "Window.hpp"
 #include <iostream>
 
 int Window::refresh = REFRESH_RATE_DEFAULT;

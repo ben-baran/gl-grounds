@@ -32,14 +32,14 @@ add_definitions(
 
 set(SOURCE_FILES src/main.cpp
                  src/Res.cpp
-                 src/Res.h
+                 src/Res.hpp
                  src/VAO.cpp
-                 src/VAO.h
+                 src/VAO.hpp
                  src/Shader.cpp
-                 src/Shader.h
-                 src/Window.h
+                 src/Shader.hpp
+                 src/Window.hpp
                  src/Window.cpp
-                 src/Texture.h)
+                 src/Texture.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

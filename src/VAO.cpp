@@ -1,4 +1,4 @@
-#include "VAO.h"
+#include "VAO.hpp"
 
 VAO::VAO(const GLfloat data[], const int &dataSize,
          const GLuint indices[], const int &indicesSize,

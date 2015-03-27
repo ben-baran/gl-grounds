@@ -1,4 +1,4 @@
-#include "Res.h"
+#include "Res.hpp"
 #include <fstream>
 #include <iostream>
 #include <SOIL/SOIL.h>

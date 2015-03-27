@@ -7,10 +7,10 @@
 
 #include <iostream>
 
-#include "Res.h"
-#include "VAO.h"
-#include "Shader.h"
-#include "Window.h"
+#include "Res.hpp"
+#include "VAO.hpp"
+#include "Shader.hpp"
+#include "Window.hpp"
 
 using namespace glm;
 
