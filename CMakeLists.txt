@@ -8,9 +8,9 @@ find_package(OpenGL REQUIRED)
 add_subdirectory(libs)
 
 include_directories(
-    libs/glfw-3.1/include/
+    libs/glfw/include/
     libs/glm/
-    libs/glew-1.12.0/include/
+    libs/glew/include/
     libs/SOIL/
     .
 )
