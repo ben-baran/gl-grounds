@@ -45,3 +45,25 @@ target_link_libraries(GLEW_1120
     ${OPENGL_LIBRARY}
     ${EXTRA_LIBS}
 )
+
+# Load in SOIL
+
+set(SOIL_SOURCE
+    SOIL/SOIL/image_DXT.c
+    SOIL/SOIL/image_DXT.h
+    SOIL/SOIL/image_helper.c
+    SOIL/SOIL/image_helper.h
+    SOIL/SOIL/SOIL.c
+    SOIL/SOIL/SOIL.h
+    SOIL/SOIL/stb_image_aug.c
+    SOIL/SOIL/stb_image_aug.h
+    SOIL/SOIL/stbi_DDS_aug.h
+    SOIL/SOIL/stbi_DDS_aug_c.h
+    SOIL/SOIL/original/stb_image-1.09.c
+    SOIL/SOIL/original/stb_image-1.16.c
+)
+
+add_library(
+    SOIL
+    ${SOIL_SOURCE}
+)

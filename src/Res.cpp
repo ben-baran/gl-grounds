@@ -1,15 +1,14 @@
 #include "Res.h"
 #include <fstream>
 #include <iostream>
-#include "png.h"
+#include <SOIL/SOIL.h>
 
 using std::unordered_map;
 using std::string;
 using std::ifstream;
 
 unordered_map<string, string> Res::loadedStrings;
-unordered_map<string, GLuint> Res::loadedTextures;
-int Res::PNG_HEADER_BYTES = 8;
+unordered_map<string, Texture> Res::loadedTextures;
 
 const string *Res::loadStr(const string &name, const string &file)
 {
@@ -31,34 +30,29 @@ const string *Res::loadStr(const string &name, const string &file)
     return nullptr;
 }
 
-const GLuint *Res::loadTex(const string &name, const string &file)
+const Texture *Res::loadTex(const string &name, const string &file)
 {
     if(file == "") return loadTex(name, name);
 
-    unordered_map<string, GLuint>::const_iterator find = loadedTextures.find(name);
+    unordered_map<string, Texture>::const_iterator find = loadedTextures.find(name);
     if(find != loadedTextures.end()) return &(find->second);
 
     ifstream f(file);
     if(f.is_open())
     {
-        if(strcmp(&file[file.length() - 4], ".png") == 0)
-        {
-            png_byte signature[PNG_HEADER_BYTES];
-            int valid = 0;
-            f.read((char *) signature, PNG_HEADER_BYTES);
-            if(!f.good()) return nullptr;
-            valid = png_sig_cmp(signature, 0, PNG_HEADER_BYTES);
+        Texture tex;
+        unsigned char *data = SOIL_load_image(file.c_str(), &tex.width, &tex.height, 0, SOIL_LOAD_RGB);
 
-            if(valid == 0)
-            {
-                png_structp readStruct = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
-                png_infop infoStruct = png_create_info_struct(readStruct);
+        glGenTextures(1, &tex.id);
+        glBindTexture(GL_TEXTURE_2D, tex.id);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex.width, tex.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
 
-                png_set_sig_bytes(readStruct, PNG_HEADER_BYTES);
-                png_read_info(readStruct, infoStruct);
+        SOIL_free_image_data(data);
+        glBindTexture(GL_TEXTURE_2D, 0);
 
-            }
-        }
+        loadedTextures[name] = tex;
+        return &(loadedTextures.find(name)->second);
     }
 
     return nullptr;

@@ -1,7 +1,14 @@
 #pragma once
 
+#include <GL/glew.h>
+
 struct Texture
 {
-    int x, y;
-    GLuint texture;
+    int width, height;
+    GLuint id;
+
+    void use() const
+    {
+        glBindTexture(GL_TEXTURE_2D, id);
+    }
 };

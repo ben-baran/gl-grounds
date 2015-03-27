@@ -4,7 +4,6 @@ project(OpenGL_Test)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 find_package(OpenGL REQUIRED)
-find_package(PNG REQUIRED)
 
 add_subdirectory(libs)
 
@@ -12,15 +11,15 @@ include_directories(
     libs/glfw-3.1/include/
     libs/glm/
     libs/glew-1.12.0/include/
-    ${PNG_INCLUDE_DIR}
+    libs/SOIL/
     .
 )
 
 set(ALL_LIBS
     ${OPENGL_LIBRARY}
-    ${PNG_LIBRARY}
     glfw
     GLEW_1120
+    SOIL
 )
 
 add_definitions(
