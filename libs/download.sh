@@ -10,8 +10,8 @@ rm -r SOIL
 
 # Get any new versions
 git clone https://github.com/nigels-com/glew.git glew
-git clone https://github.com/glfw/glfw glfw
-git clone https://github.com/epatel/SOIL SOIL
+git clone https://github.com/glfw/glfw.git glfw
+git clone https://github.com/epatel/SOIL.git SOIL
 
 wget 'http://sourceforge.net/projects/ogl-math/?source=typ_redirect' -O glm.zip
 unzip glm.zip -d glm

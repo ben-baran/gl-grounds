@@ -9,8 +9,8 @@ Key Handler
 Mouse Handler
 Get frame delta (DONE)
 Create logging interface
-PNG Importer
-Load textures, create class
+PNG Importer (DONE)
+Load textures, create class (DONE)
 Create camera class
 
 Part 2: Utility Systems

@@ -13,5 +13,5 @@ public:
     Shader(const std::string &vsource, const std::string &fsource);
     void use();
     void clean();
-    GLint getLocation(std::string name);
+    GLint getLocation(const std::string &name);
 };

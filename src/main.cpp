@@ -38,17 +38,17 @@ void loop(double dt)
 
 int main()
 {
-    GLFWwindow *window = Window::init("Engine 0.1", false, 1280, 720);
+    GLFWwindow *window = Window::init("Engine 0.1", false, 500, 500);
     glfwSetKeyCallback(window, key_callback);
 
     texture = Res::loadTex("res/brick_wall.png");
     shader = new Shader(*Res::loadStr("res/shader/simple/textureColor.v"), *Res::loadStr("res/shader/simple/textureColor.f"));
 
     GLfloat vertices[] = {
-             1.0f,  1.0f, 0.0f, /* COLOR */ 1.0f, 0.0f, 0.0f, /* TEXTURE */ 1.0f, 1.0f,
-             1.0f, -1.0f, 0.0f,             0.0f, 1.0f, 0.0f,               1.0f, 0.0f,
-            -1.0f, -1.0f, 0.0f,             1.0f, 0.0f, 0.0f,               0.0f, 0.0f,
-            -1.0f,  1.0f, 0.0f,             0.0f, 0.0f, 1.0f,               0.0f, 1.0f
+             0.5f,  0.5f, 0.0f, /* COLOR */ 1.0f, 0.0f, 0.0f, /* TEXTURE */ 1.0f, 1.0f,
+             0.5f, -0.5f, 0.0f,             0.0f, 1.0f, 0.0f,               1.0f, 0.0f,
+            -0.5f, -0.5f, 0.0f,             1.0f, 0.0f, 0.0f,               0.0f, 0.0f,
+            -0.5f,  0.5f, 0.0f,             0.0f, 0.0f, 1.0f,               0.0f, 1.0f
     };
 
     GLuint indices[] = {

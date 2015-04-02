@@ -65,7 +65,7 @@ void Shader::clean()
     glDeleteProgram(program);
 }
 
-GLint Shader::getLocation(string name)
+GLint Shader::getLocation(const string &name)
 {
     return glGetUniformLocation(program, name.c_str());
 }
