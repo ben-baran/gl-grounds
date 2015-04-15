@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
 
@@ -11,8 +13,6 @@
 #include "VAO.hpp"
 #include "Shader.hpp"
 #include "Window.hpp"
-
-using namespace glm;
 
 Shader *shader;
 VAO *vao;
@@ -31,8 +31,15 @@ void loop(double dt)
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    texture->use();
+    texture->use(*shader, "tex");
     shader->use();
+
+    glm::mat4 trans;
+//    trans = glm::rotate(trans, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+//    trans = glm::scale(trans, glm::vec3(0.5f + 0.2f * sin(4 * glfwGetTime()), 0.7f + 0.1f * sin(5 * glfwGetTime() * 1.5f), 1.0f));
+    trans = glm::translate(trans, glm::vec3(0, 0.5f * sin(glfwGetTime() * 0.5f), 0.0f));
+    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(trans));
+
     vao->draw();
 }
 
