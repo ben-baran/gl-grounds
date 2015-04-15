@@ -12,13 +12,8 @@ struct Texture
                                       GL_TEXTURE8,  GL_TEXTURE9,  GL_TEXTURE10, GL_TEXTURE11,
                                       GL_TEXTURE12, GL_TEXTURE13, GL_TEXTURE14, GL_TEXTURE15};
     int width, height;
-    int unit;
+    int unit = 0;
     GLuint id;
 
-    void use(const Shader &shader, const std::string &name) const
-    {
-        glActiveTexture(UNIT[unit]);
-        glBindTexture(GL_TEXTURE_2D, id);
-        glUniform1i(shader.getLocation(name), unit);
-    }
+    void use(const Shader &shader, const std::string &name) const;
 };

@@ -39,6 +39,7 @@ set(SOURCE_FILES src/main.cpp
                  src/Shader.hpp
                  src/Window.hpp
                  src/Window.cpp
+                 src/Texture.cpp
                  src/Texture.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
