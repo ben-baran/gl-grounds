@@ -67,3 +67,5 @@ add_library(
     SOIL
     ${SOIL_SOURCE}
 )
+
+include_directories(SOIL)
