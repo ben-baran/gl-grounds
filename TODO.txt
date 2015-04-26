@@ -1,9 +1,14 @@
 Part 1: Low Level Classes
 
-Make all functions use const references (within reason)
+Make all functions use const references (within reason) (OK)
 Create VAO class (DONE)
-Create Shader class
-Load Shader from Res
+Create Shader class (DONE)
+Create Mesh class:
+    -load from OBJ
+Create Object class:
+    -holds mesh, shader, textures
+    -hashmaps for uniform variables
+Load Shader from Res (DONE)
 Wrap around windowing (DONE)
 Key Handler
 Mouse Handler

@@ -28,16 +28,16 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 void loop(double dt)
 {
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     texture->use(*shader, "tex");
     shader->use();
 
     glm::mat4 trans;
-//    trans = glm::rotate(trans, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-//    trans = glm::scale(trans, glm::vec3(0.5f + 0.2f * sin(4 * glfwGetTime()), 0.7f + 0.1f * sin(5 * glfwGetTime() * 1.5f), 1.0f));
-    trans = glm::translate(trans, glm::vec3(0, 0.5f * sin(glfwGetTime() * 0.5f), 0.0f));
+    trans = glm::rotate(trans, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+    trans = glm::scale(trans, glm::vec3(0.8f + 0.2f * sin(4 * glfwGetTime()), 0.8f + 0.2f * sin(4 * glfwGetTime()), 1.0f));
+    trans = glm::translate(trans, glm::vec3(0, 0.5f * sin(glfwGetTime() * 2.5f), 0.0f));
     glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(trans));
 
     vao->draw();

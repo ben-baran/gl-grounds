@@ -41,7 +41,7 @@ set(SOURCE_FILES src/main.cpp
                  src/Window.cpp
                  src/Texture.cpp
                  src/Texture.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES})
+add_executable(OpenGL_Test ${SOURCE_FILES} src/Mesh.cpp src/Mesh.hpp)
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL
