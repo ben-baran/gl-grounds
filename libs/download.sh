@@ -32,4 +32,4 @@ make
 
 #Move SOIL to make namespace clearer
 cd ..
-mv SOIL/src/ SOIL/SOIL
+mv SOIL/src SOIL/SOIL
