@@ -1,5 +1,7 @@
 .idea
-res/glew/
-res/glfw/
-res/glm/
-res/SOIL/
+libs/glew/
+libs/glfw/
+libs/glm/
+libs/SOIL/
+libs/assimp/
+libs/glm/
