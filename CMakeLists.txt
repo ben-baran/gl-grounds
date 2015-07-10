@@ -31,17 +31,17 @@ add_definitions(
 )
 
 set(SOURCE_FILES src/main.cpp
-                 src/Res.cpp
-                 src/Res.hpp
-                 src/VAO.cpp
-                 src/VAO.hpp
-                 src/Shader.cpp
-                 src/Shader.hpp
-                 src/Window.hpp
-                 src/Window.cpp
-                 src/Texture.cpp
-                 src/Texture.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES} src/Mesh.cpp src/Mesh.hpp)
+                 src/engine/Res.cpp
+                 src/engine/Res.hpp
+                 src/engine/VAO.cpp
+                 src/engine/VAO.hpp
+                 src/engine/Shader.cpp
+                 src/engine/Shader.hpp
+                 src/engine/Window.hpp
+                 src/engine/Window.cpp
+                 src/engine/Texture.cpp
+                 src/engine/Texture.hpp)
+add_executable(OpenGL_Test ${SOURCE_FILES} src/engine/Mesh.cpp src/engine/Mesh.hpp)
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL
