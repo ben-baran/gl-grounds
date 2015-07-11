@@ -9,10 +9,11 @@
 
 #include <iostream>
 
-#include "engine/Res.hpp"
-#include "engine/VAO.hpp"
-#include "engine/Shader.hpp"
-#include "engine/Window.hpp"
+#include "engine/util/Res.hpp"
+#include "engine/render/VAO.hpp"
+#include "engine/render/Texture.hpp"
+#include "engine/render/Shader.hpp"
+#include "engine/util/Window.hpp"
 
 Shader *shader;
 VAO *vao;
