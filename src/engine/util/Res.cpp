@@ -9,13 +9,12 @@ using std::ifstream;
 
 unordered_map<string, string> Res::loadedStrings;
 unordered_map<string, Texture> Res::loadedTextures;
+unordered_map<string, Shader> Res::loadedShaders;
 
-const string *Res::loadStr(const string &name, const string &file)
+string *Res::loadStr(const string &name, const string &file)
 {
     if(file == "") return loadStr(name, name);
-
-    unordered_map<string, string>::const_iterator find = loadedStrings.find(name);
-    if(find != loadedStrings.end()) return &(find->second);
+    if(loadedStrings.find(name) != loadedStrings.end()) return &loadedStrings[name];
 
     ifstream f(file);
     if(f.is_open())
@@ -25,17 +24,15 @@ const string *Res::loadStr(const string &name, const string &file)
         loadedStrings[name] = total;
 
         f.close();
-        return &(loadedStrings.find(name)->second);
+        return &loadedStrings[name];
     }
     return nullptr;
 }
 
-const Texture *Res::loadTex(const string &name, const string &file)
+Texture *Res::loadTex(const string &name, const string &file)
 {
     if(file == "") return loadTex(name, name);
-
-    unordered_map<string, Texture>::const_iterator find = loadedTextures.find(name);
-    if(find != loadedTextures.end()) return &(find->second);
+    if(loadedTextures.find(name) != loadedTextures.end()) return &loadedTextures[name];
 
     ifstream f(file);
     if(f.is_open())
@@ -54,7 +51,22 @@ const Texture *Res::loadTex(const string &name, const string &file)
         glBindTexture(GL_TEXTURE_2D, 0);
 
         loadedTextures[name] = tex;
-        return &(loadedTextures.find(name)->second);
+        return &loadedTextures[name];
+    }
+
+    return nullptr;
+}
+
+Shader *Res::loadShader(const string &name, const string &file)
+{
+    if(file == "") return loadShader(name, name);
+    if(loadedShaders.find(name) != loadedShaders.end()) return &loadedShaders[name];
+
+    ifstream f(file);
+    if(f.is_open())
+    {
+        loadedShaders[name] = *(new Shader(*loadStr(file + ".vert"), *loadStr(file + ".frag")));
+        return &loadedShaders[name];
     }
 
     return nullptr;
