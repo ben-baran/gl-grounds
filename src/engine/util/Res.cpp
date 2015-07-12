@@ -60,14 +60,12 @@ Texture *Res::loadTex(const string &name, const string &file)
 Shader *Res::loadShader(const string &name, const string &file)
 {
     if(file == "") return loadShader(name, name);
-    if(loadedShaders.find(name) != loadedShaders.end()) return &loadedShaders[name];
 
-    ifstream f(file);
-    if(f.is_open())
-    {
-        loadedShaders[name] = *(new Shader(*loadStr(file + ".vert"), *loadStr(file + ".frag")));
-        return &loadedShaders[name];
-    }
+    unordered_map<string, Shader>::iterator find = loadedShaders.find(name);
+    if(find != loadedShaders.end()) return &(find->second);
+
+    loadedShaders.insert(std::make_pair<string, Shader>((string) name, (Shader) (*(new Shader(*loadStr(file + ".vert"), *loadStr(file + ".frag"))))));
+    return &(loadedShaders.find(name)->second);
 
     return nullptr;
 }
