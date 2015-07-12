@@ -57,7 +57,7 @@ int main()
     glfwSetKeyCallback(window, key_callback);
 
     //New way
-    rect = new SolidRectangle(-0.5, -0.5, 1, 1);
+    rect = new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9);
 
     //Old way
 //    texture = Res::loadTex("res/brick_wall.png");
