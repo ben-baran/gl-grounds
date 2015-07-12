@@ -26,3 +26,15 @@ SolidRectangle::SolidRectangle(float x, float y, float width, float height, floa
     vao = new VAO(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
     shader = Res::loadShader("res/shader/simple/color");
 }
+
+SolidRectangle::~SolidRectangle()
+{
+    vao->clean();
+    delete vao;
+}
+
+void SolidRectangle::draw()
+{
+    shader->use();
+    vao->draw();
+}

@@ -15,4 +15,6 @@ private:
 public:
     SolidRectangle(float x, float y, float width, float height);
     SolidRectangle(float x, float y, float width, float height, float r, float g, float b);
+    ~SolidRectangle();
+    void draw();
 };
