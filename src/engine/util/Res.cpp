@@ -64,7 +64,8 @@ Shader *Res::loadShader(const string &name, const string &file)
     unordered_map<string, Shader>::iterator find = loadedShaders.find(name);
     if(find != loadedShaders.end()) return &(find->second);
 
-    loadedShaders.insert(std::make_pair<string, Shader>((string) name, (Shader) (*(new Shader(*loadStr(file + ".vert"), *loadStr(file + ".frag"))))));
+    loadedShaders.insert(std::make_pair<string, Shader>((string) name,
+                                                        (Shader) (*(new Shader(*loadStr(file + ".vert"), *loadStr(file + ".frag"))))));
     return &(loadedShaders.find(name)->second);
 
     return nullptr;

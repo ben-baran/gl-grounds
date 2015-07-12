@@ -11,13 +11,11 @@
 
 #include "engine/util/Res.hpp"
 #include "engine/render/VAO.hpp"
-#include "engine/render/Texture.hpp"
-#include "engine/render/Shader.hpp"
 #include "engine/util/Window.hpp"
 
 Shader *shader;
 VAO *vao;
-const Texture *texture;
+Texture *texture;
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
@@ -50,7 +48,7 @@ int main()
     glfwSetKeyCallback(window, key_callback);
 
     texture = Res::loadTex("res/brick_wall.png");
-    shader = new Shader(*Res::loadStr("res/shader/simple/textureColor.vert"), *Res::loadStr("res/shader/simple/textureColor.frag"));
+    shader = Res::loadShader("res/shader/simple/textureColor");
 
     GLfloat vertices[] = {
              0.5f,  0.5f, 0.0f, /* COLOR */ 1.0f, 0.0f, 0.0f, /* TEXTURE */ 1.0f, 1.0f,
