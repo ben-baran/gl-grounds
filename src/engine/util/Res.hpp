@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include <GL/glew.h>
-#include "Texture.hpp"
+#include "../render/Texture.hpp"
 
 class Res
 {
