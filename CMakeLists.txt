@@ -44,7 +44,11 @@ set(SOURCE_FILES src/main.cpp
                  src/engine/render/SolidRectangle.cpp
                  src/engine/render/SolidRectangle.hpp
                  src/engine/render/Transform.cpp
-                 src/engine/render/Transform.hpp)
+                 src/engine/render/Transform.hpp
+                 src/engine/util/KeyHandler.cpp
+                 src/engine/util/KeyHandler.hpp
+                 src/engine/util/MouseHandler.cpp
+                 src/engine/util/MouseHandler.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
