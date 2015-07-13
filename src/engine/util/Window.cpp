@@ -1,5 +1,6 @@
 #include "Window.hpp"
 #include "KeyHandler.hpp"
+#include "MouseHandler.hpp"
 #include <iostream>
 
 int Window::refresh = REFRESH_RATE_DEFAULT;
@@ -59,6 +60,8 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
     glViewport(0, 0, pixelX, pixelY);
 
     glfwSetKeyCallback(window, KeyHandler::callback);
+    glfwSetMouseButtonCallback(window, MouseHandler::buttonCallback);
+	glfwSetCursorPosCallback(window, MouseHandler::moveCallback);
 
     return window;
 }
