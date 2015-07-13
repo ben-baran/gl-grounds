@@ -1,43 +1,39 @@
-#include <stdio.h>
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
 #include <iostream>
 #include <src/engine/render/Transform.hpp>
+#include <src/engine/util/KeyHandler.hpp>
+#include <src/engine/util/MouseHandler.hpp>
 #include "engine/render/SolidRectangle.hpp"
 
-#include "engine/util/Res.hpp"
-#include "engine/render/VAO.hpp"
 #include "engine/util/Window.hpp"
 
 //New way
-SolidRectangle *rect;
-Transform *transform;
+SolidRectangle *rect, *secondary;
+Transform *transform, *attached;
 //Not needed anymore
 //Shader *shader;
 //VAO *vao;
 //Texture *texture;
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-        glfwSetWindowShouldClose(window, GL_TRUE);
-    }
-}
-
 void loop(double dt)
 {
+
     glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
     glClear(GL_COLOR_BUFFER_BIT);
 
+	if(KeyHandler::pressed(GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(Window::getWindow(), GL_TRUE);
+
     //New way
+	attached->rotate(0.01f);
+	transform->rotate(0.01f);
+	if(KeyHandler::held(GLFW_KEY_W)) transform->translate(0, 0.02);
+	if(KeyHandler::held(GLFW_KEY_A)) transform->translate(-0.02, 0);
+	if(KeyHandler::held(GLFW_KEY_S)) transform->translate(0, -0.02);
+	if(KeyHandler::held(GLFW_KEY_D)) transform->translate(0.02, 0);
     rect->draw(transform);
+	secondary->draw(attached);
 
     //Old way
 //    texture->use(*shader, "tex");
@@ -50,18 +46,20 @@ void loop(double dt)
 //    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(trans));
 //
 //    vao->draw();
-
 }
 
 int main()
 {
-    GLFWwindow *window = Window::init("Engine 0.1", false, 500, 500);
-    glfwSetKeyCallback(window, key_callback);
+    GLFWwindow *window = Window::init("Engine 0.1", false, 600, 600);
 
     //New way
-    rect = new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9);
+    rect = new SolidRectangle(-0.25, -0.25, 0.5, 0.5, 0.5, 0.5, 0.9);
+	secondary = new SolidRectangle(-0.1, -0.1, 0.2, 0.2, 0.9, 0.5, 0.5);
+
 	transform = new Transform();
-	transform->rotate(45 * 3.141592f / 180);
+//	transform->rotate(45 * 3.141592f / 180);
+	attached = new Transform();
+	attached->translate(0.5, 0).attach(transform);
 
     //Old way
 //    texture = Res::loadTex("res/brick_wall.png");
