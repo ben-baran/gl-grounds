@@ -11,6 +11,7 @@ private:
     std::unordered_map<std::string, GLuint> uniforms;
 public:
     Shader(const std::string &vsource, const std::string &fsource);
+
     void use();
     void clean();
     GLint getLocation(const std::string &name) const;

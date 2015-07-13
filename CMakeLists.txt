@@ -40,8 +40,12 @@ set(SOURCE_FILES src/main.cpp
                  src/engine/util/Window.hpp
                  src/engine/util/Window.cpp
                  src/engine/render/Texture.cpp
-                 src/engine/render/Texture.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES} src/engine/render/Mesh.cpp src/engine/render/Mesh.hpp src/engine/render/SolidRectangle.cpp src/engine/render/SolidRectangle.hpp)
+                 src/engine/render/Texture.hpp
+                 src/engine/render/SolidRectangle.cpp
+                 src/engine/render/SolidRectangle.hpp
+                 src/engine/render/Transform.cpp
+                 src/engine/render/Transform.hpp)
+add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL
