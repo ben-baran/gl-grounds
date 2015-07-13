@@ -9,8 +9,8 @@
 #include "engine/util/Window.hpp"
 
 //New way
-SolidRectangle *rect;
-Transform *transform;
+SolidRectangle *rect, *secondary;
+Transform *transform, *attached;
 //Not needed anymore
 //Shader *shader;
 //VAO *vao;
@@ -29,6 +29,8 @@ void loop(double dt)
 	if(KeyHandler::held(GLFW_KEY_S)) transform->translate(0, -0.02);
 	if(KeyHandler::held(GLFW_KEY_D)) transform->translate(0.02, 0);
     rect->draw(transform);
+
+	secondary->draw(attached);
 
     //Old way
 //    texture->use(*shader, "tex");
@@ -51,9 +53,12 @@ int main()
 
     //New way
     rect = new SolidRectangle(-0.25, -0.25, 0.5, 0.5, 0.5, 0.5, 0.9);
+	secondary = new SolidRectangle(-0.1, -0.1, 0.2, 0.2, 0.9, 0.5, 0.5);
+
 	transform = new Transform();
-	transform->scale(2, 1);
-	transform->rotate(45 * 3.141592f / 180);
+	transform->scale(0.2, 1).rotate(45 * 3.141592f / 180);
+	attached = new Transform();
+	attached->translate(0.5, 0).attach(transform);
 
     //Old way
 //    texture = Res::loadTex("res/brick_wall.png");

@@ -7,7 +7,7 @@ glm::mat4 &Transform::getMatrix()
 	changed = false;
 
 	if(!attached) return base;
-	computed = preposition * parent->getMatrix() * baseOriginalInverse * base;
+	computed = base * baseOriginalInverse * parent->getMatrix() * preposition;
 	return computed;
 }
 
@@ -34,9 +34,13 @@ Transform &Transform::translate(double dx, double dy)
 
 void Transform::attach(Transform *parent)
 {
+	attached = false;
+	getMatrix();
+
 	attached = true;
 	this->parent = parent;
-	preposition = glm::matrixCompMult(base, glm::inverse(parent->getMatrix()));
+
+	preposition = base * glm::inverse(parent->getMatrix());
 	baseOriginalInverse = glm::inverse(base);
 }
 
