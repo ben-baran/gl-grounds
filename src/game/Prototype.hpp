@@ -1,8 +1,11 @@
 #pragma once
 
+#include <src/engine/Run.hpp>
+
 class Prototype: public Run
 {
-	void setup() override;
-	void update() override;
-	void cleanup() override;
+protected:
+	void setup();
+	void update(double dt);
+	void cleanup();
 };

@@ -1,15 +1,9 @@
-//
-// Created by Benjamin Barantschik on 7/13/15.
-//
-
-#ifndef OPENGL_TEST_RUN_HPP
-#define OPENGL_TEST_RUN_HPP
-
+#pragma once
 
 class Run
 {
-
+protected:
+	virtual void setup() = 0;
+	virtual void update(double dt) = 0;
+	virtual void cleanup() = 0;
 };
-
-
-#endif //OPENGL_TEST_RUN_HPP
