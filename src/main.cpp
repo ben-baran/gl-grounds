@@ -1,18 +1,10 @@
-#include <stdio.h>
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
 #include <src/engine/render/Transform.hpp>
 #include "engine/render/SolidRectangle.hpp"
 
-#include "engine/util/Res.hpp"
-#include "engine/render/VAO.hpp"
 #include "engine/util/Window.hpp"
 
 //New way
