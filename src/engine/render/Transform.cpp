@@ -24,20 +24,9 @@ Transform *Transform::translate(double dx, double dy)
 	return this;
 }
 
-Transform *Transform::multiply(Transform *other)
-{
-	base = glm::matrixCompMult(base, other->base);
-	return this;
-}
-
 void Transform::attach(Transform *parent)
 {
 	this->parent = parent;
 	preposition = new glm::mat4(glm::matrixCompMult(base, glm::inverse(parent->getMatrix())));
 	baseOriginalInverse = new glm::mat4(glm::inverse(base));
-}
-
-Transform *Transform::multiply(Transform *a, Transform *b)
-{
-	return glm::matrixCompMult(a, b);
 }
