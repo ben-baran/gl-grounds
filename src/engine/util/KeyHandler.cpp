@@ -1,32 +1,28 @@
 #include "KeyHandler.hpp"
 
-std::unordered_set<int> KeyHandler::pressedSet, KeyHandler::heldSet;
-
-void KeyHandler::clearPressed()
-{
-	pressedSet.clear();
-}
+const double KeyHandler::ALLOWED_PRESS_DELTA = 0.16666;
+std::unordered_map<int, double> KeyHandler::keys;
 
 void KeyHandler::callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-	if(action == GLFW_PRESS)
-	{
-		pressedSet.insert(key);
-		heldSet.insert(key);
-	}
-	else if(action == GLFW_RELEASE)
-	{
-		pressedSet.erase(key);
-		heldSet.erase(key);
-	}
+	if(action == GLFW_PRESS) keys[key] = glfwGetTime();
+	else if(action == GLFW_RELEASE) keys.erase(key);
 }
 
 bool KeyHandler::pressed(int key)
 {
-	return pressedSet.find(key) != pressedSet.end();
+	auto find = keys.find(key);
+	bool has = find != keys.end();
+	if(has && find->second < ALLOWED_PRESS_DELTA)
+	{
+		keys.erase(find);
+		return true;
+	}
+	keys.erase(find);
+	return false;
 }
 
 bool KeyHandler::held(int key)
 {
-	return heldSet.find(key) != heldSet.end();
+	return keys.find(key) != keys.end();
 }

@@ -43,8 +43,6 @@ void loop(double dt)
 //    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(trans));
 //
 //    vao->draw();
-
-	KeyHandler::clearPressed();
 }
 
 int main()
