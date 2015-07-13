@@ -56,8 +56,12 @@ set(SOURCE_FILES src/main.cpp
                  #src/game/Prototype.cpp
                  #src/game/Prototype.hpp
                  src/engine/Run.cpp
-                 src/engine/Run.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES} src/engine/render/Renderable.cpp src/engine/render/Renderable.hpp src/engine/physics/Collider.cpp src/engine/physics/Collider.hpp)
+                 src/engine/Run.hpp
+                 src/engine/render/Renderable.cpp
+                 src/engine/render/Renderable.hpp
+                 src/engine/physics/Collider.cpp
+                 src/engine/physics/Collider.hpp)
+add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL

@@ -18,8 +18,8 @@ void Prototype::setup()
 	Entity weapon = new Entity(new SolidRectangle(1, 0.1));
 	weapon.getTransform().translate(0.3, 0.3).rotate(glm::radians(-45)).attach(player.getTransform());
 	weapon.createProperty<bool>("toggled", false);
-	weapon.setImportanceAfter("player");
-	weapon.setLayerBelow("player", "wall");
+	weapon.setImportanceAfter({"player"});
+	weapon.getRenderable().setLayerBelow({"player", "wall"});
 	Scene::add("weapon", weapon);
 }
 
