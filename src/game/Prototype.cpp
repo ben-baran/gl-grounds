@@ -1,5 +1,9 @@
 #include "Prototype.hpp"
 
+using std::string;
+
+Prototype::Prototype(string title): Prototype(title){}
+
 void Prototype::setup()
 {
 	Entity player = new Entity(new SolidRectangle(1, 1));
