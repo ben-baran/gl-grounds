@@ -4,10 +4,23 @@
 
 #include "KeyHandler.hpp"
 
-void KeyHandler::key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
+std::unordered_set<int> KeyHandler::pressed, KeyHandler::held;
+
+void KeyHandler::clearPressed()
 {
-	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	pressed.clear();
+}
+
+void KeyHandler::callback(GLFWwindow *window, int key, int scancode, int action, int mode)
+{
+	if(action == GLFW_PRESS)
 	{
-		glfwSetWindowShouldClose(window, GL_TRUE);
+		pressed.insert(key);
+		held.insert(key);
+	}
+	else if(action == GLFW_RELEASE)
+	{
+		pressed.emplace(key);
+		held.emplace(key);
 	}
 }

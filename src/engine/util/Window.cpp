@@ -58,7 +58,7 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
     glfwGetFramebufferSize(window, &pixelX, &pixelY);
     glViewport(0, 0, pixelX, pixelY);
 
-    glfwSetKeyCallback(window, KeyHandler::key_callback);
+    glfwSetKeyCallback(window, KeyHandler::callback);
 
     return window;
 }
