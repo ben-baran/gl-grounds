@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <src/engine/render/Transform.hpp>
+#include <src/engine/util/KeyHandler.hpp>
 #include "engine/render/SolidRectangle.hpp"
 
 #include "engine/util/Window.hpp"
@@ -14,14 +15,6 @@ Transform *transform;
 //Shader *shader;
 //VAO *vao;
 //Texture *texture;
-
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    {
-        glfwSetWindowShouldClose(window, GL_TRUE);
-    }
-}
 
 void loop(double dt)
 {
@@ -48,7 +41,6 @@ void loop(double dt)
 int main()
 {
     GLFWwindow *window = Window::init("Engine 0.1", false, 500, 500);
-    glfwSetKeyCallback(window, key_callback);
 
     //New way
     rect = new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9);
