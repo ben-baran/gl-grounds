@@ -56,7 +56,7 @@ int main()
 	secondary = new SolidRectangle(-0.1, -0.1, 0.2, 0.2, 0.9, 0.5, 0.5);
 
 	transform = new Transform();
-	transform->scale(0.2, 1).rotate(45 * 3.141592f / 180);
+	transform->rotate(45 * 3.141592f / 180);
 	attached = new Transform();
 	attached->translate(0.5, 0).attach(transform);
 

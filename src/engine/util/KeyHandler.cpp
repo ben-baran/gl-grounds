@@ -1,7 +1,3 @@
-//
-// Created by Benjamin Barantschik on 7/13/15.
-//
-
 #include "KeyHandler.hpp"
 
 std::unordered_set<int> KeyHandler::pressedSet, KeyHandler::heldSet;
