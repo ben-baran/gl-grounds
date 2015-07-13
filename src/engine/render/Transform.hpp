@@ -6,7 +6,7 @@ class Transform
 {
 private:
 	bool attached = false, changed = false;
-	glm::mat4 base;
+	glm::mat4 base, scaleComponent, rotateComponent, translateComponent;
 	Transform *parent;
 	glm::mat4 preposition, baseOriginalInverse, computed;
 

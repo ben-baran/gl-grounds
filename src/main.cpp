@@ -18,10 +18,14 @@ Transform *transform;
 
 void loop(double dt)
 {
+	KeyHandler::clearPressed();
+
     glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     //New way
+	transform->rotate(0.01f);
+	if(KeyHandler::pressed())
     rect->draw(transform);
 
     //Old way
