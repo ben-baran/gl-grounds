@@ -8,7 +8,7 @@ private:
 	bool attached = false, changed = false;
 	glm::mat4 base, scaleComponent, rotateComponent, translateComponent;
 	Transform *parent;
-	glm::mat4 preposition, baseOriginalInverse, computed;
+	glm::mat4 parentOriginalInverse, computed;
 
 public:
 	glm::mat4 &getMatrix();
