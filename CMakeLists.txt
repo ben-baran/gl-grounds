@@ -48,7 +48,15 @@ set(SOURCE_FILES src/main.cpp
                  src/engine/util/KeyHandler.cpp
                  src/engine/util/KeyHandler.hpp
                  src/engine/util/MouseHandler.cpp
-                 src/engine/util/MouseHandler.hpp)
+                 src/engine/util/MouseHandler.hpp
+                 src/engine/Scene.cpp
+                 src/engine/Scene.hpp
+                 src/engine/Entity.cpp
+                 src/engine/Entity.hpp
+                 #src/game/Prototype.cpp
+                 #src/game/Prototype.hpp
+                 src/engine/Run.cpp
+                 src/engine/Run.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
