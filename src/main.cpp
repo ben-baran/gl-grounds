@@ -18,14 +18,16 @@ Transform *transform;
 
 void loop(double dt)
 {
-	KeyHandler::clearPressed();
 
     glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     //New way
 	transform->rotate(0.01f);
-	if(KeyHandler::pressed())
+	if(KeyHandler::held(GLFW_KEY_W)) transform->translate(0, 0.02);
+	if(KeyHandler::held(GLFW_KEY_A)) transform->translate(-0.02, 0);
+	if(KeyHandler::held(GLFW_KEY_S)) transform->translate(0, -0.02);
+	if(KeyHandler::held(GLFW_KEY_D)) transform->translate(0.02, 0);
     rect->draw(transform);
 
     //Old way
@@ -40,6 +42,7 @@ void loop(double dt)
 //
 //    vao->draw();
 
+	KeyHandler::clearPressed();
 }
 
 int main()
@@ -47,8 +50,9 @@ int main()
     GLFWwindow *window = Window::init("Engine 0.1", false, 500, 500);
 
     //New way
-    rect = new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9);
+    rect = new SolidRectangle(-0.25, -0.25, 0.5, 0.5, 0.5, 0.5, 0.9);
 	transform = new Transform();
+	transform->scale(2, 1);
 	transform->rotate(45 * 3.141592f / 180);
 
     //Old way

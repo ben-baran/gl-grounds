@@ -4,23 +4,33 @@
 
 #include "KeyHandler.hpp"
 
-std::unordered_set<int> KeyHandler::pressed, KeyHandler::held;
+std::unordered_set<int> KeyHandler::pressedSet, KeyHandler::heldSet;
 
 void KeyHandler::clearPressed()
 {
-	pressed.clear();
+	pressedSet.clear();
 }
 
 void KeyHandler::callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
 	if(action == GLFW_PRESS)
 	{
-		pressed.insert(key);
-		held.insert(key);
+		pressedSet.insert(key);
+		heldSet.insert(key);
 	}
 	else if(action == GLFW_RELEASE)
 	{
-		pressed.emplace(key);
-		held.emplace(key);
+		pressedSet.erase(key);
+		heldSet.erase(key);
 	}
+}
+
+bool KeyHandler::pressed(int key)
+{
+	return pressedSet.find(key) != pressedSet.end();
+}
+
+bool KeyHandler::held(int key)
+{
+	return heldSet.find(key) != heldSet.end();
 }

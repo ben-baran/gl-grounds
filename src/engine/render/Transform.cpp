@@ -3,7 +3,7 @@
 
 glm::mat4 &Transform::getMatrix()
 {
-	if(changed) base = scaleComponent * rotateComponent * translateComponent;
+	if(changed) base = translateComponent * rotateComponent * scaleComponent;
 	changed = false;
 
 	if(!attached) return base;
