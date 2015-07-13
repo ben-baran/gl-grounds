@@ -8,16 +8,20 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <src/engine/render/Transform.hpp>
+#include "engine/render/SolidRectangle.hpp"
 
 #include "engine/util/Res.hpp"
 #include "engine/render/VAO.hpp"
-#include "engine/render/Texture.hpp"
-#include "engine/render/Shader.hpp"
 #include "engine/util/Window.hpp"
 
-Shader *shader;
-VAO *vao;
-const Texture *texture;
+//New way
+SolidRectangle *rect;
+Transform *transform;
+//Not needed anymore
+//Shader *shader;
+//VAO *vao;
+//Texture *texture;
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
@@ -32,16 +36,21 @@ void loop(double dt)
     glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    texture->use(*shader, "tex");
-    shader->use();
+    //New way
+    rect->draw(transform);
 
-    glm::mat4 trans;
-    trans = glm::rotate(trans, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-    trans = glm::scale(trans, glm::vec3(0.8f + 0.2f * sin(4 * glfwGetTime()), 0.8f + 0.2f * sin(4 * glfwGetTime()), 1.0f));
-    trans = glm::translate(trans, glm::vec3(0, 0.5f * sin(glfwGetTime() * 2.5f), 0.0f));
-    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(trans));
+    //Old way
+//    texture->use(*shader, "tex");
+//    shader->use();
+//
+//    glm::mat4 trans;
+//    trans = glm::rotate(trans, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+//    trans = glm::scale(trans, glm::vec3(0.8f + 0.2f * sin(4 * glfwGetTime()), 0.8f + 0.2f * sin(4 * glfwGetTime()), 1.0f));
+//    trans = glm::translate(trans, glm::vec3(0, 0.5f * sin(glfwGetTime() * 2.5f), 0.0f));
+//    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(trans));
+//
+//    vao->draw();
 
-    vao->draw();
 }
 
 int main()
@@ -49,31 +58,41 @@ int main()
     GLFWwindow *window = Window::init("Engine 0.1", false, 500, 500);
     glfwSetKeyCallback(window, key_callback);
 
-    texture = Res::loadTex("res/brick_wall.png");
-    shader = new Shader(*Res::loadStr("res/shader/simple/textureColor.vert"), *Res::loadStr("res/shader/simple/textureColor.frag"));
+    //New way
+    rect = new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9);
+	transform = new Transform();
+	transform->rotate(45 * 3.141592f / 180);
 
-    GLfloat vertices[] = {
-             0.5f,  0.5f, 0.0f, /* COLOR */ 1.0f, 0.0f, 0.0f, /* TEXTURE */ 1.0f, 1.0f,
-             0.5f, -0.5f, 0.0f,             0.0f, 1.0f, 0.0f,               1.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f,             1.0f, 0.0f, 0.0f,               0.0f, 0.0f,
-            -0.5f,  0.5f, 0.0f,             0.0f, 0.0f, 1.0f,               0.0f, 1.0f
-    };
-
-    GLuint indices[] = {
-            0, 1, 3,
-            1, 2, 3
-    };
-
-    int attributes[3]{3, 3, 2};
-
-    vao = new VAO(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
+    //Old way
+//    texture = Res::loadTex("res/brick_wall.png");
+//    shader = Res::loadShader("res/shader/simple/textureColor");
+//
+//    GLfloat vertices[] = {
+//             0.5f,  0.5f, 0.0f, /* COLOR */ 1.0f, 0.0f, 0.0f, /* TEXTURE */ 1.0f, 1.0f,
+//             0.5f, -0.5f, 0.0f,             0.0f, 1.0f, 0.0f,               1.0f, 0.0f,
+//            -0.5f, -0.5f, 0.0f,             1.0f, 0.0f, 0.0f,               0.0f, 0.0f,
+//            -0.5f,  0.5f, 0.0f,             0.0f, 0.0f, 1.0f,               0.0f, 1.0f
+//    };
+//
+//    GLuint indices[] = {
+//            0, 1, 3,
+//            1, 2, 3
+//    };
+//
+//    int attributes[3]{3, 3, 2};
+//
+//    vao = new VAO(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
 
     Window::start(loop);
 
-    vao->clean();
-    shader->clean();
-    delete vao;
-    delete shader;
+    //New way
+    delete rect;
+
+    //Old way
+//    vao->clean();
+//    shader->clean();
+//    delete vao;
+//    delete shader;
     glfwTerminate();
     return 0;
 }
