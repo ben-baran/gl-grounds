@@ -8,6 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
+#include <src/engine/render/Transform.hpp>
 #include "engine/render/SolidRectangle.hpp"
 
 #include "engine/util/Res.hpp"
@@ -16,6 +17,7 @@
 
 //New way
 SolidRectangle *rect;
+Transform *transform;
 //Not needed anymore
 //Shader *shader;
 //VAO *vao;
@@ -35,7 +37,7 @@ void loop(double dt)
     glClear(GL_COLOR_BUFFER_BIT);
 
     //New way
-    rect->draw();
+    rect->draw(transform);
 
     //Old way
 //    texture->use(*shader, "tex");
@@ -58,6 +60,8 @@ int main()
 
     //New way
     rect = new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9);
+	transform = new Transform();
+	transform->rotate(45 * 3.141592f / 180);
 
     //Old way
 //    texture = Res::loadTex("res/brick_wall.png");

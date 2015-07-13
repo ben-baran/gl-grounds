@@ -1,4 +1,5 @@
 #include <src/engine/util/Res.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "SolidRectangle.hpp"
 
 int SolidRectangle::attributes[] = {3, 3};
@@ -37,4 +38,11 @@ void SolidRectangle::draw()
 {
     shader->use();
     vao->draw();
+}
+
+void SolidRectangle::draw(Transform *transform)
+{
+    shader->use();
+    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(transform->getMatrix()));
+	vao->draw();
 }

@@ -2,6 +2,7 @@
 
 #include "VAO.hpp"
 #include "Shader.hpp"
+#include "Transform.hpp"
 
 class SolidRectangle
 {
@@ -17,4 +18,5 @@ public:
     SolidRectangle(float x, float y, float width, float height, float r, float g, float b);
     ~SolidRectangle();
     void draw();
+    void draw(Transform *transform);
 };
