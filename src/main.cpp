@@ -24,10 +24,10 @@ void loop(double dt)
 
     //New way
 	transform->rotate(0.01f);
-	if(KeyHandler::held(GLFW_KEY_W)) transform->translate(0, 0.02);
-	if(KeyHandler::held(GLFW_KEY_A)) transform->translate(-0.02, 0);
-	if(KeyHandler::held(GLFW_KEY_S)) transform->translate(0, -0.02);
-	if(KeyHandler::held(GLFW_KEY_D)) transform->translate(0.02, 0);
+	if(KeyHandler::pressed(GLFW_KEY_W)) transform->translate(0, 0.02);
+	if(KeyHandler::pressed(GLFW_KEY_A)) transform->translate(-0.02, 0);
+	if(KeyHandler::pressed(GLFW_KEY_S)) transform->translate(0, -0.02);
+	if(KeyHandler::pressed(GLFW_KEY_D)) transform->translate(0.02, 0);
     rect->draw(transform);
 
 	secondary->draw(attached);

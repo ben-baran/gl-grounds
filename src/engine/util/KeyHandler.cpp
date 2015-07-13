@@ -13,12 +13,12 @@ bool KeyHandler::pressed(int key)
 {
 	auto find = keys.find(key);
 	bool has = find != keys.end();
-	if(has && find->second < ALLOWED_PRESS_DELTA)
+	if(has && glfwGetTime() - find->second < ALLOWED_PRESS_DELTA)
 	{
 		keys.erase(find);
 		return true;
 	}
-	keys.erase(find);
+	if(has) keys.erase(find);
 	return false;
 }
 
