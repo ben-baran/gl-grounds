@@ -46,3 +46,8 @@ void SolidRectangle::draw(Transform *transform)
     glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(transform->getMatrix()));
 	vao->draw();
 }
+
+Collider SolidRectangle::provideCollider()
+{
+    return Collider();
+}

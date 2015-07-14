@@ -3,8 +3,9 @@
 #include "VAO.hpp"
 #include "Shader.hpp"
 #include "Transform.hpp"
+#include "Renderable.hpp"
 
-class SolidRectangle
+class SolidRectangle: public Renderable
 {
 private:
     static int attributes[];
@@ -19,4 +20,5 @@ public:
     ~SolidRectangle();
     void draw();
     void draw(Transform *transform);
+    Collider provideCollider();
 };
