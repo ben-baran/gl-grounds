@@ -8,6 +8,8 @@ using std::string;
 Run::Run(string title)
 {
 	Window::init(title, false, 600, 600);
+	Scene::getCamera().getInverseTransform().setScale(5, 5);
+
 	setup();
 
 	Scene::updateBuffers();

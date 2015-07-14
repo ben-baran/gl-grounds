@@ -2,7 +2,7 @@
 
 using std::string
 
-Camera Scene::camera;
+Camera Scene::camera(0, 0, 1, 1);
 
 std::map<std::string, Entity*, Entity::PointerCompare> Scene::entitiesByName;
 std::unordered_map<std::string, Entity*> Scene::nameAddBuffer;

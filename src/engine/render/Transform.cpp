@@ -1,5 +1,7 @@
 #include "Transform.hpp"
+
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 
 glm::mat4 &Transform::getMatrix()
 {
@@ -13,17 +15,27 @@ glm::mat4 &Transform::getMatrix()
 
 Transform &Transform::setRotation(double theta)
 {
-	return rotate(theta - this->theta);
+	changed = true;
+	this->theta = theta;
+	rotateComponent = glm::rotate(theta, glm::vec3(0, 0, 1));
+	return *this;
 }
 
 Transform &Transform::setScale(double scaleX, double scaleY)
 {
-	return scale(scaleX / this->scaleX, scaleY / this->scaleY);
+	changed = true;
+	this->scaleX = scaleX;
+	this->scaleY = scaleY;
+	scaleComponent = glm::scale(glm::vec3(scaleX, scaleY, 1));
+	return *this;
 }
 
 Transform &Transform::setTranslation(double dx, double dy)
 {
-	return translate(dx - this->dx, dy - this->dy);
+	changed = true;
+	this->dx = dx;
+	this->dy = dy;
+	translateComponent = glm::translate(glm::vec3(dx, dy, 0));
 }
 
 Transform &Transform::rotate(double theta)
