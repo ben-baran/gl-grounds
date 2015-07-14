@@ -17,5 +17,5 @@
 - [X] Implement Run
 - [X] Implement Scene
 - [X] Implement Entity
-- [ ] Implement Camera
+- [X] Implement Camera
 - [ ] Create prototype
