@@ -93,3 +93,16 @@ bool Entity::PointerCompare::operator()(const Entity *left, const Entity *right)
 {
 	return left->getImportance() < right->getImportance();
 }
+
+template<typename T>
+void Entity::setProperty(std::string name, T &property)
+{
+	T *copy = new T(property);
+	properties[name] = copy;
+}
+
+template<typename T>
+T Entity::getProperty(std::string name)
+{
+	return (T) properties[name];
+}
