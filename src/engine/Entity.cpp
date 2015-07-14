@@ -89,11 +89,6 @@ void Entity::draw()
 	renderable->render(Scene::getCamera().getTransformMatrix() * transform->getMatrix());
 }
 
-bool Entity::PointerCompare::operator()(const Entity *left, const Entity *right) const
-{
-	return left->getImportance() < right->getImportance();
-}
-
 template<typename T>
 void Entity::setProperty(std::string name, T &property)
 {
@@ -113,4 +108,9 @@ Entity::~Entity()
 	delete renderable;
 	delete collider;
 	delete transform;
+}
+
+bool Entity::PairCompare::operator()(const std::pair<std::string, Entity *> &left, const std::pair &right) const
+{
+	return left.second->getImportance() < right.second->getImportance();
 }

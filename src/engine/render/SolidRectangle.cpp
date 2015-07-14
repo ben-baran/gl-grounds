@@ -89,13 +89,13 @@ void SolidRectangle::setLayer(double layer)
 	constructVAO();
 }
 
-void SolidRectangle::draw()
+void SolidRectangle::render()
 {
     shader->use();
     vao->draw();
 }
 
-void SolidRectangle::draw(glm::mat4 transformMatrix)
+void SolidRectangle::render(glm::mat4 transformMatrix)
 {
     shader->use();
     glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(transformMatrix));

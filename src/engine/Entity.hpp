@@ -45,10 +45,11 @@ public:
 	virtual void update(double dt);
 	void draw();
 
-	struct PointerCompare
+	struct PairCompare
 	{
-		bool operator()(const Entity *left, const Entity *right) const;
+		bool operator()(const std::pair<std::string, Entity*> &left, const std::pair<std::string, Entity*> &right) const;
 	};
+	static PairCompare pairCompare;
 
 	~Entity();
 };

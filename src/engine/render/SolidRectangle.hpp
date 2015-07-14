@@ -31,7 +31,7 @@ public:
     ~SolidRectangle();
 	void setLayer(double layer);
 
-    void draw();
-    void draw(glm::mat4 transformMatrix);
+    void render();
+    void render(glm::mat4 transformMatrix);
     Collider &provideCollider();
 };
