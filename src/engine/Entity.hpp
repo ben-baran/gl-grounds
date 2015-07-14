@@ -48,4 +48,6 @@ public:
 	{
 		bool operator()(const Entity *left, const Entity *right) const;
 	};
+
+	~Entity();
 };

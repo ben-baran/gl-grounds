@@ -59,7 +59,11 @@ void Scene::draw()
 void Scene::updateBuffers()
 {
 	for(auto &pair : nameAddBuffer) entitiesByName[pair.first] = pair.second;
-	for(auto &pair : nameRemoveBuffer) entitiesByName.erase(pair.first);
+	for(auto &pair : nameRemoveBuffer)
+	{
+		entitiesByName.erase(pair.first);
+		delete pair.second;
+	}
 
 	for(auto &pair : tagAddBuffer) entitiesByTag[pair.first].insert(pair.second.begin(), pair.second.end());
 	for(auto &pair : tagRemoveBuffer) entitiesByTag[pair.first].erase(pair.second.begin(), pair.second.end());

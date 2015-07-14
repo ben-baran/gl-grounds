@@ -106,3 +106,11 @@ T Entity::getProperty(std::string name)
 {
 	return (T) properties[name];
 }
+
+Entity::~Entity()
+{
+	for(auto &iter : properties) delete iter.second;
+	delete renderable;
+	delete collider;
+	delete transform;
+}
