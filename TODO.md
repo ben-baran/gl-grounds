@@ -1,6 +1,6 @@
-# Current Version: 0.0.1
+# Current Version: 0.0.0
 
-## List of requirements for 0.0.2
+## List of requirements for 0.0.1
 
 - [X] Implement VAO
 - [X] Implement Texture
