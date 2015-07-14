@@ -1,10 +1,10 @@
 # Current Version: 0.0.0
 
-## List of requirements for 0.0.1
+## List of requirements for v0.0.1 ("Disgusting Filth Release")
 
 - [X] Implement VAO
 - [X] Implement Texture
-- [X] Implement Transform (no animation)
+- [ ] Implement Transform (with animation)
 - [X] Implement Shader
 - [X] Implement SolidRectangle
 - [X] Implement Renderable
@@ -17,4 +17,5 @@
 - [X] Implement Run
 - [ ] Implement Scene
 - [ ] Implement Entity
+- [ ] Implement Camera
 - [ ] Create prototype
