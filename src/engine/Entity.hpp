@@ -6,7 +6,15 @@
 
 class Entity
 {
+private:
+	Renderable *renderable;
+	Collider *collider;
+	Transform *transform;
 public:
+	Renderable &getRenderable();
+	Collider &getCollider();
+	Transform &getTransform();
+
 	Entity(Renderable *renderable, Transform *transform = new Transform());
 	Entity(Renderable *renderable, Collider *collider, Transform *transform = new Transform());
 };
