@@ -6,7 +6,7 @@ using std::string;
 
 double Renderable::layer = 0;
 
-int Renderable::getLayer()
+double Renderable::getLayer()
 {
 	return layer;
 }

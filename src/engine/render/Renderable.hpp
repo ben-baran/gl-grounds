@@ -9,7 +9,7 @@ class Renderable
 private:
 	double layer;
 public:
-	int getLayer();
+	double getLayer();
 	void setLayer(int layer);
 	void setLayerBelow(std::initializer_list<std::string> names);
 	void setLayerBetween(std::string bottom, std::string top);
