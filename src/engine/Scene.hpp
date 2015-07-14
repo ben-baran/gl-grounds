@@ -9,11 +9,20 @@
 class Scene
 {
 private:
-	std::unordered_map<std::string, Entity*> entitiesByName;
-	std::unordered_map<std::string, std::unordered_set<Entity*>> entitiesByTag;
+	static std::unordered_map<std::string, Entity*> entitiesByName;
+	static std::unordered_map<std::string, Entity*> nameAddBuffer;
+	static std::unordered_map<std::string, Entity*> nameRemoveBuffer;
 
-	friend Entity void addEntityToTag(Entity entity, std::string tag);
-	friend Entity void removeEntityFromTag(Entity entity, std::string tag);
+	static std::unordered_map<std::string, std::unordered_set<Entity*>> entitiesByTag;
+	static std::unordered_map<std::string, std::unordered_set<Entity*>> tagAddBuffer;
+	static std::unordered_map<std::string, std::unordered_set<Entity*>> tagRemoveBuffer;
+
+	friend Entity static void addEntityToTag(Entity &entity, std::string tag);
+	friend Entity static void removeEntityFromTag(Entity &entity, std::string tag);
+
 public:
 	static Entity get(std::string name);
+	static void update(double dt);
+	static void draw();
+	static void updateBuffers();
 };

@@ -59,13 +59,13 @@ bool Entity::hasTag(std::string tag)
 
 void Entity::addTag(std::string tag)
 {
-	Scene::
+	Scene::addEntityToTag(*this, tag);
 	tags.insert(tag);
 }
 
 void Entity::removeTag(std::string tag)
 {
-	tagsChanged = true;
+	Scene::removeEntityFromTag(*this, tag);
 	tags.erase(tag);
 }
 
