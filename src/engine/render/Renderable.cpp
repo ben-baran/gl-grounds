@@ -32,4 +32,5 @@ void Renderable::setLayerAbove(std::initializer_list<std::string> names)
 {
 	double max = -INFINITY;
 	for(string name : names) max = std::max(max, Scene::get(name).getRenderable().getLayer());
+	layer = max + 1;
 }
