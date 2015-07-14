@@ -32,8 +32,8 @@ void loop(double dt)
 	if(KeyHandler::held(GLFW_KEY_A)) transform->translate(-0.02, 0);
 	if(KeyHandler::held(GLFW_KEY_S)) transform->translate(0, -0.02);
 	if(KeyHandler::held(GLFW_KEY_D)) transform->translate(0.02, 0);
-    rect->draw(transform);
-	secondary->draw(attached);
+    rect->draw(transform->getMatrix());
+	secondary->draw(attached->getMatrix());
 
     //Old way
 //    texture->use(*shader, "tex");
