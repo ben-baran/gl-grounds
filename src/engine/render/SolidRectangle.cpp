@@ -63,7 +63,7 @@ float SolidRectangle::getB()
 
 SolidRectangle::SolidRectangle(float x, float y, float width, float height) : SolidRectangle(x, y, width, height, 1.0f, 1.0f, 1.0f) {}
 
-SolidRectangle::SolidRectangle(float x, float y, float width, float height, float r, float g, float b, float layer = 0)
+SolidRectangle::SolidRectangle(float x, float y, float width, float height, float r, float g, float b, float layer)
 		: x(x)
 		, y(y)
 		, width(width)

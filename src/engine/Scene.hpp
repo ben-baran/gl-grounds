@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Entity.hpp"
-
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
+
 #include <src/engine/render/Camera.hpp>
+#include "Entity.hpp"
 
 class Scene
 {

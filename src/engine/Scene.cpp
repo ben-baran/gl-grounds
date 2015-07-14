@@ -1,6 +1,6 @@
 #include "Scene.hpp"
 
-using std::string
+using std::string;
 
 Camera Scene::camera(0, 0, 1, 1);
 
