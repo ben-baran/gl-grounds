@@ -83,10 +83,10 @@ void SolidRectangle::draw()
     vao->draw();
 }
 
-void SolidRectangle::draw(Transform *transform)
+void SolidRectangle::draw(glm::mat4 transformMatrix)
 {
     shader->use();
-    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(transform->getMatrix()));
+    glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(transformMatrix));
 	vao->draw();
 }
 
