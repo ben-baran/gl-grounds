@@ -2,13 +2,15 @@
 
 using std::string
 
-std::map<std::string, Entity*, Entity::PointerCompare> entitiesByName;
-std::unordered_map<std::string, Entity*> nameAddBuffer;
-std::unordered_map<std::string, Entity*> nameRemoveBuffer;
+Camera Scene::camera;
 
-std::unordered_map<std::string, std::unordered_set<Entity*>> entitiesByTag;
-std::unordered_map<std::string, std::unordered_set<Entity*>> tagAddBuffer;
-std::unordered_map<std::string, std::unordered_set<Entity*>> tagRemoveBuffer;
+std::map<std::string, Entity*, Entity::PointerCompare> Scene::entitiesByName;
+std::unordered_map<std::string, Entity*> Scene::nameAddBuffer;
+std::unordered_map<std::string, Entity*> Scene::nameRemoveBuffer;
+
+std::unordered_map<std::string, std::unordered_set<Entity*>> Scene::entitiesByTag;
+std::unordered_map<std::string, std::unordered_set<Entity*>> Scene::tagAddBuffer;
+std::unordered_map<std::string, std::unordered_set<Entity*>> Scene::tagRemoveBuffer;
 
 void Scene::addEntityToTag(Entity &entity, std::string tag)
 {
@@ -20,6 +22,11 @@ void Scene::removeEntityFromTag(Entity &entity, std::string tag)
 {
 	tagRemoveBuffer[tag].insert(&entity);
 	tagAddBuffer[tag].erase(&entity);
+}
+
+Camera &Scene::getCamera()
+{
+	return camera;
 }
 
 void Scene::add(Entity &entity, std::string name)
