@@ -48,8 +48,22 @@ set(SOURCE_FILES src/main.cpp
                  src/engine/util/KeyHandler.cpp
                  src/engine/util/KeyHandler.hpp
                  src/engine/util/MouseHandler.cpp
-                 src/engine/util/MouseHandler.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES})
+                 src/engine/util/MouseHandler.hpp
+                 src/engine/Scene.cpp
+                 src/engine/Scene.hpp
+                 src/engine/Entity.cpp
+                 src/engine/Entity.hpp
+                 #src/game/Prototype.cpp
+                 #src/game/Prototype.hpp
+                 src/engine/Run.cpp
+                 src/engine/Run.hpp
+                 src/engine/render/Renderable.cpp
+                 src/engine/render/Renderable.hpp
+                 src/engine/physics/Collider.cpp
+                 src/engine/physics/Collider.hpp
+                 src/engine/physics/RectangleCollider.cpp
+                 src/engine/physics/RectangleCollider.hpp)
+add_executable(OpenGL_Test ${SOURCE_FILES} src/engine/render/Camera.cpp src/engine/render/Camera.hpp)
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL
