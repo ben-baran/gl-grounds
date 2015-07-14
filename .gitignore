@@ -5,3 +5,6 @@
 # libs/SOIL/
 # libs/assimp/
 # libs/glm/
+
+loc.bash
+cloc_defs.txt
