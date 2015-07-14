@@ -7,7 +7,13 @@ Camera::Camera(double centerX, double centerY, double width, double height)
 	transformMatrix = glm::inverse(inverseTransform.getMatrix());
 }
 
-glm::mat4 Camera::getTransformMatrix()
+Transform &Camera::getInverseTransform()
 {
+	return inverseTransform;
+}
+
+glm::mat4 &Camera::getTransformMatrix()
+{
+	transformMatrix = glm::inverse(inverseTransform.getMatrix());
 	return transformMatrix;
 }

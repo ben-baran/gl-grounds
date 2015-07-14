@@ -9,5 +9,6 @@ private:
 	glm::mat4 transformMatrix;
 public:
 	Camera(double centerX, double centerY, double width, double height);
-	glm::mat4 getTransformMatrix();
+	Transform &getInverseTransform();
+	glm::mat4 &getTransformMatrix();
 };

@@ -53,7 +53,7 @@ void Prototype::update(double dt)
 		}
 	}
 
-	Scene::getCamera().center(player.getTransform());
+	Scene::getCamera().getInverseTransform().setTranslation(player.getTransform());
 }
 
 void Prototype::cleanup(){}

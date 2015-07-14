@@ -5,6 +5,8 @@
 class Transform
 {
 private:
+	double theta, scaleX, scaleY, dx, dy;
+
 	bool attached = false, changed = false;
 	glm::mat4 base, scaleComponent, rotateComponent, translateComponent;
 	Transform *parent;
@@ -13,7 +15,11 @@ private:
 public:
 	glm::mat4 &getMatrix();
 
-	Transform &rotate(float theta);
+	Transform &setRotation(double theta);
+	Transform &setScale(double scaleX, double scaleY);
+	Transform &setTranslation(double dx, double dy);
+
+	Transform &rotate(double theta);
 	Transform &scale(double scaleX, double scaleY);
 	Transform &translate(double dx, double dy);
 	void attach(Transform *parent); //always follows another transform
