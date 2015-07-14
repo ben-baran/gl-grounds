@@ -10,6 +10,7 @@ Run::Run(string title)
 	Window::init(title, false, 600, 600);
 	setup();
 
+	Scene::updateBuffers();
 	Window::start(baseUpdate);
 
 	cleanup();

@@ -17,12 +17,18 @@ private:
 	static std::unordered_map<std::string, std::unordered_set<Entity*>> tagAddBuffer;
 	static std::unordered_map<std::string, std::unordered_set<Entity*>> tagRemoveBuffer;
 
-	friend Entity static void addEntityToTag(Entity &entity, std::string tag);
-	friend Entity static void removeEntityFromTag(Entity &entity, std::string tag);
+	static void addEntityToTag(Entity &entity, std::string tag);
+	static void removeEntityFromTag(Entity &entity, std::string tag);
 
 public:
-	static Entity get(std::string name);
+
+	static void add(Entity &entity, std::string name);
+	static void remove(Entity &entity, std::string name);
+	static Entity &get(std::string name);
 	static void update(double dt);
 	static void draw();
 	static void updateBuffers();
+
+	friend void Entity::addTag(std::string tag);
+	friend void Entity::removeTag(std::string tag);
 };
