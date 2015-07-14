@@ -7,7 +7,7 @@
 - [X] Implement Transform (no animation)
 - [X] Implement Shader
 - [X] Implement SolidRectangle
-- [ ] Implement Renderable
+- [X] Implement Renderable
 - [X] Implement KeyHandler
 - [X] Implement MouseHandler
 - [X] Implement simple Res features
