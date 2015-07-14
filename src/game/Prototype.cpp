@@ -28,10 +28,10 @@ void Prototype::update(double dt)
 	Entity player = Scene::get("player");
 
 	Transform &pTrans = player.getTransform();
-	if(KeyHandler.held(GLFW_KEY_W)) pTrans.translate(0, -dt);
-	if(KeyHandler.held(GLFW_KEY_A)) pTrans.translate(-dt, 0);
-	if(KeyHandler.held(GLFW_KEY_S)) pTrans.translate(0, dt);
-	if(KeyHandler.held(GLFW_KEY_D)) pTrans.translate(dt, 0);
+	if(KeyHandler::held(GLFW_KEY_W)) pTrans.translate(0, -dt);
+	if(KeyHandler::held(GLFW_KEY_A)) pTrans.translate(-dt, 0);
+	if(KeyHandler::held(GLFW_KEY_S)) pTrans.translate(0, dt);
+	if(KeyHandler::held(GLFW_KEY_D)) pTrans.translate(dt, 0);
 	player.getTransform().setRotation(std::atan((MouseHandler.getWorldX() - pTrans.getTranslationX()) /
 												(MouseHandler.getWorldY() - pTrans.getTranslationY())));
 	player.collideByTags("wall");
