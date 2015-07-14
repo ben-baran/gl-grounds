@@ -4,8 +4,6 @@
 
 using std::string;
 
-double Renderable::layer = 0;
-
 double Renderable::getLayer()
 {
 	return layer;

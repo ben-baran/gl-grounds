@@ -9,13 +9,10 @@
 
 class Entity
 {
-friend class Scene;
-
 private:
 	double importance;
 
 	std::unordered_set<std::string> tags;
-	bool tagsChanged;
 
 	Renderable *renderable;
 	Collider *collider;

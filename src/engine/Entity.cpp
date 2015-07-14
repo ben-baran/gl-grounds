@@ -3,15 +3,6 @@
 
 using std::string
 
-double Entity::importance = 0;
-
-std::unordered_set<string> Entity::tags;
-bool Entity::tagsChanged = false;
-
-Renderable *Entity::renderable;
-Collider *Entity::collider;
-Transform *Entity::transform;
-
 double Entity::getImportance()
 {
 	return importance;
@@ -68,7 +59,7 @@ bool Entity::hasTag(std::string tag)
 
 void Entity::addTag(std::string tag)
 {
-	tagsChanged = true;
+	Scene::
 	tags.insert(tag);
 }
 
