@@ -46,7 +46,7 @@ void Scene::update(double dt)
 
 void Scene::draw()
 {
-
+	for(auto &pair : entitiesByName) pair.second->draw();
 }
 
 void Scene::updateBuffers()

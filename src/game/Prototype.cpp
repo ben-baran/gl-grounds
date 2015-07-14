@@ -53,7 +53,7 @@ void Prototype::update(double dt)
 		}
 	}
 
-	getCamera().follow(player);
+	Scene::getCamera().follow(player);
 }
 
 void Prototype::cleanup(){}
