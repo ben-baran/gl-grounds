@@ -15,6 +15,6 @@ public:
 
 	static bool pressed(int button);
 	static bool held(int button);
-	static double getPixelX();
-	static double getPixelY();
+	static std::pair<double, double> getPixelCoords();
+	static std::pair<double, double> getWorldCoords();
 };

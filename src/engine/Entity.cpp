@@ -86,7 +86,7 @@ void Entity::update(double dt){}
 
 void Entity::draw()
 {
-	renderable->render(Scene::getCamera().getTransform() * transform);
+	renderable->render(Scene::getCamera().getTransformMatrix() * transform->getMatrix());
 }
 
 bool Entity::PointerCompare::operator()(const Entity *left, const Entity *right) const

@@ -16,6 +16,6 @@ public:
 	void setLayerAbove(std::initializer_list<std::string> names);
 
 	virtual void render() = 0;
-	virtual void render(Transform transform) = 0;
+	virtual void render(glm::mat4 transformMatrix) = 0;
 	virtual Collider &provideCollider() = 0;
 };

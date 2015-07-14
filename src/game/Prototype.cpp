@@ -6,7 +6,7 @@ Prototype::Prototype(string title): Prototype(title){}
 
 void Prototype::setup()
 {
-	Entity player = new Entity(new SolidRectangle(1, 1));
+	Entity player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1));
 	Entity wall0 = new Entity(new SolidRectangle(-2, -2, 1, 1));
 	wall0.addTag("wall");
 	Entity wall1 = new Entity(new SolidRectangle(2, 3, 2, 0.5));
@@ -28,10 +28,10 @@ void Prototype::update(double dt)
 	Entity player = Scene::get("player");
 
 	Transform &pTrans = player.getTransform();
-	if(KeyHandler.held(GLFW_KEY_W)) pTrans.translate(0, -dt);
-	if(KeyHandler.held(GLFW_KEY_A)) pTrans.translate(-dt, 0);
-	if(KeyHandler.held(GLFW_KEY_S)) pTrans.translate(0, dt);
-	if(KeyHandler.held(GLFW_KEY_D)) pTrans.translate(dt, 0);
+	if(KeyHandler::held(GLFW_KEY_W)) pTrans.translate(0, -dt);
+	if(KeyHandler::held(GLFW_KEY_A)) pTrans.translate(-dt, 0);
+	if(KeyHandler::held(GLFW_KEY_S)) pTrans.translate(0, dt);
+	if(KeyHandler::held(GLFW_KEY_D)) pTrans.translate(dt, 0);
 	player.getTransform().setRotation(std::atan((MouseHandler.getWorldX() - pTrans.getTranslationX()) /
 												(MouseHandler.getWorldY() - pTrans.getTranslationY())));
 	player.collideByTags("wall");
@@ -53,7 +53,7 @@ void Prototype::update(double dt)
 		}
 	}
 
-	Scene::getCamera().follow(player);
+	Scene::getCamera().getInverseTransform().setTranslation(player.getTransform());
 }
 
 void Prototype::cleanup(){}

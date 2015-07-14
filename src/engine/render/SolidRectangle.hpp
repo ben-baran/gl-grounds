@@ -28,6 +28,6 @@ public:
     SolidRectangle(float x, float y, float width, float height, float r, float g, float b);
     ~SolidRectangle();
     void draw();
-    void draw(Transform *transform);
+    void draw(glm::mat4 transformMatrix);
     Collider &provideCollider();
 };
