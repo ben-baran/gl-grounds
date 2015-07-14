@@ -1,6 +1,8 @@
 #include "Entity.hpp"
 
-using std::string
+#include "Scene.hpp"
+
+using std::string;
 
 double Entity::getImportance() const
 {
@@ -97,7 +99,7 @@ void Entity::setProperty(std::string name, T &property)
 }
 
 template<typename T>
-T Entity::getProperty(std::string name)
+T &Entity::getProperty(std::string name)
 {
 	return (T) properties[name];
 }
@@ -110,7 +112,8 @@ Entity::~Entity()
 	delete transform;
 }
 
-bool Entity::PairCompare::operator()(const std::pair<std::string, Entity *> &left, const std::pair &right) const
+bool Entity::PairCompare::operator()(const std::pair<std::string, Entity *> &left,
+									 const std::pair<std::string, Entity *> &right) const
 {
 	return left.second->getImportance() < right.second->getImportance();
 }

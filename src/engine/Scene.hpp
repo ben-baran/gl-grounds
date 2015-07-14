@@ -4,8 +4,8 @@
 #include <unordered_set>
 #include <string>
 
-#include <src/engine/render/Camera.hpp>
 #include "Entity.hpp"
+#include <src/engine/render/Camera.hpp>
 
 class Scene
 {

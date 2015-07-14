@@ -18,4 +18,6 @@ public:
 	virtual void render() = 0;
 	virtual void render(glm::mat4 transformMatrix) = 0;
 	virtual Collider &provideCollider() = 0;
+
+	virtual ~Renderable() = 0;
 };
