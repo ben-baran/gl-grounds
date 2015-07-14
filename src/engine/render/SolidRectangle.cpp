@@ -1,14 +1,57 @@
 #include <src/engine/util/Res.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <src/engine/physics/RectangleCollider.hpp>
 #include "SolidRectangle.hpp"
 
 int SolidRectangle::attributes[] = {3, 3};
 GLuint SolidRectangle::indices[] = {0, 1, 3,
                                     1, 2, 3};
 
+float SolidRectangle::getX()
+{
+	return x;
+}
+
+float SolidRectangle::getY()
+{
+	return y;
+}
+
+float SolidRectangle::getWidth()
+{
+	return width;
+}
+
+float SolidRectangle::getHeight()
+{
+	return height;
+}
+
+float SolidRectangle::getR()
+{
+	return r;
+}
+
+long SolidRectangle::getG()
+{
+	return g;
+}
+
+float SolidRectangle::getB()
+{
+	return b;
+}
+
 SolidRectangle::SolidRectangle(float x, float y, float width, float height) : SolidRectangle(x, y, width, height, 1.0f, 1.0f, 1.0f) {}
 
 SolidRectangle::SolidRectangle(float x, float y, float width, float height, float r, float g, float b)
+		: x(x)
+		, y(y)
+		, width(width)
+		, height(height)
+		, r(r)
+		, g(g)
+		, b(b)
 {
     GLfloat vertices[24];
     vertices[0] = vertices[6] = x + width;
@@ -47,7 +90,7 @@ void SolidRectangle::draw(Transform *transform)
 	vao->draw();
 }
 
-Collider SolidRectangle::provideCollider()
+Collider *SolidRectangle::provideCollider()
 {
-    return Collider();
+    return new RectangleCollider(x, y, width, height);
 }

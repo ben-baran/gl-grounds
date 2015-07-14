@@ -17,5 +17,5 @@ public:
 
 	virtual void render() = 0;
 	virtual void render(Transform transform) = 0;
-	virtual Collider provideCollider() = 0;
+	virtual Collider *provideCollider() = 0;
 };
