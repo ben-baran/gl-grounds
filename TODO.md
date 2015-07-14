@@ -15,7 +15,7 @@
 - [ ] Implement Collider
 - [ ] Implement RectangleCollider
 - [X] Implement Run
-- [ ] Implement Scene
+- [X] Implement Scene
 - [X] Implement Entity
 - [ ] Implement Camera
 - [ ] Create prototype
