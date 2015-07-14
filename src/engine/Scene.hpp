@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Entity.hpp"
-
-#include <map>
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
+
+#include "Entity.hpp"
 #include <src/engine/render/Camera.hpp>
 
 class Scene
@@ -13,7 +12,7 @@ class Scene
 private:
 	static Camera camera;
 
-	static std::map<std::string, Entity*, Entity::PointerCompare> entitiesByName;
+	static std::unordered_map<std::string, Entity*> entitiesByName;
 	static std::unordered_map<std::string, Entity*> nameAddBuffer;
 	static std::unordered_map<std::string, Entity*> nameRemoveBuffer;
 

@@ -15,6 +15,8 @@ private:
     VAO *vao;
     Shader *shader;
 
+	void constructVAO();
+
 public:
 	float getX();
 	float getY();
@@ -25,9 +27,11 @@ public:
 	float getB();
 
     SolidRectangle(float x, float y, float width, float height);
-    SolidRectangle(float x, float y, float width, float height, float r, float g, float b);
+    SolidRectangle(float x, float y, float width, float height, float r, float g, float b, float layer = 0);
     ~SolidRectangle();
-    void draw();
-    void draw(glm::mat4 transformMatrix);
+	void setLayer(double layer);
+
+    void render();
+    void render(glm::mat4 transformMatrix);
     Collider &provideCollider();
 };

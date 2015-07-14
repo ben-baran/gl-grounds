@@ -1,6 +1,8 @@
 #include "Entity.hpp"
 
-using std::string
+#include "Scene.hpp"
+
+using std::string;
 
 double Entity::getImportance() const
 {
@@ -89,11 +91,6 @@ void Entity::draw()
 	renderable->render(Scene::getCamera().getTransformMatrix() * transform->getMatrix());
 }
 
-bool Entity::PointerCompare::operator()(const Entity *left, const Entity *right) const
-{
-	return left->getImportance() < right->getImportance();
-}
-
 template<typename T>
 void Entity::setProperty(std::string name, T &property)
 {
@@ -102,7 +99,7 @@ void Entity::setProperty(std::string name, T &property)
 }
 
 template<typename T>
-T Entity::getProperty(std::string name)
+T &Entity::getProperty(std::string name)
 {
 	return (T) properties[name];
 }
@@ -113,4 +110,10 @@ Entity::~Entity()
 	delete renderable;
 	delete collider;
 	delete transform;
+}
+
+bool Entity::PairCompare::operator()(const std::pair<std::string, Entity *> &left,
+									 const std::pair<std::string, Entity *> &right) const
+{
+	return left.second->getImportance() < right.second->getImportance();
 }

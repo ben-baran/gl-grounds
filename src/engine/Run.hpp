@@ -5,11 +5,12 @@
 class Run
 {
 public:
-	Run(std::string title);
+	static void start(Run *currentRun);
 protected:
 	virtual void setup() = 0;
 	virtual void update(double dt) = 0;
 	virtual void cleanup() = 0;
 private:
-	void baseUpdate(double dt);
+	static Run *currentRun;
+	static void baseUpdate(double dt);
 };

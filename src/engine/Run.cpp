@@ -5,24 +5,27 @@
 
 using std::string;
 
-Run::Run(string title)
+Run *Run::currentRun;
+
+void Run::start(Run *run)
 {
-	Window::init(title, false, 600, 600);
+	currentRun = run;
+	Window::init("Title", false, 600, 600);
 	Scene::getCamera().getInverseTransform().setScale(5, 5);
 
-	setup();
+	run->setup();
 
 	Scene::updateBuffers();
 	Window::start(baseUpdate);
 
-	cleanup();
+	run->cleanup();
 	glfwTerminate();
 }
 
 void Run::baseUpdate(double dt)
 {
 	Scene::update(dt);
-	update(dt);
+	currentRun->update(dt);
 	Scene::draw();
 	Scene::updateBuffers();
 }

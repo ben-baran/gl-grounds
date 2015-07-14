@@ -62,8 +62,10 @@ set(SOURCE_FILES src/main.cpp
                  src/engine/physics/Collider.cpp
                  src/engine/physics/Collider.hpp
                  src/engine/physics/RectangleCollider.cpp
-                 src/engine/physics/RectangleCollider.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES} src/engine/render/Camera.cpp src/engine/render/Camera.hpp)
+                 src/engine/physics/RectangleCollider.hpp
+                 src/engine/render/Camera.cpp
+                 src/engine/render/Camera.hpp)
+add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL

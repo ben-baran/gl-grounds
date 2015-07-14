@@ -10,7 +10,7 @@ private:
 	double layer;
 public:
 	double getLayer();
-	void setLayer(int layer);
+	virtual void setLayer(double layer);
 	void setLayerBelow(std::initializer_list<std::string> names);
 	void setLayerBetween(std::string bottom, std::string top);
 	void setLayerAbove(std::initializer_list<std::string> names);
@@ -18,4 +18,6 @@ public:
 	virtual void render() = 0;
 	virtual void render(glm::mat4 transformMatrix) = 0;
 	virtual Collider &provideCollider() = 0;
+
+	virtual ~Renderable() = 0;
 };
