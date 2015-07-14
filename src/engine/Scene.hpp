@@ -25,7 +25,7 @@ private:
 	static void removeEntityFromTag(Entity &entity, std::string tag);
 
 public:
-	Camera &getCamera();
+	static Camera &getCamera();
 
 	static void add(Entity &entity, std::string name);
 	static void remove(Entity &entity, std::string name);

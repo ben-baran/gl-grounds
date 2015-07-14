@@ -7,7 +7,7 @@ glm::mat4 &Transform::getMatrix()
 	changed = false;
 
 	if(!attached) return base;
-	computed =  parent->getMatrix() * parentOriginalInverse * base;
+	computed = parent->getMatrix() * parentOriginalInverse * base;
 	return computed;
 }
 

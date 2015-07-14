@@ -6,7 +6,7 @@ Prototype::Prototype(string title): Prototype(title){}
 
 void Prototype::setup()
 {
-	Entity player = new Entity(new SolidRectangle(1, 1));
+	Entity player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1));
 	Entity wall0 = new Entity(new SolidRectangle(-2, -2, 1, 1));
 	wall0.addTag("wall");
 	Entity wall1 = new Entity(new SolidRectangle(2, 3, 2, 0.5));
@@ -53,7 +53,7 @@ void Prototype::update(double dt)
 		}
 	}
 
-	Scene::getCamera().follow(player);
+	Scene::getCamera().center(player.getTransform());
 }
 
 void Prototype::cleanup(){}
