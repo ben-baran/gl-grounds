@@ -41,7 +41,7 @@ Entity &Scene::get(string name)
 
 void Scene::update(double dt)
 {
-	for(auto pair : entitiesByName) pair.second.update(dt);
+	for(auto &pair : entitiesByName) pair.second->update(dt);
 }
 
 void Scene::draw()
@@ -51,9 +51,9 @@ void Scene::draw()
 
 void Scene::updateBuffers()
 {
-	for(auto pair : nameAddBuffer) entitiesByName[pair.first] = pair.second;
-	for(auto pair : nameRemoveBuffer) entitiesByName.erase(pair.first);
+	for(auto &pair : nameAddBuffer) entitiesByName[pair.first] = pair.second;
+	for(auto &pair : nameRemoveBuffer) entitiesByName.erase(pair.first);
 
-	for(auto pair : tagAddBuffer) entitiesByTag[pair.first].insert(pair.second.begin(), pair.second.end());
-	for(auto pair : tagRemoveBuffer) entitiesByTag[pair.first].erase(pair.second.begin(), pair.second.end());
+	for(auto &pair : tagAddBuffer) entitiesByTag[pair.first].insert(pair.second.begin(), pair.second.end());
+	for(auto &pair : tagRemoveBuffer) entitiesByTag[pair.first].erase(pair.second.begin(), pair.second.end());
 }
