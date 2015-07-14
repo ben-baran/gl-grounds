@@ -1,9 +1,8 @@
 #include "Entity.hpp"
-#include "Scene.hpp"
 
 using std::string
 
-double Entity::getImportance()
+double Entity::getImportance() const
 {
 	return importance;
 }
@@ -82,3 +81,10 @@ Entity::Entity(Renderable *renderable, Collider *collider, Transform *transform)
 	this->collider = collider;
 	this->transform = transform;
 }
+
+bool Entity::PointerCompare::operator()(const Entity *left, const Entity *right) const
+{
+	return left->getImportance() < right->getImportance();
+}
+
+void Entity::update(double dt) {}

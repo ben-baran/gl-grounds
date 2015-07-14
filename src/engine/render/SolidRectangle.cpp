@@ -90,7 +90,7 @@ void SolidRectangle::draw(Transform *transform)
 	vao->draw();
 }
 
-Collider *SolidRectangle::provideCollider()
+Collider &SolidRectangle::provideCollider()
 {
-    return new RectangleCollider(x, y, width, height);
+    return *(new RectangleCollider(x, y, width, height));
 }

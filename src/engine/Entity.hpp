@@ -19,7 +19,7 @@ private:
 	Collider *collider;
 	Transform *transform;
 public:
-	double getImportance();
+	double getImportance() const;
 	void setImportance(double importance);
 	void setImportanceBefore(std::initializer_list<std::string> names);
 	void setImportanceBetween(std::string before, std::string after);
@@ -36,4 +36,11 @@ public:
 
 	Entity(Renderable *renderable, Transform *transform = new Transform());
 	Entity(Renderable *renderable, Collider *collider, Transform *transform = new Transform());
+
+	virtual void update(double dt);
+
+	struct PointerCompare
+	{
+		bool operator()(const Entity *left, const Entity *right) const;
+	};
 };

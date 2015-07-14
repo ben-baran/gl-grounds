@@ -2,7 +2,7 @@
 
 using std::string
 
-std::unordered_map<std::string, Entity*> entitiesByName;
+std::map<std::string, Entity*, Entity::PointerCompare> entitiesByName;
 std::unordered_map<std::string, Entity*> nameAddBuffer;
 std::unordered_map<std::string, Entity*> nameRemoveBuffer;
 
@@ -41,7 +41,7 @@ Entity &Scene::get(string name)
 
 void Scene::update(double dt)
 {
-
+	for(auto pair : entitiesByName) pair.second.update(dt);
 }
 
 void Scene::draw()

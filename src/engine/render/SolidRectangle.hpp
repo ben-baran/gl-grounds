@@ -29,5 +29,5 @@ public:
     ~SolidRectangle();
     void draw();
     void draw(Transform *transform);
-    Collider *provideCollider();
+    Collider &provideCollider();
 };
