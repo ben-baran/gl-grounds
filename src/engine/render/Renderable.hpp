@@ -10,7 +10,7 @@ private:
 	double layer;
 public:
 	double getLayer();
-	void setLayer(int layer);
+	virtual void setLayer(double layer);
 	void setLayerBelow(std::initializer_list<std::string> names);
 	void setLayerBetween(std::string bottom, std::string top);
 	void setLayerAbove(std::initializer_list<std::string> names);
