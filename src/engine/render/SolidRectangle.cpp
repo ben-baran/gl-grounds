@@ -73,7 +73,6 @@ SolidRectangle::SolidRectangle(float x, float y, float width, float height, floa
 
 SolidRectangle::~SolidRectangle()
 {
-    vao->clean();
     delete vao;
 }
 

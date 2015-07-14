@@ -10,7 +10,7 @@ public:
         const int attributes[], const int &attributesLength,
         const GLenum &usage);
     void draw();
-    void clean();
+    ~VAO();
 private:
     int nVertices;
     GLuint vao, vbo, ebo;

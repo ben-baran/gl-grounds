@@ -39,7 +39,7 @@ void VAO::draw()
     glBindVertexArray(0);
 }
 
-void VAO::clean()
+VAO::~VAO()
 {
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
