@@ -5,6 +5,9 @@ using std::string
 
 double Entity::importance = 0;
 
+std::unordered_set<string> Entity::tags;
+bool Entity::tagsChanged = false;
+
 Renderable *Entity::renderable;
 Collider *Entity::collider;
 Transform *Entity::transform;
@@ -51,6 +54,28 @@ Collider &Entity::getCollider()
 Transform &Entity::getTransform()
 {
 	return *transform;
+}
+
+const std::unordered_set<std::string> &Entity::getTags()
+{
+	return tags;
+}
+
+bool Entity::hasTag(std::string tag)
+{
+	return tags.find(tag) != tags.end();
+}
+
+void Entity::addTag(std::string tag)
+{
+	tagsChanged = true;
+	tags.insert(tag);
+}
+
+void Entity::removeTag(std::string tag)
+{
+	tagsChanged = true;
+	tags.erase(tag);
 }
 
 Entity::Entity(Renderable *renderable, Transform *transform)
