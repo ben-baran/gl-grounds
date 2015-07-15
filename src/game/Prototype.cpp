@@ -43,14 +43,14 @@ void Prototype::update(double dt)
 		if(weapon.bProperty("toggled"))
 		{
 			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut)
-												 .addComponent(glm::radians(90), Transform::ROTATE),
-												 .addComponent(-0.6, Transform::TRANSLATE_Y));
+												 .addComponent(glm::radians(90), Transform::rotate)
+												 .addComponent(-0.6, Transform::translateY));
 		}
 		else
 		{
 			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut)
-												 .addComponent(glm::radians(90), Transform::ROTATE),
-												 .addComponent(-0.6, Transform::TRANSLATE_Y));
+												 .addComponent(glm::radians(90), Transform::rotate)
+												 .addComponent(-0.6, Transform::translateY));
 		}
 	}
 

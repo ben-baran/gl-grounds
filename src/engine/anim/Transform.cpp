@@ -123,3 +123,22 @@ void Transform::unattach()
 {
 	attached = false;
 }
+
+Transform::Animation &Transform::queueAnimation(double target, double (*animFunc)(double))
+{
+	Animation *anim = new Animation(target, animFunc);
+	animQueue.push(*anim);
+	return *anim;
+}
+
+Transform::Animation::Animation(double duration, double (*animFunc)(double))
+{
+	this->duration = duration;
+	this->animFunc = animFunc;
+}
+
+Transform::Animation &Transform::Animation::addComponent(double target, Transform &(*component)(double))
+{
+	components.push_back(std::make_pair(target, component));
+	return *this;
+}

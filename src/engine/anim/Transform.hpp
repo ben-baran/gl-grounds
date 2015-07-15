@@ -18,10 +18,12 @@ private:
 	struct Animation
 	{
 	private:
-		double lastTime;
+		double duration, lastTime;
+		double (* animFunc)(double);
+		std::vector<std::pair<double, Transform &(Transform::*)(double)>> components;
 	public:
-		Animation(double duration, double (*animFunc)(double));
-		Animation &addComponent();
+		Animation(double duration, double (* animFunc)(double));
+		Animation &addComponent(double target, Transform &(Transform::* component)(double));
 	};
 public:
 	glm::mat4 &getMatrix();
@@ -45,4 +47,6 @@ public:
 	Transform &translate(double dx, double dy);
 	void attach(Transform *parent); //always follows another transform
 	void unattach();
+
+	Animation &queueAnimation(double target, double (* animFunc)(double));
 };
