@@ -56,10 +56,10 @@ void TestRunner::update(double dt)
 	Scene::get("secondary").getTransform().rotate(0.01);
 	for(auto &rotator : Scene::getAll("rotate")) rotator->getTransform().rotate(0.01);
 
-	if(KeyHandler::held(GLFW_KEY_W)) transform.translate(0, 0.04);
-	if(KeyHandler::held(GLFW_KEY_A)) transform.translate(-0.04, 0);
-	if(KeyHandler::held(GLFW_KEY_S)) transform.translate(0, -0.04);
-	if(KeyHandler::held(GLFW_KEY_D)) transform.translate(0.04, 0);
+	if(KeyHandler::held(GLFW_KEY_W)) transform.translate(0, 0.07);
+	if(KeyHandler::held(GLFW_KEY_A)) transform.translate(-0.07, 0);
+	if(KeyHandler::held(GLFW_KEY_S)) transform.translate(0, -0.07);
+	if(KeyHandler::held(GLFW_KEY_D)) transform.translate(0.07, 0);
 }
 
 void TestRunner::cleanup(){}

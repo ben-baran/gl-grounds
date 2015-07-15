@@ -43,8 +43,8 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/render/Texture.hpp
                  src/engine/render/SolidRectangle.cpp
                  src/engine/render/SolidRectangle.hpp
-                 src/engine/render/Transform.cpp
-                 src/engine/render/Transform.hpp
+                 src/engine/anim/Transform.cpp
+                 src/engine/anim/Transform.hpp
                  src/engine/util/KeyHandler.cpp
                  src/engine/util/KeyHandler.hpp
                  src/engine/util/MouseHandler.cpp

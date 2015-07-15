@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <queue>
 
 class Transform
 {
@@ -12,6 +13,15 @@ private:
 	Transform *parent;
 	glm::mat4 parentOriginalInverse, computed;
 
+	std::queue<Animation> animQueue;
+
+	struct Animation
+	{
+	private:
+		double lastTime;
+	public:
+
+	};
 public:
 	glm::mat4 &getMatrix();
 
