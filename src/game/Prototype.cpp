@@ -17,7 +17,7 @@ void Prototype::setup()
 
 	Entity weapon = new Entity(new SolidRectangle(1, 0.1));
 	weapon.getTransform().translate(0.3, 0.3).rotate(glm::radians(-45)).attach(player.getTransform());
-	weapon.setProperty<bool>("toggled", false);
+	weapon.bProperty("toggled") = false;
 	weapon.setImportanceAfter({"player"});
 	weapon.getRenderable().setLayerBelow({"player", "wall"});
 	Scene::add("weapon", weapon);
@@ -39,7 +39,7 @@ void Prototype::update(double dt)
 	if(MouseHandler.clicked(GLFW_MOUSE_BUTTON_1))
 	{
 		Entity weapon = Scene::get("weapon");
-		if(weapon.getProperty<bool>("toggled"))
+		if(weapon.bProperty("toggled"))
 		{
 			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut,
 												 new AnimComponent(glm::radians(90), Transform::ROTATE),

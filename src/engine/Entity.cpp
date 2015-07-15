@@ -93,7 +93,6 @@ void Entity::draw()
 
 Entity::~Entity()
 {
-	for(auto &iter : properties) delete iter.second;
 	delete renderable;
 	delete collider;
 	delete transform;
@@ -105,27 +104,32 @@ bool Entity::PairCompare::operator()(const std::pair<std::string, Entity *> &lef
 	return left.second->getImportance() < right.second->getImportance();
 }
 
-const int &Entity::iProperty(std::string name)
+bool &Entity::bProperty(std::string name)
 {
-	return <#initializer#>;
+	return bProperties[name];
+}
+
+int &Entity::iProperty(std::string name)
+{
+	return iProperties[name];
 }
 
 float &Entity::fProperty(std::string name)
 {
-	return <#initializer#>;
+	return fProperties[name];
 }
 
 double &Entity::dProperty(std::string name)
 {
-	return <#initializer#>;
+	return dProperties[name];
 }
 
 std::string &Entity::sProperty(std::string name)
 {
-	return <#initializer#>;
+	return sProperties[name];
 }
 
-Entity &Entity::eProperty(std::string name)
+Entity *&Entity::eProperty(std::string name)
 {
-	return <#initializer#>;
+	return eProperties[name];
 }
