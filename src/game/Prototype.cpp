@@ -42,7 +42,7 @@ void Prototype::update(double dt)
 		Entity weapon = Scene::get("weapon");
 		if(weapon.bProperty("toggled"))
 		{
-			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut,
+			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut)
 												 .addComponent(glm::radians(90), Transform::ROTATE),
 												 .addComponent(-0.6, Transform::TRANSLATE_Y));
 		}

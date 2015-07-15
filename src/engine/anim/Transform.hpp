@@ -20,7 +20,8 @@ private:
 	private:
 		double lastTime;
 	public:
-
+		Animation(double duration, double (*animFunc)(double));
+		Animation &addComponent();
 	};
 public:
 	glm::mat4 &getMatrix();
@@ -36,7 +37,11 @@ public:
 	Transform &setTranslation(double dx, double dy);
 
 	Transform &rotate(double theta);
+	Transform &scaleInX(double scaleX);
+	Transform &scaleInY(double scaleY);
 	Transform &scale(double scaleX, double scaleY);
+	Transform &translateX(double dx);
+	Transform &translateY(double dy);
 	Transform &translate(double dx, double dy);
 	void attach(Transform *parent); //always follows another transform
 	void unattach();

@@ -70,6 +70,16 @@ Transform &Transform::rotate(double theta)
 	return *this;
 }
 
+Transform &Transform::scaleInX(double scaleX)
+{
+	return scale(scaleX, 1);
+}
+
+Transform &Transform::scaleInY(double scaleY)
+{
+	return scale(1, scaleY);
+}
+
 Transform &Transform::scale(double scaleX, double scaleY)
 {
 	this->scaleX *= scaleX;
@@ -77,6 +87,16 @@ Transform &Transform::scale(double scaleX, double scaleY)
 	changed = true;
 	scaleComponent = glm::scale(scaleComponent, glm::vec3(scaleX, scaleY, 1));
 	return *this;
+}
+
+Transform &Transform::translateX(double dx)
+{
+	return translate(dx, 0);
+}
+
+Transform &Transform::translateY(double dy)
+{
+	return translate(0, dy);
 }
 
 Transform &Transform::translate(double dx, double dy)
