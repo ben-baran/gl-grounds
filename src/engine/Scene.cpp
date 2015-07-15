@@ -51,7 +51,9 @@ void Scene::remove(std::string name, Entity &entity)
 
 Entity &Scene::get(string name)
 {
-	return *(entitiesByName[name]);
+	auto find = entitiesByName.find(name);
+	if(find != entitiesByName.end()) return *(find->second);
+	return *(nameAddBuffer[name]);
 }
 
 void Scene::update(double dt)

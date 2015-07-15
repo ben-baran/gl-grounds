@@ -29,3 +29,9 @@ void Run::baseUpdate(double dt)
 	Scene::draw();
 	Scene::updateBuffers();
 }
+
+void Run::end()
+{
+	cleanup();
+	glfwSetWindowShouldClose(Window::getWindow(), GL_TRUE);
+}
