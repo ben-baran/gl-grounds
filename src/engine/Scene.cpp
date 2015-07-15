@@ -1,6 +1,7 @@
 #include "Scene.hpp"
 
 #include <vector>
+#include <string>
 
 using std::string;
 
@@ -31,13 +32,18 @@ Camera &Scene::getCamera()
 	return camera;
 }
 
-void Scene::add(Entity &entity, std::string name)
+void Scene::add(std::string name, Entity &entity)
 {
 	nameAddBuffer[name] = &entity;
 	nameRemoveBuffer.erase(name);
 }
 
-void Scene::remove(Entity &entity, std::string name)
+void Scene::add(Entity &entity)
+{
+	add(std::to_string(((long) &entity)), entity);
+}
+
+void Scene::remove(std::string name, Entity &entity)
 {
 	nameRemoveBuffer[name] = &entity;
 	nameAddBuffer.erase(name);

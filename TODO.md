@@ -6,7 +6,7 @@
 - [X] Implement Texture
 - [ ] Implement Transform (with animation)
 - [X] Implement Shader
-- [X] Implement SolidRectangle (layers not working)
+- [X] Implement SolidRectangle (layers not working) (layers now work)
 - [X] Implement Renderable
 - [X] Implement KeyHandler
 - [X] Implement MouseHandler

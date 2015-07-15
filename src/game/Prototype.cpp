@@ -6,14 +6,15 @@ Prototype::Prototype(string title): Prototype(title){}
 
 void Prototype::setup()
 {
-	Entity player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1));
-	Entity wall0 = new Entity(new SolidRectangle(-2, -2, 1, 1));
-	wall0.addTag("wall");
-	Entity wall1 = new Entity(new SolidRectangle(2, 3, 2, 0.5));
-	wall1.addTag("wall");
+	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1));
+	Entity *wall0 = new Entity(new SolidRectangle(-2, -2, 1, 1));
+	wall0->addTag("wall");
+	Entity *wall1 = new Entity(new SolidRectangle(2, 3, 2, 0.5));
+	wall1->addTag("wall");
 
-	Scene::add("player", player);
-	Scene::add(wall0, wall1);
+	Scene::add("player", *player);
+	Scene::add(*wall0);
+	Scene::add(*wall1);
 
 	Entity weapon = new Entity(new SolidRectangle(1, 0.1));
 	weapon.getTransform().translate(0.3, 0.3).rotate(glm::radians(-45)).attach(player.getTransform());

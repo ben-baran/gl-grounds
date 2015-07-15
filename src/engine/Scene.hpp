@@ -26,8 +26,9 @@ private:
 public:
 	static Camera &getCamera();
 
-	static void add(Entity &entity, std::string name);
-	static void remove(Entity &entity, std::string name);
+	static void add(std::string name, Entity &entity);
+	static void add(Entity &entity);
+	static void remove(std::string name, Entity &entity);
 	static Entity &get(std::string name);
 	static void update(double dt);
 	static void draw();
