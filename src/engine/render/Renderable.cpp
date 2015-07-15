@@ -11,14 +11,14 @@ double Renderable::getLayer()
 
 void Renderable::setLayer(double layer)
 {
-	this->layer = layer;
+	this->layer = -layer; //negative because of GL_LESS parameter in glDepthFunc
 }
 
 void Renderable::setLayerBelow(std::initializer_list<std::string> names)
 {
 	double min = INFINITY;
 	for(string name : names) min = std::min(min, Scene::get(name).getRenderable().getLayer());
-	setLayer(min - 1);
+	setLayer((min - 1) / 2); //needed because bounds are -1 to 1 in depth buffer
 }
 
 void Renderable::setLayerBetween(std::string bottom, std::string top)
@@ -30,5 +30,7 @@ void Renderable::setLayerAbove(std::initializer_list<std::string> names)
 {
 	double max = -INFINITY;
 	for(string name : names) max = std::max(max, Scene::get(name).getRenderable().getLayer());
-	setLayer(max + 1);
+	setLayer((max + 1) / 2); //needed because bounds are -1 to 1 in depth buffer
 }
+
+Renderable::~Renderable(){}

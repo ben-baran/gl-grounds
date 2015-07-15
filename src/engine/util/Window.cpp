@@ -59,6 +59,9 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
     glfwGetFramebufferSize(window, &pixelX, &pixelY);
     glViewport(0, 0, pixelX, pixelY);
 
+	glDepthFunc(GL_LESS);
+	glEnable(GL_DEPTH_TEST);
+
     glfwSetKeyCallback(window, KeyHandler::callback);
     glfwSetMouseButtonCallback(window, MouseHandler::buttonCallback);
 	glfwSetCursorPosCallback(window, MouseHandler::moveCallback);
@@ -81,6 +84,10 @@ void Window::start(void (*handler)(double))
         if(!paused)
         {
             double time = glfwGetTime();
+
+			glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
             handler(time - lastTime);
             lastTime = time;
             glfwSwapBuffers(window);

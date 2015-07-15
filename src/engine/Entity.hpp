@@ -14,7 +14,12 @@ private:
 	double importance;
 
 	std::unordered_set<std::string> tags;
-	std::unordered_map<std::string, void *> properties;
+	std::unordered_map<std::string, bool> bProperties;
+	std::unordered_map<std::string, int> iProperties;
+	std::unordered_map<std::string, float> fProperties;
+	std::unordered_map<std::string, double> dProperties;
+	std::unordered_map<std::string, std::string> sProperties;
+	std::unordered_map<std::string, Entity*> eProperties;
 
 	Renderable *renderable;
 	Collider *collider;
@@ -35,8 +40,13 @@ public:
 	void addTag(std::string tag);
 	void removeTag(std::string tag);
 
-	template<typename T> void setProperty(std::string name, T &property);
-	template<typename T> T &getProperty(std::string name);
+	bool &bProperty(std::string name);
+	int &iProperty(std::string name);
+	float &fProperty(std::string name);
+	double &dProperty(std::string name);
+	std::string &sProperty(std::string name);
+	Entity *&eProperty(std::string name);
+
 
 	Entity(Renderable *renderable, Transform *transform = new Transform());
 	Entity(Renderable *renderable, Collider *collider, Transform *transform = new Transform());
