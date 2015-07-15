@@ -91,19 +91,6 @@ void Entity::draw()
 	renderable->render(Scene::getCamera().getTransformMatrix() * transform->getMatrix());
 }
 
-template<typename T>
-void Entity::setProperty(std::string name, T &property)
-{
-	T *copy = new T(property);
-	properties[name] = copy;
-}
-
-template<typename T>
-T &Entity::getProperty(std::string name)
-{
-	return (T) properties[name];
-}
-
 Entity::~Entity()
 {
 	for(auto &iter : properties) delete iter.second;
@@ -116,4 +103,29 @@ bool Entity::PairCompare::operator()(const std::pair<std::string, Entity *> &lef
 									 const std::pair<std::string, Entity *> &right) const
 {
 	return left.second->getImportance() < right.second->getImportance();
+}
+
+const int &Entity::iProperty(std::string name)
+{
+	return <#initializer#>;
+}
+
+float &Entity::fProperty(std::string name)
+{
+	return <#initializer#>;
+}
+
+double &Entity::dProperty(std::string name)
+{
+	return <#initializer#>;
+}
+
+std::string &Entity::sProperty(std::string name)
+{
+	return <#initializer#>;
+}
+
+Entity &Entity::eProperty(std::string name)
+{
+	return <#initializer#>;
 }
