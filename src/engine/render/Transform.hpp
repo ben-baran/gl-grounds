@@ -15,6 +15,12 @@ private:
 public:
 	glm::mat4 &getMatrix();
 
+	double getTheta();
+	double getScaleX();
+	double getScaleY();
+	double getDX();
+	double getDY();
+
 	Transform &setRotation(double theta);
 	Transform &setScale(double scaleX, double scaleY);
 	Transform &setTranslation(double dx, double dy);

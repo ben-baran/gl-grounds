@@ -12,6 +12,31 @@ glm::mat4 &Transform::getMatrix()
 	return computed;
 }
 
+double Transform::getTheta()
+{
+	return theta;
+}
+
+double Transform::getScaleX()
+{
+	return scaleX;
+}
+
+double Transform::getScaleY()
+{
+	return scaleY;
+}
+
+double Transform::getDX()
+{
+	return dx;
+}
+
+double Transform::getDY()
+{
+	return dy;
+}
+
 Transform &Transform::setRotation(double theta)
 {
 	changed = true;

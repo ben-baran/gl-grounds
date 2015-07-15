@@ -80,3 +80,8 @@ void Scene::updateBuffers()
 	for(auto &pair : tagAddBuffer) entitiesByTag[pair.first].insert(pair.second.begin(), pair.second.end());
 	for(auto &pair : tagRemoveBuffer) entitiesByTag[pair.first].erase(pair.second.begin(), pair.second.end());
 }
+
+std::unordered_set<Entity*> &Scene::getAll(std::string tag)
+{
+	return entitiesByTag[tag];
+}

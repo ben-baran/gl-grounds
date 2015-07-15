@@ -20,6 +20,8 @@ public:
     static void start(void (*handler)(double));
     static void setPaused(bool paused);
     static void end();
+    static int getResX();
+	static int getResY();
 private:
     static constexpr int REFRESH_RATE_DEFAULT = 60;
     static int refresh;
