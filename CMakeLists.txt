@@ -30,7 +30,7 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-set(SOURCE_FILES src/main.cpp
+set(SOURCE_FILES #src/main.cpp
                  src/engine/util/Res.cpp
                  src/engine/util/Res.hpp
                  src/engine/render/VAO.cpp
@@ -64,8 +64,10 @@ set(SOURCE_FILES src/main.cpp
                  src/engine/physics/RectangleCollider.cpp
                  src/engine/physics/RectangleCollider.hpp
                  src/engine/render/Camera.cpp
-                 src/engine/render/Camera.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES} src/game/TestRunner.cpp src/game/TestRunner.hpp)
+                 src/engine/render/Camera.hpp
+                 src/game/TestRunner.cpp
+                 src/game/TestRunner.hpp)
+add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL
