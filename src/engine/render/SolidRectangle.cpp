@@ -72,7 +72,7 @@ SolidRectangle::SolidRectangle(float x, float y, float width, float height, floa
 		, g(g)
 		, b(b)
 {
-	setLayer(layer);
+	Renderable::setLayer(layer);
 	constructVAO();
     shader = Res::loadShader("res/shader/simple/color");
 }
