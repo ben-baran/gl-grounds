@@ -1,9 +1,24 @@
 #include "Transform.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <GLFW/glfw3.h>
 
 glm::mat4 &Transform::getMatrix()
 {
+	if(animList.size() != 0)
+	{
+		Animation &curAnim = animList.front();
+		double time = glfwGetTime();
+		while(time > curAnim.initialTime + 1)
+		{
+			curAnim.yield(1, *this);
+			animList.erase(animList.begin());
+		}
+		if(time > curAnim.initialTime)
+		{
+			curAnim.yield(time - curAnim.initialTime, *this);
+		}
+	}
 	if(changed) base = translateComponent * rotateComponent * scaleComponent;
 	changed = false;
 
@@ -126,13 +141,17 @@ void Transform::unattach()
 
 Transform::Animation &Transform::queueAnimation(double target, double (*animFunc)(double))
 {
-	Animation *anim = new Animation(target, animFunc);
-	animQueue.push(*anim);
+	double curTime = glfwGetTime();
+	for(auto &anim : animList) curTime += anim.duration;
+	Animation *anim = new Animation(curTime, target, animFunc);
+	animList.push_back(*anim);
 	return *anim;
 }
 
-Transform::Animation::Animation(double duration, double (*animFunc)(double))
+Transform::Animation::Animation(double initialTime, double duration, double (*animFunc)(double))
 {
+	this->initialTime = initialTime;
+	lastValue = 0;
 	this->duration = duration;
 	this->animFunc = animFunc;
 }
@@ -141,4 +160,12 @@ Transform::Animation &Transform::Animation::addComponent(double target, Transfor
 {
 	components.push_back(std::make_pair(target, component));
 	return *this;
+}
+
+void Transform::Animation::yield(double time, Transform &transform)
+{
+	double value = animFunc(time), difference = value - lastValue;
+
+	for(auto &component : components) (transform.*(component.second))(component.first);
+	lastValue = value;
 }

@@ -2,7 +2,10 @@
 
 using std::string;
 
-Prototype::Prototype(string title): Prototype(title){}
+int main()
+{
+	Run::start(new Prototype());
+}
 
 void Prototype::setup()
 {
@@ -54,7 +57,7 @@ void Prototype::update(double dt)
 		}
 	}
 
-	Scene::getCamera().getInverseTransform().setTranslation(player.getTransform());
+	Scene::getCamera().getInverseTransform().setTranslation(transform.getDX(), transform.getDY());
 }
 
 void Prototype::cleanup(){}

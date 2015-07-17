@@ -13,17 +13,18 @@ private:
 	Transform *parent;
 	glm::mat4 parentOriginalInverse, computed;
 
-	std::queue<Animation> animQueue;
+	std::vector<Animation> animList;
 
 	struct Animation
 	{
-	private:
-		double duration, lastTime;
+		double duration, initialTime, lastValue;
 		double (* animFunc)(double);
 		std::vector<std::pair<double, Transform &(Transform::*)(double)>> components;
-	public:
-		Animation(double duration, double (* animFunc)(double));
+
+		Animation(double initialTime, double duration, double (* animFunc)(double));
 		Animation &addComponent(double target, Transform &(Transform::* component)(double));
+
+		void yield(double time, Transform &transform);
 	};
 public:
 	glm::mat4 &getMatrix();
