@@ -50,5 +50,5 @@ public:
 	void attach(Transform *parent); //always follows another transform
 	void unattach();
 
-	Animation &queueAnimation(double target, double (* animFunc)(double));
+	Animation &queueAnimation(double duration, double (* animFunc)(double));
 };

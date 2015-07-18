@@ -9,9 +9,9 @@ glm::mat4 &Transform::getMatrix()
 	{
 		Animation *curAnim = animList.front();
 		double time = glfwGetTime();
-		while(animList.size() > 0 && time > curAnim->initialTime + 1)
+		while(animList.size() > 0 && time > curAnim->initialTime + curAnim->duration)
 		{
-			curAnim->yield(1, *this);
+			curAnim->yield(curAnim->duration, *this);
 			animList.erase(animList.begin());
 			curAnim = animList.front();
 		}
@@ -141,11 +141,11 @@ void Transform::unattach()
 	attached = false;
 }
 
-Transform::Animation &Transform::queueAnimation(double target, double (*animFunc)(double))
+Transform::Animation &Transform::queueAnimation(double duration, double (*animFunc)(double))
 {
 	double curTime = glfwGetTime();
 	for(auto &anim : animList) curTime += anim->duration;
-	Animation *anim = new Animation(curTime, target, animFunc);
+	Animation *anim = new Animation(curTime, duration, animFunc);
 	animList.push_back(anim);
 	return *anim;
 }
@@ -166,6 +166,7 @@ Transform::Animation &Transform::Animation::addComponent(double target, Transfor
 
 void Transform::Animation::yield(double time, Transform &transform)
 {
+	time /= duration;
 	double value = animFunc(time), difference = value - lastValue;
 
 	for(auto &component : components) (transform.*(component.second))(component.first * difference);
