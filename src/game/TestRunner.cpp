@@ -4,6 +4,7 @@
 #include <src/engine/util/KeyHandler.hpp>
 #include <src/engine/util/MouseHandler.hpp>
 #include <iostream>
+#include <src/engine/anim/Ease.hpp>
 #include "TestRunner.hpp"
 
 int main()
@@ -48,8 +49,7 @@ void TestRunner::update(double dt)
 	auto coords = MouseHandler::getWorldCoords();
 	if(MouseHandler::pressed(GLFW_MOUSE_BUTTON_1))
 	{
-		std::cout << coords.first << " " << coords.second << std::endl;
-		std::cout << transform.getDX() << " " << transform.getDY() << "\n" << std::endl;
+		transform.queueAnimation(1, Ease::linear).addComponent(1, &Transform::translateX);
 	}
 	transform.setRotation(std::atan2(coords.second - transform.getDY(), coords.first - transform.getDX()));
 

@@ -25,7 +25,7 @@ private:
 		void yield(double time, Transform &transform);
 	};
 
-	std::vector<Animation> animList;
+	std::vector<Animation *> animList;
 
 public:
 	glm::mat4 &getMatrix();
