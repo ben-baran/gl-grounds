@@ -75,6 +75,7 @@ Transform &Transform::setTranslation(double dx, double dy)
 	this->dx = dx;
 	this->dy = dy;
 	translateComponent = glm::translate(glm::mat4(), glm::vec3(dx, dy, 0));
+	return *this;
 }
 
 Transform &Transform::rotate(double theta)
@@ -156,7 +157,7 @@ Transform::Animation::Animation(double initialTime, double duration, double (*an
 	this->animFunc = animFunc;
 }
 
-Transform::Animation &Transform::Animation::addComponent(double target, Transform &(*component)(double))
+Transform::Animation &Transform::Animation::addComponent(double target, Transform &(Transform::* component)(double))
 {
 	components.push_back(std::make_pair(target, component));
 	return *this;

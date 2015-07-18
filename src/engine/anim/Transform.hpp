@@ -13,8 +13,6 @@ private:
 	Transform *parent;
 	glm::mat4 parentOriginalInverse, computed;
 
-	std::vector<Animation> animList;
-
 	struct Animation
 	{
 		double duration, initialTime, lastValue;
@@ -26,6 +24,9 @@ private:
 
 		void yield(double time, Transform &transform);
 	};
+
+	std::vector<Animation> animList;
+
 public:
 	glm::mat4 &getMatrix();
 
