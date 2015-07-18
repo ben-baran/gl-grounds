@@ -143,8 +143,10 @@ void Transform::unattach()
 
 Transform::Animation &Transform::queueAnimation(double duration, double (*animFunc)(double))
 {
-	double curTime = glfwGetTime();
-	for(auto &anim : animList) curTime += anim->duration;
+	double curTime;
+	if(animList.size() != 0) curTime = animList.back()->initialTime + animList.back()->duration;
+	else curTime = glfwGetTime();
+	
 	Animation *anim = new Animation(curTime, duration, animFunc);
 	animList.push_back(anim);
 	return *anim;
