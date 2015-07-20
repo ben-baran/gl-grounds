@@ -104,45 +104,62 @@ double Ease::exponentialInOut(double time)
 
 double Ease::backIn(double time)
 {
-	return 0;
+	double back = 1.70158;
+	return time * time * ((back + 1) * time - back);
 }
 
 double Ease::backOut(double time)
 {
-	return 0;
+	double back = 1.70158;
+	return (--time) * time * ((back + 1) * time + back) + 1;
 }
 
 double Ease::backInOut(double time)
 {
-	return 0;
+	double back = 1.70158, norm = 1.525;
+	if((time *= 2) < 1) return 0.5 * (time * time * (((back *= norm) + 1) * time - back));
+	return 0.5 * ((time -= 2) * time * (((back *= norm) + 1) * time + back) + 2);
 }
 
 double Ease::elasticIn(double time)
 {
-	return 0;
+	if(time == 0 || time == 1) return time;
+	double invDuration = 0.3, offset = invDuration / 4;
+	return -(std::pow(2, 10 * (--time)) * std::sin((time - offset) * 2 * M_PI / invDuration));
 }
 
 double Ease::elasticOut(double time)
 {
-	return 0;
+	if(time == 0 || time == 1) return time;
+	double invDuration = 0.3, offset = invDuration / 4;
+	return (std::pow(2, -10 * time) * std::sin((time - offset) * 2 * M_PI / invDuration)) + 1;
 }
 
 double Ease::elasticInOut(double time)
 {
-	return 0;
+	if(time == 0) return 0;
+	if((time *= 2) == 2) return 1;
+	double invDuration = 0.45, offset = invDuration / 4;
+	if(time < 1) return -0.5 * (std::pow(2, 10 * (--time)) * std::sin((time - offset) * 2 * M_PI / invDuration));
+	return 0.5 * (std::pow(2, -10 * (--time)) * std::sin((time - offset) * 2 * M_PI / invDuration)) + 1;
 }
 
 double Ease::bounceIn(double time)
 {
-	return 0;
+	return 1 - bounceOut(1 - time);
 }
 
 double Ease::bounceOut(double time)
 {
-	return 0;
+	double cycle = 2.75;
+	if(time < (1 / cycle)) return 7.5625 * time * time;
+	if(time < (2 / cycle)) return 7.5625 * (time -= (1.5 / cycle)) * time + .75;
+	if(time	< (2.5 / cycle)) return 7.5625 * (time -= (2.25 / cycle)) * time + .9375;
+	return 7.5625 * (time -= (2.625 / cycle)) * time + .984375;
 }
 
 double Ease::bounceInOut(double time)
 {
-	return 0;
+	if(time < 0.5) return bounceIn(time * 2) * 0.5;
+	return bounceOut(time * 2 - 1) * 0.5 + 0.5;
 }
