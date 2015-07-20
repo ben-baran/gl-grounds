@@ -7,7 +7,7 @@
 class Renderable
 {
 private:
-	double layer;
+	double layer = 0;
 public:
 	double getLayer();
 	virtual void setLayer(double layer);

@@ -12,32 +12,18 @@ int main()
 	Run::start(new TestRunner());
 }
 
+void placeWall(int x, int y)
+{
+	Entity *wall = new Entity(new SolidRectangle(x, y, 1, 1));
+	wall->addTag("wall");
+	Scene::add(*wall);
+}
+
 void TestRunner::setup()
 {
+	placeWall(-2, -2);
 	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9));
 	Scene::add("player", *player);
-
-	Entity *secondary = new Entity(new SolidRectangle(-0.4, -0.4, 0.8, 0.8, 0.9, 0.5, 0.5));
-	Scene::add("secondary", *secondary);
-	secondary->getRenderable().setLayerAbove({"player"});
-	secondary->getTransform().translate(0.5, 0).attach(&(player->getTransform()));
-
-	Entity *pointer = new Entity(new SolidRectangle(-0.01, -0.01, 0.02, 0.02, 0, 0, 0));
-	Scene::add(*pointer);
-	pointer->getRenderable().setLayerAbove({"player"});
-	pointer->getTransform().attach(&(player->getTransform()));
-
-	Entity &last = *secondary;
-	for(int i = 1; i < 8; i++)
-	{
-		Entity *attached = new Entity(new SolidRectangle(-0.4 / (i + 1), -0.4 / (i + 1), 0.8 / (i + 1), 0.8 / (i + 1),
-														 i / 15.0, i / 10.0, i / 15.0));
-		attached->addTag("rotate");
-		Scene::add(*attached);
-		attached->getRenderable().setLayerBelow({"player"});
-		attached->getTransform().translate(0.9 * i, 0).attach(&(last.getTransform()));
-		last = *attached;
-	}
 }
 
 void TestRunner::update(double dt)
@@ -49,17 +35,22 @@ void TestRunner::update(double dt)
 	auto coords = MouseHandler::getWorldCoords();
 	if(MouseHandler::pressed(GLFW_MOUSE_BUTTON_1))
 	{
-		transform.queueAnimation(1.0, Ease::bounceInOut).addComponent(1, &Transform::translateX);
+		std::cout << coords.first << " " << coords.second << std::endl;
+		std::cout << transform.getDX() << " " << transform.getDY() << std::endl;
+		//transform.queueAnimation(1.0, Ease::backInOut).addComponent(1, &Transform::translateX);
 	}
 	transform.setRotation(std::atan2(coords.second - transform.getDY(), coords.first - transform.getDX()));
 
-	Scene::get("secondary").getTransform().rotate(0.01);
-	for(auto &rotator : Scene::getAll("rotate")) rotator->getTransform().rotate(0.01);
+	double speed = 0.08;
+	if(KeyHandler::held(GLFW_KEY_LEFT_SHIFT) || KeyHandler::held(GLFW_KEY_RIGHT_SHIFT)) speed *= 2;
+	if(KeyHandler::held(GLFW_KEY_W)) transform.translate(0, speed);
+	if(KeyHandler::held(GLFW_KEY_A)) transform.translate(-speed, 0);
+	if(KeyHandler::held(GLFW_KEY_S)) transform.translate(0, -speed);
+	if(KeyHandler::held(GLFW_KEY_D)) transform.translate(speed, 0);
 
-	if(KeyHandler::held(GLFW_KEY_W)) transform.translate(0, 0.07);
-	if(KeyHandler::held(GLFW_KEY_A)) transform.translate(-0.07, 0);
-	if(KeyHandler::held(GLFW_KEY_S)) transform.translate(0, -0.07);
-	if(KeyHandler::held(GLFW_KEY_D)) transform.translate(0.07, 0);
+	Scene::get("player").collideByTag("wall");
+
+	Scene::getCamera().getInverseTransform().setTranslation(transform.getDX(), transform.getDY());
 }
 
 void TestRunner::cleanup(){}

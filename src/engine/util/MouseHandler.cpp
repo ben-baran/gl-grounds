@@ -45,8 +45,8 @@ std::pair<double, double> MouseHandler::getPixelCoords()
 
 std::pair<double, double> MouseHandler::getWorldCoords()
 {
-	glm::vec4 coords(2 * (pixelX - Window::getResX() / 2) / Window::getResX(),
-					 -2 * (pixelY - Window::getResX() / 2) / Window::getResY(), 0, 1);
+	glm::vec4 coords(2 * (pixelX - Window::getWindowX() / 2) / Window::getWindowX(),
+					 -2 * (pixelY - Window::getWindowY() / 2) / Window::getWindowY(), 0, 1);
 	coords = Scene::getCamera().getInverseTransform().getMatrix() * coords;
 	return std::make_pair(coords[0], coords[1]);
 }

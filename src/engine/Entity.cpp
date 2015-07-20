@@ -88,7 +88,7 @@ void Entity::update(double dt){}
 
 void Entity::draw()
 {
-	renderable->render(Scene::getCamera().getTransformMatrix() * transform->getMatrix());
+	renderable->render((glm::mat4) (Scene::getCamera().getTransformMatrix()) * transform->getMatrix());
 }
 
 Entity::~Entity()

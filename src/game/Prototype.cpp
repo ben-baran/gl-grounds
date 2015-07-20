@@ -46,11 +46,11 @@ void Prototype::update(double dt)
 
 	auto worldCoords = MouseHandler::getWorldCoords();
 	player.getTransform().setRotation(std::atan((worldCoords.first - pTrans.getDX()) / (worldCoords.second - pTrans.getDY())));
-	player.collideByTag("wall");
+	//player.collideByTag("wall");
 
 	if(MouseHandler::pressed(GLFW_MOUSE_BUTTON_1))
 	{
-		Entity weapon = Scene::get("weapon");
+		Entity &weapon = Scene::get("weapon");
 		if(weapon.bProperty("toggled"))
 		{
 			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut)

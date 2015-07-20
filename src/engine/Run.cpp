@@ -10,7 +10,7 @@ Run *Run::currentRun;
 void Run::start(Run *run)
 {
 	currentRun = run;
-	Window::init("Title", false, 600, 600);
+	Window::init("Title", false, 300, 300);
 	Scene::getCamera().getInverseTransform().setScale(3, 3);
 
 	run->setup();
