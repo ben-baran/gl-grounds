@@ -1,4 +1,8 @@
 #include "MouseHandler.hpp"
+#include "Window.hpp"
+#include <glm/detail/type_vec.hpp>
+#include <glm/detail/type_vec4.hpp>
+#include <src/engine/Scene.hpp>
 
 const double MouseHandler::ALLOWED_PRESS_DELTA = 0.16666;
 std::unordered_map<int, double> MouseHandler::buttons;
@@ -34,12 +38,15 @@ bool MouseHandler::held(int button)
 	return buttons.find(button) != buttons.end();
 }
 
-double MouseHandler::getPixelX()
+std::pair<double, double> MouseHandler::getPixelCoords()
 {
-	return pixelX;
+	return std::make_pair(pixelX, pixelY);
 }
 
-double MouseHandler::getPixelY()
+std::pair<double, double> MouseHandler::getWorldCoords()
 {
-	return pixelY;
+	glm::vec4 coords(2 * (pixelX - Window::getWindowX() / 2) / Window::getWindowX(),
+					 -2 * (pixelY - Window::getWindowY() / 2) / Window::getWindowY(), 0, 1);
+	coords = Scene::getCamera().getInverseTransform().getMatrix() * coords;
+	return std::make_pair(coords[0], coords[1]);
 }

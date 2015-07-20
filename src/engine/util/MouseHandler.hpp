@@ -1,5 +1,6 @@
 #pragma once
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <unordered_map>
 
@@ -15,6 +16,6 @@ public:
 
 	static bool pressed(int button);
 	static bool held(int button);
-	static double getPixelX();
-	static double getPixelY();
+	static std::pair<double, double> getPixelCoords();
+	static std::pair<double, double> getWorldCoords();
 };

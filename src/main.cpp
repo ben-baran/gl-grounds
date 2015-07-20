@@ -19,10 +19,6 @@ Transform *transform, *attached;
 
 void loop(double dt)
 {
-
-    glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
 	if(KeyHandler::pressed(GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(Window::getWindow(), GL_TRUE);
 
     //New way
@@ -32,8 +28,8 @@ void loop(double dt)
 	if(KeyHandler::held(GLFW_KEY_A)) transform->translate(-0.02, 0);
 	if(KeyHandler::held(GLFW_KEY_S)) transform->translate(0, -0.02);
 	if(KeyHandler::held(GLFW_KEY_D)) transform->translate(0.02, 0);
-    rect->draw(transform);
-	secondary->draw(attached);
+    rect->render(transform->getMatrix());
+	secondary->render(attached->getMatrix());
 
     //Old way
 //    texture->use(*shader, "tex");
@@ -55,11 +51,12 @@ int main()
     //New way
     rect = new SolidRectangle(-0.25, -0.25, 0.5, 0.5, 0.5, 0.5, 0.9);
 	secondary = new SolidRectangle(-0.1, -0.1, 0.2, 0.2, 0.9, 0.5, 0.5);
+	secondary->setLayer(-0.5);
 
 	transform = new Transform();
 //	transform->rotate(45 * 3.141592f / 180);
 	attached = new Transform();
-	attached->translate(0.5, 0).attach(transform);
+	attached->translate(0.25, 0).attach(transform);
 
     //Old way
 //    texture = Res::loadTex("res/brick_wall.png");

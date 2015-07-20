@@ -4,7 +4,8 @@
 #include <iostream>
 
 int Window::refresh = REFRESH_RATE_DEFAULT;
-int Window::resX = -1, Window::resY = -1;
+int Window::windowX = -1, Window::windowY = -1;
+int Window::pixelX = -1, Window::pixelY = -1;
 GLFWwindow *Window::window;
 void (*Window::handler)(double);
 bool Window::paused;
@@ -12,8 +13,6 @@ bool Window::paused;
 GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, int resY)
 {
     refresh = REFRESH_RATE_DEFAULT;
-    Window::resX = resX;
-    Window::resY = resY;
     paused = false;
 
     if(!glfwInit())
@@ -30,6 +29,8 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
         resX = mode->width;
         resY = mode->height;
     }
+	windowX = resX;
+	windowY = resY;
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -58,6 +59,13 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
     int pixelX, pixelY;
     glfwGetFramebufferSize(window, &pixelX, &pixelY);
     glViewport(0, 0, pixelX, pixelY);
+//	glOrtho(0, pixelX, pixelY, 0, -1, 1);
+
+	Window::pixelX = pixelX;
+	Window::pixelY = pixelY;
+
+	glDepthFunc(GL_LESS);
+	glEnable(GL_DEPTH_TEST);
 
     glfwSetKeyCallback(window, KeyHandler::callback);
     glfwSetMouseButtonCallback(window, MouseHandler::buttonCallback);
@@ -81,6 +89,10 @@ void Window::start(void (*handler)(double))
         if(!paused)
         {
             double time = glfwGetTime();
+
+			glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
             handler(time - lastTime);
             lastTime = time;
             glfwSwapBuffers(window);
@@ -96,4 +108,24 @@ void Window::setPaused(bool paused)
 void Window::end()
 {
     glfwDestroyWindow(window);
+}
+
+int Window::getWindowX()
+{
+	return windowX;
+}
+
+int Window::getWindowY()
+{
+	return windowY;
+}
+
+int Window::getPixelX()
+{
+    return pixelX;
+}
+
+int Window::getPixelY()
+{
+    return pixelY;
 }

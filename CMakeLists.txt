@@ -30,7 +30,7 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-set(SOURCE_FILES src/main.cpp
+set(SOURCE_FILES #src/main.cpp
                  src/engine/util/Res.cpp
                  src/engine/util/Res.hpp
                  src/engine/render/VAO.cpp
@@ -43,12 +43,32 @@ set(SOURCE_FILES src/main.cpp
                  src/engine/render/Texture.hpp
                  src/engine/render/SolidRectangle.cpp
                  src/engine/render/SolidRectangle.hpp
-                 src/engine/render/Transform.cpp
-                 src/engine/render/Transform.hpp
+                 src/engine/anim/Transform.cpp
+                 src/engine/anim/Transform.hpp
                  src/engine/util/KeyHandler.cpp
                  src/engine/util/KeyHandler.hpp
                  src/engine/util/MouseHandler.cpp
-                 src/engine/util/MouseHandler.hpp)
+                 src/engine/util/MouseHandler.hpp
+                 src/engine/Scene.cpp
+                 src/engine/Scene.hpp
+                 src/engine/Entity.cpp
+                 src/engine/Entity.hpp
+                 #src/game/Prototype.cpp
+                 #src/game/Prototype.hpp
+                 src/engine/Run.cpp
+                 src/engine/Run.hpp
+                 src/engine/render/Renderable.cpp
+                 src/engine/render/Renderable.hpp
+                 src/engine/physics/Collider.cpp
+                 src/engine/physics/Collider.hpp
+                 src/engine/physics/RectangleCollider.cpp
+                 src/engine/physics/RectangleCollider.hpp
+                 src/engine/render/Camera.cpp
+                 src/engine/render/Camera.hpp
+                 src/game/TestRunner.cpp
+                 src/game/TestRunner.hpp
+                 src/engine/anim/Ease.cpp
+                 src/engine/anim/Ease.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

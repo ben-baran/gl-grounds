@@ -20,10 +20,14 @@ public:
     static void start(void (*handler)(double));
     static void setPaused(bool paused);
     static void end();
+	static int getWindowX();
+	static int getWindowY();
+    static int getPixelX();
+	static int getPixelY();
 private:
     static constexpr int REFRESH_RATE_DEFAULT = 60;
     static int refresh;
-    static int resX, resY;
+    static int windowX, windowY, pixelX, pixelY;
     static GLFWwindow *window;
     static void (*handler)(double);
     static bool paused;
