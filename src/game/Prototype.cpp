@@ -1,3 +1,9 @@
+#include <src/engine/Entity.hpp>
+#include <src/engine/render/SolidRectangle.hpp>
+#include <src/engine/Scene.hpp>
+#include <src/engine/util/KeyHandler.hpp>
+#include <src/engine/util/MouseHandler.hpp>
+#include <src/engine/anim/Ease.hpp>
 #include "Prototype.hpp"
 
 using std::string;
@@ -19,12 +25,12 @@ void Prototype::setup()
 	Scene::add(*wall0);
 	Scene::add(*wall1);
 
-	Entity weapon = new Entity(new SolidRectangle(1, 0.1));
-	weapon.getTransform().translate(0.3, 0.3).rotate(glm::radians(-45)).attach(player.getTransform());
-	weapon.bProperty("toggled") = false;
-	weapon.setImportanceAfter({"player"});
-	weapon.getRenderable().setLayerBelow({"player", "wall"});
-	Scene::add("weapon", weapon);
+	Entity *weapon = new Entity(new SolidRectangle(1, 0.1));
+	weapon->getTransform().translate(0.3, 0.3).rotate(glm::radians(-45.0f)).attach(&(player->getTransform()));
+	weapon->bProperty("toggled") = false;
+	weapon->setImportanceAfter({"player"});
+	weapon->getRenderable().setLayerBelow({"player", "wall"});
+	Scene::add("weapon", *weapon);
 }
 
 void Prototype::update(double dt)
@@ -36,28 +42,29 @@ void Prototype::update(double dt)
 	if(KeyHandler::held(GLFW_KEY_A)) pTrans.translate(-dt, 0);
 	if(KeyHandler::held(GLFW_KEY_S)) pTrans.translate(0, dt);
 	if(KeyHandler::held(GLFW_KEY_D)) pTrans.translate(dt, 0);
-	player.getTransform().setRotation(std::atan((MouseHandler.getWorldX() - pTrans.getTranslationX()) /
-												(MouseHandler.getWorldY() - pTrans.getTranslationY())));
-	player.collideByTags("wall");
 
-	if(MouseHandler.clicked(GLFW_MOUSE_BUTTON_1))
+	auto worldCoords = MouseHandler::getWorldCoords();
+	player.getTransform().setRotation(std::atan((worldCoords.first - pTrans.getDX()) / (worldCoords.second - pTrans.getDY())));
+	player.collideByTag("wall");
+
+	if(MouseHandler::pressed(GLFW_MOUSE_BUTTON_1))
 	{
 		Entity weapon = Scene::get("weapon");
 		if(weapon.bProperty("toggled"))
 		{
 			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut)
-												 .addComponent(glm::radians(90), Transform::rotate)
-												 .addComponent(-0.6, Transform::translateY));
+					.addComponent(glm::radians(90.0f), &Transform::rotate)
+					.addComponent(-0.6, &Transform::translateY);
 		}
 		else
 		{
 			weapon.getTransform().queueAnimation(0.3, Ease::cubicInOut)
-												 .addComponent(glm::radians(90), Transform::rotate)
-												 .addComponent(-0.6, Transform::translateY));
+					.addComponent(glm::radians(90.0f), &Transform::rotate)
+					.addComponent(-0.6, &Transform::translateY);
 		}
 	}
 
-	Scene::getCamera().getInverseTransform().setTranslation(transform.getDX(), transform.getDY());
+	Scene::getCamera().getInverseTransform().setTranslation(pTrans.getDX(), pTrans.getDY());
 }
 
 void Prototype::cleanup(){}

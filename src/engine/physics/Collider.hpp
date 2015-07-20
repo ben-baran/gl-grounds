@@ -11,6 +11,7 @@ private:
 	static std::pair<double, double> intersection(RectangleCollider &a, Transform &tA, RectangleCollider &b, Transform &tB);
 public:
 	virtual int getClassID() = 0;
+	virtual void getCoordinates(Transform &transform, double coords[][2]) = 0;
 
 	static const int LOW_ITERATIONS, HIGH_ITERATIONS;
 	static std::pair<double, double> intersection(Collider &a, Transform &tA, Collider &b, Transform &tB);
