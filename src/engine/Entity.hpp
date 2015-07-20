@@ -62,5 +62,5 @@ public:
 	~Entity();
 
 	void collideByName(std::string name);
-	void collideByTag(std::string tag);
+	void collideByTag(std::string tag, int iterations = Collider::LOW_ITERATIONS);
 };

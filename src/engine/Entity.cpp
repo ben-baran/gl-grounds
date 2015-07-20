@@ -136,10 +136,18 @@ Entity *&Entity::eProperty(std::string name)
 
 void Entity::collideByName(std::string name)
 {
+	Entity other = Scene::get(name);
+	auto coords = Collider::intersection(*collider, *transform, other.getCollider(), other.getTransform());
 
+	transform->translate(coords.first, coords.second);
 }
 
-void Entity::collideByTag(std::string tag)
+void Entity::collideByTag(std::string tag, int iterations)
 {
-
+	auto entities = Scene::getAll(tag);
+	for(int i = 0; i < iterations; i++) for(auto entity : entities)
+	{
+		auto coords = Collider::intersection(*collider, *transform, entity->getCollider(), entity->getTransform());
+		transform->translate(coords.first, coords.second);
+	}
 }
