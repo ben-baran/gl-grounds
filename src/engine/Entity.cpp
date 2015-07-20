@@ -133,3 +133,13 @@ Entity *&Entity::eProperty(std::string name)
 {
 	return eProperties[name];
 }
+
+void Entity::collideByName(std::string name)
+{
+
+}
+
+void Entity::collideByTag(std::string tag)
+{
+
+}

@@ -47,7 +47,6 @@ public:
 	std::string &sProperty(std::string name);
 	Entity *&eProperty(std::string name);
 
-
 	Entity(Renderable *renderable, Transform *transform = new Transform());
 	Entity(Renderable *renderable, Collider *collider, Transform *transform = new Transform());
 
@@ -61,4 +60,7 @@ public:
 	static PairCompare pairCompare;
 
 	~Entity();
+
+	void collideByName(std::string name);
+	void collideByTag(std::string tag);
 };

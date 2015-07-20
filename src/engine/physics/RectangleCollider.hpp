@@ -2,8 +2,8 @@
 
 #include "Collider.hpp"
 
-class RectangleCollider: public Collider
+struct RectangleCollider: public Collider
 {
-public:
 	RectangleCollider(double x, double y, double width, double height);
+	double x, y, width, height;
 };
