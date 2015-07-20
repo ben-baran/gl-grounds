@@ -49,7 +49,7 @@ void TestRunner::update(double dt)
 	auto coords = MouseHandler::getWorldCoords();
 	if(MouseHandler::pressed(GLFW_MOUSE_BUTTON_1))
 	{
-		transform.queueAnimation(0.7, Ease::quadraticInOut).addComponent(1, &Transform::translateX);
+		transform.queueAnimation(0.7, Ease::sqrtIn).addComponent(1, &Transform::translateX);
 	}
 	transform.setRotation(std::atan2(coords.second - transform.getDY(), coords.first - transform.getDX()));
 

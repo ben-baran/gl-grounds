@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Ease.hpp"
 
 double Ease::linear(double time)
@@ -28,7 +29,7 @@ double Ease::cubicIn(double time)
 
 double Ease::cubicOut(double time)
 {
-	return 1 + (time -= 1) * time * time;
+	return 1 + (--time) * time * time;
 }
 
 double Ease::cubicInOut(double time)
@@ -44,7 +45,7 @@ double Ease::quarticIn(double time)
 
 double Ease::quarticOut(double time)
 {
-	return -((time -= 1) * time * time * time - 1);
+	return -((--time) * time * time * time - 1);
 }
 
 double Ease::quarticInOut(double time)
@@ -60,57 +61,45 @@ double Ease::quinticIn(double time)
 
 double Ease::quinticOut(double time)
 {
-	return (--t);
+	return (--time) * time * time * time * time + 1;
 }
 
 double Ease::quinticInOut(double time)
 {
-	return 0;
+	if((time *= 2) < 1) return 0.5 * time * time * time * time * time;
+	return 0.5 * ((time -= 2) * time * time * time * time + 2);
 }
 
 double Ease::sineIn(double time)
 {
-	return 0;
+	return 1 - std::cos(time * M_PI_2);
 }
 
 double Ease::sineOut(double time)
 {
-	return 0;
+	return std::sin(time * M_PI_2);
 }
 
 double Ease::sineInOut(double time)
 {
-	return 0;
+	return -0.5 * (std::cos(time * M_PI) - 1);
 }
 
 double Ease::exponentialIn(double time)
 {
-	return 0;
+	return time == 0 ? 0 : std::pow(2, 10 * (time - 1));
 }
 
 double Ease::exponentialOut(double time)
 {
-	return 0;
+	return time == 1 ? 1 : 1 - std::pow(2, -10 * time);
 }
 
 double Ease::exponentialInOut(double time)
 {
-	return 0;
-}
-
-double Ease::sqrtIn(double time)
-{
-	return 0;
-}
-
-double Ease::sqrtOut(double time)
-{
-	return 0;
-}
-
-double Ease::sqrtInOut(double time)
-{
-	return 0;
+	if(time == 0 || time == 1) return time;
+	if((time *= 2) < 1) return 0.5 * std::pow(2, 10 * (time - 1));
+	return 0.5 * (2 - std::pow(2, -10 * (time - 1)));
 }
 
 double Ease::backIn(double time)
