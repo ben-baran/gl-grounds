@@ -73,7 +73,7 @@ void Entity::removeTag(std::string tag)
 Entity::Entity(Renderable *renderable, Transform *transform)
 {
 	this->renderable = renderable;
-	this->collider = new Collider(renderable->provideCollider());
+	this->collider = &(renderable->provideCollider());
 	this->transform = transform;
 }
 

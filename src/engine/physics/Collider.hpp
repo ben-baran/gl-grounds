@@ -2,7 +2,8 @@
 
 #include <utility>
 #include <src/engine/anim/Transform.hpp>
-#include "RectangleCollider.hpp"
+
+class RectangleCollider;
 
 class Collider
 {
