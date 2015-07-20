@@ -26,6 +26,7 @@ public:
 	float getG();
 	float getB();
 
+	SolidRectangle(float width, float height);
     SolidRectangle(float x, float y, float width, float height);
     SolidRectangle(float x, float y, float width, float height, float r, float g, float b, float layer = 0);
     ~SolidRectangle();

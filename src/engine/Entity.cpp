@@ -73,7 +73,7 @@ void Entity::removeTag(std::string tag)
 Entity::Entity(Renderable *renderable, Transform *transform)
 {
 	this->renderable = renderable;
-	this->collider = new Collider(renderable->provideCollider());
+	this->collider = &(renderable->provideCollider());
 	this->transform = transform;
 }
 
@@ -88,7 +88,7 @@ void Entity::update(double dt){}
 
 void Entity::draw()
 {
-	renderable->render(Scene::getCamera().getTransformMatrix() * transform->getMatrix());
+	renderable->render((glm::mat4) (Scene::getCamera().getTransformMatrix()) * transform->getMatrix());
 }
 
 Entity::~Entity()
@@ -132,4 +132,22 @@ std::string &Entity::sProperty(std::string name)
 Entity *&Entity::eProperty(std::string name)
 {
 	return eProperties[name];
+}
+
+void Entity::collideByName(std::string name)
+{
+	Entity other = Scene::get(name);
+	auto coords = Collider::intersection(*collider, *transform, other.getCollider(), other.getTransform());
+
+	transform->translate(coords.first, coords.second);
+}
+
+void Entity::collideByTag(std::string tag, int iterations)
+{
+	auto entities = Scene::getAll(tag);
+	for(int i = 0; i < iterations; i++) for(auto entity : entities)
+	{
+		auto coords = Collider::intersection(*collider, *transform, entity->getCollider(), entity->getTransform());
+		transform->translate(coords.first, coords.second);
+	}
 }
