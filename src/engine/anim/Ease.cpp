@@ -19,7 +19,8 @@ double Ease::quadraticOut(double time)
 double Ease::quadraticInOut(double time)
 {
 	if((time *= 2) < 1) return 0.5 * time * time;
-	return -0.5 * ((--time) * (time - 2) - 1);
+	--time;
+	return -0.5 * (time * (time - 2) - 1);
 }
 
 double Ease::cubicIn(double time)
@@ -29,13 +30,16 @@ double Ease::cubicIn(double time)
 
 double Ease::cubicOut(double time)
 {
-	return 1 + (--time) * time * time;
+	--time;
+	return 1 + time * time * time;
 }
 
 double Ease::cubicInOut(double time)
 {
-	if((time *= 2) < 1) return 0.5 * time * time * time;
-	return 0.5 * ((time -= 2) * time * time + 2);
+	time *= 2;
+	if(time < 1) return 0.5 * time * time * time;
+	time -= 2;
+	return 0.5 * (time * time * time + 2);
 }
 
 double Ease::quarticIn(double time)
@@ -45,13 +49,16 @@ double Ease::quarticIn(double time)
 
 double Ease::quarticOut(double time)
 {
-	return -((--time) * time * time * time - 1);
+	--time;
+	return -(time * time * time * time - 1);
 }
 
 double Ease::quarticInOut(double time)
 {
-	if((time *= 2) < 1) return 0.5 * time * time * time * time;
-	return -0.5 * ((time -= 2) * time * time * time - 2);
+	time *= 2;
+	if(time < 1) return 0.5 * time * time * time * time;
+	time -= 2;
+	return -0.5 * (time * time * time * time - 2);
 }
 
 double Ease::quinticIn(double time)
@@ -61,13 +68,15 @@ double Ease::quinticIn(double time)
 
 double Ease::quinticOut(double time)
 {
-	return (--time) * time * time * time * time + 1;
+	--time;
+	return time * time * time * time * time + 1;
 }
 
 double Ease::quinticInOut(double time)
 {
 	if((time *= 2) < 1) return 0.5 * time * time * time * time * time;
-	return 0.5 * ((time -= 2) * time * time * time * time + 2);
+	time -= 2;
+	return 0.5 * (time * time * time * time * time + 2);
 }
 
 double Ease::sineIn(double time)
@@ -111,21 +120,25 @@ double Ease::backIn(double time)
 double Ease::backOut(double time)
 {
 	double back = 1.70158;
-	return (--time) * time * ((back + 1) * time + back) + 1;
+	--time;
+	return time * time * ((back + 1) * time + back) + 1;
 }
 
 double Ease::backInOut(double time)
 {
-	double back = 1.70158, norm = 1.525;
-	if((time *= 2) < 1) return 0.5 * (time * time * (((back *= norm) + 1) * time - back));
-	return 0.5 * ((time -= 2) * time * (((back *= norm) + 1) * time + back) + 2);
+	double norm = 1.525, back = 1.70158 * norm;
+	time *= 2;
+	if(time < 1) return 0.5 * (time * time * ((back + 1) * time - back));
+	time -= 2;
+	return 0.5 * (time * time * ((back + 1) * time + back) + 2);
 }
 
 double Ease::elasticIn(double time)
 {
 	if(time == 0 || time == 1) return time;
 	double invDuration = 0.3, offset = invDuration / 4;
-	return -(std::pow(2, 10 * (--time)) * std::sin((time - offset) * 2 * M_PI / invDuration));
+	--time;
+	return -(std::pow(2, 10 * time) * std::sin((time - offset) * 2 * M_PI / invDuration));
 }
 
 double Ease::elasticOut(double time)
@@ -140,8 +153,9 @@ double Ease::elasticInOut(double time)
 	if(time == 0) return 0;
 	if((time *= 2) == 2) return 1;
 	double invDuration = 0.45, offset = invDuration / 4;
-	if(time < 1) return -0.5 * (std::pow(2, 10 * (--time)) * std::sin((time - offset) * 2 * M_PI / invDuration));
-	return 0.5 * (std::pow(2, -10 * (--time)) * std::sin((time - offset) * 2 * M_PI / invDuration)) + 1;
+	--time;
+	if(time < 0) return -0.5 * (std::pow(2, 10 * time) * std::sin((time - offset) * 2 * M_PI / invDuration));
+	return 0.5 * (std::pow(2, -10 * time) * std::sin((time - offset) * 2 * M_PI / invDuration)) + 1;
 }
 
 double Ease::bounceIn(double time)
@@ -153,9 +167,19 @@ double Ease::bounceOut(double time)
 {
 	double cycle = 2.75;
 	if(time < (1 / cycle)) return 7.5625 * time * time;
-	if(time < (2 / cycle)) return 7.5625 * (time -= (1.5 / cycle)) * time + .75;
-	if(time	< (2.5 / cycle)) return 7.5625 * (time -= (2.25 / cycle)) * time + .9375;
-	return 7.5625 * (time -= (2.625 / cycle)) * time + .984375;
+	if(time < (2 / cycle))
+	{
+		time -= 1.5 / cycle;
+		return 7.5625 * time * time + .75;
+	}
+	if(time	< (2.5 / cycle))
+	{
+		time -= 2.25 / cycle;
+		return 7.5625 * time * time + .9375;
+	}
+
+	time -= 2.625 / cycle;
+	return 7.5625 * time * time + .984375;
 }
 
 double Ease::bounceInOut(double time)
