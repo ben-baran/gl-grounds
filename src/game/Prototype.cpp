@@ -29,7 +29,8 @@ void Prototype::setup()
 	weapon->getTransform().translate(0.3, 0.3).rotate(glm::radians(-45.0f)).attach(&(player->getTransform()));
 	weapon->bProperty("toggled") = false;
 	weapon->setImportanceAfter({"player"});
-	weapon->getRenderable().setLayerBelow({"player", "wall"});
+	weapon->getRenderable().setLayerBelow({"player"});
+	weapon->getRenderable().setLayerBelowTag("wall");
 	Scene::add("weapon", *weapon);
 }
 

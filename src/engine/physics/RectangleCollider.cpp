@@ -22,12 +22,12 @@ void RectangleCollider::getCoordinates(Transform &t, double (*coords)[2])
 	glm::vec4 p3 = matrix * glm::vec4(x + width, y + height, 0, 1);
 	glm::vec4 p4 = matrix * glm::vec4(x + width, y, 0, 1);
 
-	coords[0][0] = p1.a;
-	coords[0][1] = p1.b;
-	coords[1][0] = p2.a;
-	coords[1][1] = p2.b;
-	coords[2][0] = p3.a;
-	coords[2][1] = p3.b;
-	coords[3][0] = p4.a;
-	coords[4][1] = p4.b;
+	coords[0][0] = p1.x;
+	coords[0][1] = p1.y;
+	coords[1][0] = p2.x;
+	coords[1][1] = p2.y;
+	coords[2][0] = p3.x;
+	coords[2][1] = p3.y;
+	coords[3][0] = p4.x;
+	coords[3][1] = p4.y;
 }

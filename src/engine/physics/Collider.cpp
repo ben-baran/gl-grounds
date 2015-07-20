@@ -17,7 +17,7 @@ std::pair<double, double> Collider::intersection(RectangleCollider &a, Transform
 	};
 
 	double smallestLength = INFINITY;
-	auto smallestIntersection = std::make_pair(0.0, 0.0);
+	std::pair<double, double> smallestIntersection;
 
 	for(int i = 0; i < 4; i++)
 	{
@@ -59,6 +59,6 @@ std::pair<double, double> Collider::intersection(Collider &a, Transform &tA, Col
 {
 	if(a.getClassID() == RectangleCollider::CLASS_ID && b.getClassID() == RectangleCollider::CLASS_ID)
 	{
-		return intersection(*(static_cast<RectangleCollider *>(&a)), tA, *(static_cast<RectangleCollider *>(&b)), tB);
+		return intersection(static_cast<RectangleCollider &>(a), tA, static_cast<RectangleCollider &>(b), tB);
 	}
 }

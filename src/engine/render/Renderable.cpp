@@ -33,4 +33,21 @@ void Renderable::setLayerAbove(std::initializer_list<std::string> names)
 	setLayer((max + 1) / 2); //needed because bounds are -1 to 1 in depth buffer
 }
 
+void Renderable::setLayerBelowTag(std::string tag)
+{
+	double min = INFINITY;
+	auto entities = Scene::getAll(tag);
+	for(auto entity : entities) min = std::min(min, entity->getRenderable().getLayer());
+	setLayer((min - 1) / 2); //needed because bounds are -1 to 1 in depth buffer
+}
+
+void Renderable::setLayerAboveTag(std::string tag)
+{
+	double max = -INFINITY;
+	auto entities = Scene::getAll(tag);
+	for(auto entity : entities) max = std::max(max, entity->getRenderable().getLayer());
+	setLayer((max + 1) / 2); //needed because bounds are -1 to 1 in depth buffer
+}
+
 Renderable::~Renderable(){}
+
