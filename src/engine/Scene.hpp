@@ -30,6 +30,7 @@ public:
 	static void add(Entity &entity);
 	static void remove(std::string name, Entity &entity);
 	static Entity &get(std::string name);
+	static std::unordered_set<Entity*> &getAll(std::string tag);
 	static void update(double dt);
 	static void draw();
 	static void updateBuffers();

@@ -43,8 +43,8 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/render/Texture.hpp
                  src/engine/render/SolidRectangle.cpp
                  src/engine/render/SolidRectangle.hpp
-                 src/engine/render/Transform.cpp
-                 src/engine/render/Transform.hpp
+                 src/engine/anim/Transform.cpp
+                 src/engine/anim/Transform.hpp
                  src/engine/util/KeyHandler.cpp
                  src/engine/util/KeyHandler.hpp
                  src/engine/util/MouseHandler.cpp
@@ -66,7 +66,9 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/render/Camera.cpp
                  src/engine/render/Camera.hpp
                  src/game/TestRunner.cpp
-                 src/game/TestRunner.hpp)
+                 src/game/TestRunner.hpp
+                 src/engine/anim/Ease.cpp
+                 src/engine/anim/Ease.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

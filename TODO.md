@@ -6,7 +6,7 @@
 - [X] Implement Texture
 - [ ] Implement Transform (with animation)
 - [X] Implement Shader
-- [X] Implement SolidRectangle (layers not working) (layers now work)
+- [X] Implement SolidRectangle
 - [X] Implement Renderable
 - [X] Implement KeyHandler
 - [X] Implement MouseHandler
@@ -14,6 +14,7 @@
 - [X] Implement Window
 - [ ] Implement Collider
 - [ ] Implement RectangleCollider
+- [ ] Implement PolygonCollider
 - [X] Implement Run
 - [X] Implement Scene
 - [X] Implement Entity

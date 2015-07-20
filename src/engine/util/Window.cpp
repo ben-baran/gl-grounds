@@ -104,3 +104,13 @@ void Window::end()
 {
     glfwDestroyWindow(window);
 }
+
+int Window::getResX()
+{
+    return resX;
+}
+
+int Window::getResY()
+{
+    return resY;
+}
