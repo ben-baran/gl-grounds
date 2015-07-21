@@ -65,7 +65,7 @@ void TestRunner::update(double dt)
 //		Scene::removeAll("wall");
 		int sizeX = 100, sizeY = 100;
 		vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
-		CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {6, 7, 8}, 4, 0.5);
+		CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {5, 6, 7, 8}, 4, 0.5);
 
 		Entity *grid = new Entity(new SolidGrid(map, sizeX, sizeY, transform.getDX(), transform.getDY(), 2, 2));
 		Scene::add(*grid);

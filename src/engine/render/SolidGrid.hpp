@@ -11,6 +11,11 @@ private:
 	static int attributes[];
 	VAO *vao;
 	Shader *shader;
+
+	vector<vector<bool>> &map;
+	int nx, ny;
+	double startX, startY, cellWidth, cellHeight;
+
 public:
 	SolidGrid(vector<vector<bool>> &map, int nx, int ny,
 			  double startX, double startY, double cellWidth, double cellHeight,

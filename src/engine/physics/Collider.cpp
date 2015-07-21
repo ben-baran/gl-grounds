@@ -1,13 +1,16 @@
+#include <glm/detail/func_matrix.hpp>
+#include <algorithm>
 #include "Collider.hpp"
 #include "RectangleCollider.hpp"
+#include "GridCollider.hpp"
 
 const int Collider::LOW_ITERATIONS = 3, Collider::HIGH_ITERATIONS = 20;
 
-std::pair<double, double> Collider::intersection(RectangleCollider &a, Transform &tA, RectangleCollider &b, Transform &tB)
+std::pair<double, double> Collider::intersection(RectangleCollider &a, glm::mat4 &mA, RectangleCollider &b, glm::mat4 &mB)
 {
 	double aCoords[4][2], bCoords[4][2];
-	a.getCoordinates(tA, aCoords);
-	b.getCoordinates(tB, bCoords);
+	a.getCoordinates(mA, aCoords);
+	b.getCoordinates(mB, bCoords);
 
 	double axes[4][2] = {
 			{aCoords[0][0] - aCoords[1][0], aCoords[0][1] - aCoords[1][1]},
@@ -55,10 +58,39 @@ std::pair<double, double> Collider::intersection(RectangleCollider &a, Transform
 	return smallestIntersection;
 }
 
-std::pair<double, double> Collider::intersection(Collider &a, Transform &tA, Collider &b, Transform &tB)
+std::pair<double, double> Collider::intersection(RectangleCollider &a, glm::mat4 &mA, GridCollider &b, glm::mat4 &mB)
 {
+	std::pair<double, double> intersect;
+
+	glm::mat4 adjust = glm::inverse(mB) * mA;
+	glm::vec4 aBB = a.boundingBox(adjust);
+	int minX = std::max(0, (int) ((aBB.x - b.startX) / b.cellWidth - 1));
+	int maxX = std::min(b.nx - 1, (int) ((aBB.z - b.startX) / b.cellWidth + 1));
+	int minY = std::max(0, (int) ((aBB.y - b.startY) / b.cellHeight - 1));
+	int maxY = std::min(b.ny - 1, (int) ((aBB.w - b.startX) / b.cellHeight + 1));
+
+	for(int i = minX; i <= maxX; i++) for(int j = minY; j <= maxY; j++) if(b.map[i][j])
+	{
+		auto curIntersection = intersection(a, mA, b, mB);
+		intersect.first += curIntersection.first;
+		intersect.second += curIntersection.second;
+	}
+
+	return intersect;
+}
+
+std::pair<double, double> Collider::intersection(Collider &a, glm::mat4 &mA, Collider &b, glm::mat4 &mB)
+{
+	glm::vec4 aBox = a.boundingBox(mA), bBox = b.boundingBox(mB);
+	if(aBox.x > bBox.z || aBox.z < bBox.x || aBox.y > bBox.w || aBox.w < bBox.y) return std::make_pair(0.0, 0.0);
+
 	if(a.getClassID() == RectangleCollider::CLASS_ID && b.getClassID() == RectangleCollider::CLASS_ID)
 	{
-		return intersection(static_cast<RectangleCollider &>(a), tA, static_cast<RectangleCollider &>(b), tB);
+		return intersection(static_cast<RectangleCollider &>(a), mA, static_cast<RectangleCollider &>(b), mB);
+	}
+
+	if(a.getClassID() == RectangleCollider::CLASS_ID && b.getClassID() == GridCollider::CLASS_ID)
+	{
+		return intersection(static_cast<RectangleCollider &>(a), mA, static_cast<GridCollider &>(b), mB);
 	}
 }

@@ -1,6 +1,7 @@
 #include <src/engine/util/Res.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <src/engine/physics/RectangleCollider.hpp>
+#include <src/engine/physics/GridCollider.hpp>
 #include "SolidGrid.hpp"
 
 int SolidGrid::attributes[] = {3, 3};
@@ -8,6 +9,13 @@ int SolidGrid::attributes[] = {3, 3};
 SolidGrid::SolidGrid(vector<vector<bool>> &map, int nx, int ny,
 					 double startX, double startY, double cellWidth, double cellHeight,
 					 float r, float g, float b, double layer)
+	: map(map)
+	, nx(nx)
+	, ny(ny)
+	, startX(startX)
+	, startY(startY)
+	, cellWidth(cellWidth)
+	, cellHeight(cellHeight)
 {
 	Renderable::setLayer(layer);
 
@@ -61,5 +69,5 @@ void SolidGrid::render(glm::mat4 transformMatrix)
 
 Collider &SolidGrid::provideCollider()
 {
-	return *(new RectangleCollider(0.0, 0.0, 0.0, 0.0));
+	return *(new GridCollider(map, nx, ny, startX, startY, cellWidth, cellHeight));
 }

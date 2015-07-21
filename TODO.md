@@ -7,7 +7,8 @@
 - [ ] Implement basic logger
 - [ ] Implement gestures
 - [ ] Create grid based collision
-- [ ] Create grid based solid renderable
+- [X] Create grid based solid renderable
+- [X] Add collision bounding boxes
 - [ ] Add camera culling
 
 ### List of requirements for v0.0.1 ("Disgusting Filth Release")
