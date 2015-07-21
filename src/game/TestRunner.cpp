@@ -4,7 +4,7 @@
 #include <src/engine/util/KeyHandler.hpp>
 #include <src/engine/util/MouseHandler.hpp>
 #include <iostream>
-#include <src/engine/anim/Ease.hpp>
+#include <src/game/procedural/CellularAutomata.hpp>
 #include "TestRunner.hpp"
 
 int main()
@@ -14,15 +14,22 @@ int main()
 
 void placeWall(int x, int y)
 {
-	Entity *wall = new Entity(new SolidRectangle(x, y, 1, 1));
+	Entity *wall = new Entity(new SolidRectangle(x, y, 2, 2));
 	wall->addTag("wall");
 	Scene::add(*wall);
 }
 
 void TestRunner::setup()
 {
-	placeWall(-2, -2);
+	int emptyX = 0, emptyY = 0;
+	int sizeX = 40, sizeY = 40;
+	bool **map = new bool *[sizeX];
+	for(int i = 0; i < sizeX; i++) map[i] = new bool[sizeY];
+	CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {5, 6, 7, 8}, 0, 0.5);
+
+	for(int i = 0; i < sizeX; i++) for(int j = 0; j < sizeY; j++) if(map[i][j]) placeWall(i * 2, j * 2);
 	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9));
+	player->getTransform().setTranslation(emptyX, emptyY);
 	Scene::add("player", *player);
 }
 
