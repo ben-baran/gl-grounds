@@ -5,17 +5,16 @@
 
 using std::vector;
 
-vector<vector<bool>> *CellularAutomata::generateWithRules(int nx, int ny,
-														  std::initializer_list<int> aliveRules,
-														  std::initializer_list<int> deadRules,
-														  int iterations, double probability,
-														  int probabilityPrecision)
+void CellularAutomata::generateWithRules(vector<vector<bool>> &map, int nx, int ny,
+										 std::initializer_list<int> aliveRules,
+										 std::initializer_list<int> deadRules,
+										 int iterations, double probability,
+										 int probabilityPrecision)
 {
 	srand(time(nullptr));
-	vector<vector<bool>> map = *(new vector<vector<bool>>), mapCopy;
+	vector<vector<bool>> mapCopy;
 	for(int i = 0; i < nx; i++)
 	{
-		//map.push_back(...);
 		for(int j = 0; j < ny; j++) map[i][j] = (rand() % probabilityPrecision) < probability * probabilityPrecision;
 	}
 
@@ -54,6 +53,4 @@ vector<vector<bool>> *CellularAutomata::generateWithRules(int nx, int ny,
 			}
 		}
 	}
-
-	return &map;
 }

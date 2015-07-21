@@ -68,8 +68,12 @@ set(SOURCE_FILES #src/main.cpp
                  src/game/TestRunner.cpp
                  src/game/TestRunner.hpp
                  src/engine/anim/Ease.cpp
-                 src/engine/anim/Ease.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES} src/game/procedural/CellularAutomata.cpp src/game/procedural/CellularAutomata.hpp)
+                 src/engine/anim/Ease.hpp
+                 src/game/procedural/CellularAutomata.cpp
+                 src/game/procedural/CellularAutomata.hpp
+                 src/engine/render/SolidGrid.cpp
+                 src/engine/render/SolidGrid.hpp)
+add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL
