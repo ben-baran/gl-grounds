@@ -53,24 +53,31 @@ void TestRunner::update(double dt)
 	}
 	transform.setRotation(std::atan2(coords.second - transform.getDY(), coords.first - transform.getDX()));
 
-	double speed = 0.8;
+	double speed = 0.15;
 	if(KeyHandler::held(GLFW_KEY_LEFT_SHIFT) || KeyHandler::held(GLFW_KEY_RIGHT_SHIFT)) speed *= 2;
 	if(KeyHandler::held(GLFW_KEY_W)) transform.translate(0, speed);
 	if(KeyHandler::held(GLFW_KEY_A)) transform.translate(-speed, 0);
 	if(KeyHandler::held(GLFW_KEY_S)) transform.translate(0, -speed);
 	if(KeyHandler::held(GLFW_KEY_D)) transform.translate(speed, 0);
 
+	if(KeyHandler::held(GLFW_KEY_R)) Scene::getCamera().getInverseTransform().scale(0.97, 0.97);
+	if(KeyHandler::held(GLFW_KEY_F)) Scene::getCamera().getInverseTransform().scale(1.03, 1.03);
+
 	if(KeyHandler::pressed(GLFW_KEY_SPACE))
 	{
 //		Scene::removeAll("wall");
-		int sizeX = 100, sizeY = 100;
-		vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
-		CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {5, 6, 7, 8}, 4, 0.5);
 
-		Entity *grid = new Entity(new SolidGrid(map, sizeX, sizeY, transform.getDX(), transform.getDY(), 2, 2));
-		Scene::add(*grid);
-//		for(int i = 0; i < sizeX; i++) for(int j = 0; j < sizeY; j++) if(map[i][j]) placeWall(transform.getDX() + i * 2,
-//																							  transform.getDY() + j * 2);
+		for(int i = 0; i < 10; i++)
+		{
+			int sizeX = 100, sizeY = 100;
+			vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
+			CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {5, 6, 7, 8}, 4, 0.5);
+
+			Entity *grid = new Entity(new SolidGrid(map, sizeX, sizeY,
+													200 * i + transform.getDX() + 2 - 500, transform.getDY() + 2, 2, 2));
+			grid->addTag("wall");
+			Scene::add(*grid);
+		}
 	}
 
 	Scene::get("player").collideByTag("wall");

@@ -11,7 +11,6 @@ void CellularAutomata::generateWithRules(vector<vector<bool>> &map, int nx, int 
 										 int iterations, double probability,
 										 int probabilityPrecision)
 {
-	srand(time(nullptr));
 	vector<vector<bool>> mapCopy;
 	for(int i = 0; i < nx; i++)
 	{

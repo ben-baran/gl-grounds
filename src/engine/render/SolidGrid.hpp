@@ -12,7 +12,7 @@ private:
 	VAO *vao;
 	Shader *shader;
 
-	vector<vector<bool>> &map;
+	vector<vector<bool>> map;
 	int nx, ny;
 	double startX, startY, cellWidth, cellHeight;
 

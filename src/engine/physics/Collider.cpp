@@ -1,5 +1,7 @@
 #include <glm/detail/func_matrix.hpp>
 #include <algorithm>
+#include <src/engine/util/KeyHandler.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "Collider.hpp"
 #include "RectangleCollider.hpp"
 #include "GridCollider.hpp"
@@ -64,16 +66,30 @@ std::pair<double, double> Collider::intersection(RectangleCollider &a, glm::mat4
 
 	glm::mat4 adjust = glm::inverse(mB) * mA;
 	glm::vec4 aBB = a.boundingBox(adjust);
-	int minX = std::max(0, (int) ((aBB.x - b.startX) / b.cellWidth - 1));
-	int maxX = std::min(b.nx - 1, (int) ((aBB.z - b.startX) / b.cellWidth + 1));
-	int minY = std::max(0, (int) ((aBB.y - b.startY) / b.cellHeight - 1));
-	int maxY = std::min(b.ny - 1, (int) ((aBB.w - b.startX) / b.cellHeight + 1));
+	int minX = std::max(0, (int) ((aBB.x - b.startX) / b.cellWidth));
+	int maxX = std::min(b.nx - 1, (int) ((aBB.z - b.startX) / b.cellWidth));
+	int minY = std::max(0, (int) ((aBB.y - b.startY) / b.cellHeight));
+	int maxY = std::min(b.ny - 1, (int) ((aBB.w - b.startX) / b.cellHeight));
 
+	if(KeyHandler::pressed(GLFW_KEY_Q))
+	{
+
+	}
+
+	glm::mat4 correctedMatrix = mA;
 	for(int i = minX; i <= maxX; i++) for(int j = minY; j <= maxY; j++) if(b.map[i][j])
 	{
-		auto curIntersection = intersection(a, mA, b, mB);
+		RectangleCollider currentCollider(b.startX + b.cellWidth * i,
+										  b.startY + b.cellHeight * j,
+										  b.cellWidth, b.cellHeight);
+		auto curIntersection = intersection(a, correctedMatrix, currentCollider, mB);
 		intersect.first += curIntersection.first;
 		intersect.second += curIntersection.second;
+		correctedMatrix = glm::translate(glm::mat4(),
+										 glm::vec3((float) curIntersection.first,
+												   (float) curIntersection.second,
+												   0.0f))
+						  * correctedMatrix;
 	}
 
 	return intersect;

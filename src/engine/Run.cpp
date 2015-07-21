@@ -9,6 +9,7 @@ Run *Run::currentRun;
 
 void Run::start(Run *run)
 {
+	srand(time(nullptr));
 	currentRun = run;
 	Window::init("Title", true, -1, -1);
 	Scene::getCamera().getInverseTransform().setScale(100 * Window::getPixelX() / ((double) Window::getPixelY()), 100);
