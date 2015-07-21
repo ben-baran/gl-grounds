@@ -1,3 +1,5 @@
+#include <string>
+#include <memory>
 #include "Entity.hpp"
 
 #include "Scene.hpp"
@@ -31,6 +33,16 @@ void Entity::setImportanceAfter(std::initializer_list<string> names)
 	double max = -INFINITY;
 	for(string name : names) max = std::max(max, Scene::get(name).getImportance());
 	importance = max + 1;
+}
+
+string Entity::getName()
+{
+	return name;
+}
+
+void Entity::setName(std::string &name)
+{
+	this->name = name;
 }
 
 Renderable &Entity::getRenderable()

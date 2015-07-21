@@ -34,6 +34,7 @@ Camera &Scene::getCamera()
 
 void Scene::add(std::string name, Entity &entity)
 {
+	entity.setName(name);
 	nameAddBuffer[name] = &entity;
 	nameRemoveBuffer.erase(name);
 }
@@ -43,10 +44,17 @@ void Scene::add(Entity &entity)
 	add(std::to_string(((long) &entity)), entity);
 }
 
-void Scene::remove(std::string name, Entity &entity)
+void Scene::remove(std::string name)
 {
-	nameRemoveBuffer[name] = &entity;
+	Entity *entity = &get(name);
+	nameRemoveBuffer[name] = entity;
 	nameAddBuffer.erase(name);
+	for(const auto &tag : entity->getTags()) removeEntityFromTag(*entity, tag);
+}
+
+void Scene::removeAll(std::string tag)
+{
+	for(auto entity : getAll(tag)) remove(entity->getName());
 }
 
 Entity &Scene::get(string name)

@@ -23,11 +23,10 @@ void TestRunner::setup()
 {
 	int emptyX = 0, emptyY = 0;
 	int sizeX = 40, sizeY = 40;
-	bool **map = new bool *[sizeX];
-	for(int i = 0; i < sizeX; i++) map[i] = new bool[sizeY];
-	CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {5, 6, 7, 8}, 0, 0.5);
+	auto map = CellularAutomata::generateWithRules(sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {6, 7, 8}, 4, 0.5);
 
-	for(int i = 0; i < sizeX; i++) for(int j = 0; j < sizeY; j++) if(map[i][j]) placeWall(i * 2, j * 2);
+	for(int i = 0; i < sizeX; i++) for(int j = 0; j < sizeY; j++) if((*map)[i][j]) placeWall(i * 2, j * 2);
+	delete map;
 	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9));
 	player->getTransform().setTranslation(emptyX, emptyY);
 	Scene::add("player", *player);
@@ -54,6 +53,16 @@ void TestRunner::update(double dt)
 	if(KeyHandler::held(GLFW_KEY_A)) transform.translate(-speed, 0);
 	if(KeyHandler::held(GLFW_KEY_S)) transform.translate(0, -speed);
 	if(KeyHandler::held(GLFW_KEY_D)) transform.translate(speed, 0);
+
+	if(KeyHandler::pressed(GLFW_KEY_SPACE))
+	{
+		Scene::removeAll("wall");
+		int sizeX = 40, sizeY = 40;
+		auto map = CellularAutomata::generateWithRules(sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {6, 7, 8}, 4, 0.5);
+
+		for(int i = 0; i < sizeX; i++) for(int j = 0; j < sizeY; j++) if((*map)[i][j]) placeWall(i * 2, j * 2);
+		delete map;
+	}
 
 	Scene::get("player").collideByTag("wall");
 
