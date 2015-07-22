@@ -43,7 +43,7 @@ void TestRunner::update(double dt)
 	}
 	transform.setRotation(std::atan2(coords.second - transform.getDY(), coords.first - transform.getDX()));
 
-	double speed = 0.15;
+	double speed = 3.85;
 	if(KeyHandler::held(GLFW_KEY_LEFT_SHIFT) || KeyHandler::held(GLFW_KEY_RIGHT_SHIFT)) speed *= 2;
 	if(KeyHandler::held(GLFW_KEY_W)) transform.translate(0, speed);
 	if(KeyHandler::held(GLFW_KEY_A)) transform.translate(-speed, 0);
@@ -57,17 +57,23 @@ void TestRunner::update(double dt)
 	{
 //		Scene::removeAll("wall");
 
-		for(int i = 0; i < 1; i++)
+		for(int i = 0; i < 10; i++)
 		{
-			int sizeX = 100, sizeY = 100;
+			int sizeX = 50, sizeY = 300;
 			vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
-			GridManip::fillRandom(map, 0.49);
+			GridManip::fillRandom(map, 0.43 + i * .008);
+
 			GridManip::cellularGenerate(map, {4, 5, 6, 7, 8}, {5, 6, 7, 8}, 5);
+//			GridManip::cellularGenerate(map, {0, 1, 4, 5, 6, 7, 8}, {0, 1, 2, 5, 6, 7, 8}, 4);
+//			GridManip::cellularGenerate(map, {4, 5, 6, 7, 8}, {5, 6, 7, 8}, 3);
+
+
 			GridManip::removeSingles(map);
+			GridManip::unifyRegions(map);
 			GridManip::surround(map, 10);
 
 			Entity *grid = new Entity(new SolidGrid(map, map.size(), map[0].size(),
-													200 * i + transform.getDX() - 100, transform.getDY() - 100, 2, 2));
+													200 * i + transform.getDX() - 1000, transform.getDY() + 2, 2, 2));
 			grid->addTag("wall");
 			Scene::add(*grid);
 		}

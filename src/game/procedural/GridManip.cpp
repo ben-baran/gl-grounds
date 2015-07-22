@@ -1,9 +1,11 @@
 #include <time.h>
 #include <stdlib.h>
 #include <algorithm>
+#include <queue>
 #include "GridManip.hpp"
 
 using std::vector;
+using std::queue;
 
 int GridManip::neighborCount(std::vector<std::vector<bool>> &map, int x, int y)
 {
@@ -46,20 +48,20 @@ void GridManip::cellularGenerate(vector<vector<bool>> &map,
 				{
 					bool satisfied = false;
 					for(int rule : aliveRules) if(rule == count)
-						{
-							satisfied = true;
-							break;
-						}
+					{
+						satisfied = true;
+						break;
+					}
 					if(!satisfied) map[x][y] = false;
 				}
 				else
 				{
 					bool satisfied = false;
 					for(int rule : deadRules) if(rule == count)
-						{
-							satisfied = true;
-							break;
-						}
+					{
+						satisfied = true;
+						break;
+					}
 					if(satisfied) map[x][y] = true;
 				}
 			}
@@ -86,4 +88,85 @@ void GridManip::surround(std::vector<std::vector<bool>> &map, int layers)
 	map.reserve(nx + 2 * layers);
 	map.insert(map.begin(), layers, vector<bool>(ny + layers * 2, true));
 	for(int i = 0; i < layers; i++) map.push_back(vector<bool>(ny + layers * 2, true));
+}
+
+void GridManip::unifyRegions(std::vector<std::vector<bool>> &map, double fillPerc)
+{
+	int nx = map.size(), ny = map[0].size();
+	vector<vector<int>> regions(nx, vector<int>(ny, -1));
+	vector<std::pair<int, int>> regionPoints;
+	vector<int> regionCounts;
+
+	int nRegions = 0;
+
+	for(int i = 0; i < nx; i++) for(int j = 0; j < ny; j++) if(regions[i][j] == -1 && !map[i][j])
+	{
+		int count = floodFill(map, regions, i, j, nRegions);
+		if(count != 0)
+		{
+			regionPoints.push_back(std::make_pair(i, j));
+			regionCounts.push_back(count);
+			nRegions++;
+		}
+	}
+
+	for(int i = 0; i < nRegions; i++) if(regionCounts[i] * 1.0 / nx / ny > fillPerc)
+	{
+		for(int j = 0; j < nRegions; j++) if(i != j) floodFill(map, regionPoints[j].first, regionPoints[j].second, true);
+		break;
+	}
+}
+
+int GridManip::floodFill(std::vector<std::vector<bool>> &map, std::vector<std::vector<int>> &regions, int x, int y, int fill)
+{
+	int filled = 0;
+	int nx = map.size(), ny = map[0].size();
+	queue<std::pair<int, int>> floodQueue;
+	floodQueue.push(std::make_pair(x, y));
+	while(floodQueue.size() > 0)
+	{
+		auto coords = floodQueue.front();
+		floodQueue.pop();
+		x = coords.first;
+		y = coords.second;
+
+		if(x >= 0 && y >= 0 && x < nx && y < ny && regions[x][y] == -1 && !map[x][y])
+		{
+			regions[x][y] = fill;
+			filled++;
+			floodQueue.push(std::make_pair(x + 1, y));
+			floodQueue.push(std::make_pair(x - 1, y));
+			floodQueue.push(std::make_pair(x, y + 1));
+			floodQueue.push(std::make_pair(x, y - 1));
+		}
+	}
+
+	return filled;
+}
+
+int GridManip::floodFill(std::vector<std::vector<bool>> &map, int x, int y, bool fill)
+{
+	int filled = 0;
+	int nx = map.size(), ny = map[0].size();
+	queue<std::pair<int, int>> floodQueue;
+	floodQueue.push(std::make_pair(x, y));
+	while(floodQueue.size() > 0)
+	{
+		auto coords = floodQueue.front();
+		floodQueue.pop();
+		x = coords.first;
+		y = coords.second;
+
+		if(coords.first >= 0 && y >= 0 && x < nx && y < ny && map[x][y] != fill)
+		{
+			map[x][y] = fill;
+			filled++;
+			floodQueue.push(std::make_pair(x + 1, y));
+			floodQueue.push(std::make_pair(x - 1, y));
+			floodQueue.push(std::make_pair(x, y + 1));
+			floodQueue.push(std::make_pair(x, y - 1));
+		}
+	}
+
+	return filled;
 }
