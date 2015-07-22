@@ -71,11 +71,6 @@ std::pair<double, double> Collider::intersection(RectangleCollider &a, glm::mat4
 	int minY = std::max(0, (int) ((aBB.y - b.startY) / b.cellHeight));
 	int maxY = std::min(b.ny - 1, (int) ((aBB.w - b.startX) / b.cellHeight));
 
-	if(KeyHandler::pressed(GLFW_KEY_Q))
-	{
-
-	}
-
 	glm::mat4 correctedMatrix = mA;
 	for(int i = minX; i <= maxX; i++) for(int j = minY; j <= maxY; j++) if(b.map[i][j])
 	{

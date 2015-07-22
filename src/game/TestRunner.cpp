@@ -4,8 +4,8 @@
 #include <src/engine/util/KeyHandler.hpp>
 #include <src/engine/util/MouseHandler.hpp>
 #include <iostream>
-#include <src/game/procedural/CellularAutomata.hpp>
 #include <src/engine/render/SolidGrid.hpp>
+#include <src/game/procedural/GridManip.hpp>
 #include "TestRunner.hpp"
 
 using std::vector;
@@ -24,17 +24,7 @@ void placeWall(int x, int y)
 
 void TestRunner::setup()
 {
-//	int emptyX = 0, emptyY = 0;
-//	int sizeX = 10, sizeY = 10;
-//	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
-//	CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {6, 7, 8}, 4, 0.5);
-//
-//	for(int i = 0; i < sizeX; i++) for(int j = 0; j < sizeY; j++)
-//	{
-//		if(map[i][j]) placeWall(i * 2, j * 2);
-//	}
 	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9));
-//	player->getTransform().setTranslation(emptyX, emptyY);
 	Scene::add("player", *player);
 }
 
@@ -67,14 +57,17 @@ void TestRunner::update(double dt)
 	{
 //		Scene::removeAll("wall");
 
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 1; i++)
 		{
 			int sizeX = 100, sizeY = 100;
 			vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
-			CellularAutomata::generateWithRules(map, sizeX, sizeY, {3, 4, 5, 6, 7, 8}, {5, 6, 7, 8}, 4, 0.5);
+			GridManip::fillRandom(map, 0.49);
+			GridManip::cellularGenerate(map, {4, 5, 6, 7, 8}, {5, 6, 7, 8}, 5);
+			GridManip::removeSingles(map);
+			GridManip::surround(map, 10);
 
-			Entity *grid = new Entity(new SolidGrid(map, sizeX, sizeY,
-													200 * i + transform.getDX() + 2 - 500, transform.getDY() + 2, 2, 2));
+			Entity *grid = new Entity(new SolidGrid(map, map.size(), map[0].size(),
+													200 * i + transform.getDX() - 100, transform.getDY() - 100, 2, 2));
 			grid->addTag("wall");
 			Scene::add(*grid);
 		}
