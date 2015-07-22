@@ -3,13 +3,17 @@
 ## List of requirements for v0.0.2 ("Amateur Stupidity Release")
 
 - [X] Fix camera coordinate system to work with "retina" displays
-- [ ] Create basic random generation system
+- [X] Create basic random generation system
 - [ ] Implement basic logger
 - [ ] Implement gestures
-- [ ] Create grid based collision
+- [X] Create grid based collision
 - [X] Create grid based solid renderable
 - [X] Add collision bounding boxes
 - [ ] Add camera culling
+- [ ] Marching squares
+- [ ] Randomly select spawn and end point
+- [ ] Polygon render and collision
+- [ ] Basic enemy AI
 
 ### List of requirements for v0.0.1 ("Disgusting Filth Release")
 
