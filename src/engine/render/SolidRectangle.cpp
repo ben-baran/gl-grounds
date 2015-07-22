@@ -65,7 +65,7 @@ SolidRectangle::SolidRectangle(float width, float height) : SolidRectangle(-widt
 
 SolidRectangle::SolidRectangle(float x, float y, float width, float height) : SolidRectangle(x, y, width, height, 1.0f, 1.0f, 1.0f) {}
 
-SolidRectangle::SolidRectangle(float x, float y, float width, float height, float r, float g, float b, float layer)
+SolidRectangle::SolidRectangle(float x, float y, float width, float height, float r, float g, float b, double layer)
 		: x(x)
 		, y(y)
 		, width(width)

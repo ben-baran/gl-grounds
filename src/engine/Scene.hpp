@@ -28,7 +28,8 @@ public:
 
 	static void add(std::string name, Entity &entity);
 	static void add(Entity &entity);
-	static void remove(std::string name, Entity &entity);
+	static void remove(std::string name);
+	static void removeAll(std::string tag);
 	static Entity &get(std::string name);
 	static std::unordered_set<Entity*> &getAll(std::string tag);
 	static void update(double dt);

@@ -1,11 +1,15 @@
 # Current Version: 0.0.1
 
-## List of requirements for v0.0.2 ("Amateur Stupidity")
+## List of requirements for v0.0.2 ("Amateur Stupidity Release")
 
-- [ ] Fix camera coordinate system to work with "retina" displays
+- [X] Fix camera coordinate system to work with "retina" displays
 - [ ] Create basic random generation system
 - [ ] Implement basic logger
 - [ ] Implement gestures
+- [ ] Create grid based collision
+- [X] Create grid based solid renderable
+- [X] Add collision bounding boxes
+- [ ] Add camera culling
 
 ### List of requirements for v0.0.1 ("Disgusting Filth Release")
 

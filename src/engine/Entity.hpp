@@ -13,6 +13,8 @@ class Entity
 private:
 	double importance;
 
+	std::string name;
+
 	std::unordered_set<std::string> tags;
 	std::unordered_map<std::string, bool> bProperties;
 	std::unordered_map<std::string, int> iProperties;
@@ -30,6 +32,9 @@ public:
 	void setImportanceBefore(std::initializer_list<std::string> names);
 	void setImportanceBetween(std::string before, std::string after);
 	void setImportanceAfter(std::initializer_list<std::string> names);
+
+	std::string getName();
+	void setName(std::string &name);
 
 	Renderable &getRenderable();
 	Collider &getCollider();
