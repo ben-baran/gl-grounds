@@ -47,9 +47,12 @@ void Scene::add(Entity &entity)
 void Scene::remove(std::string name)
 {
 	Entity *entity = &get(name);
-	nameRemoveBuffer[name] = entity;
-	nameAddBuffer.erase(name);
-	for(const auto &tag : entity->getTags()) removeEntityFromTag(*entity, tag);
+	if(entity)
+	{
+		nameRemoveBuffer[name] = entity;
+		nameAddBuffer.erase(name);
+		for(const auto &tag : entity->getTags()) removeEntityFromTag(*entity, tag);
+	}
 }
 
 void Scene::removeAll(std::string tag)
