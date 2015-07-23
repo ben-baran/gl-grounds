@@ -6,19 +6,8 @@
 
 int SolidGrid::attributes[] = {3, 3};
 
-SolidGrid::SolidGrid(vector<vector<bool>> &map, int nx, int ny,
-					 double startX, double startY, double cellWidth, double cellHeight,
-					 float r, float g, float b, double layer)
-	: map(map)
-	, nx(nx)
-	, ny(ny)
-	, startX(startX)
-	, startY(startY)
-	, cellWidth(cellWidth)
-	, cellHeight(cellHeight)
+void SolidGrid::constructVAO()
 {
-	Renderable::setLayer(layer);
-
 	int cellCount = 0;
 	for(int i = 0; i < nx; i++) for(int j = 0; j < ny; j++) if(map[i][j]) cellCount++;
 
@@ -51,7 +40,37 @@ SolidGrid::SolidGrid(vector<vector<bool>> &map, int nx, int ny,
 	}
 
 	vao = new VAO(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
+}
+
+SolidGrid::SolidGrid(vector<vector<bool>> &map, int nx, int ny,
+					 double startX, double startY, double cellWidth, double cellHeight,
+					 float r, float g, float b, double layer)
+	: map(map)
+	, nx(nx)
+	, ny(ny)
+	, startX(startX)
+	, startY(startY)
+	, cellWidth(cellWidth)
+	, cellHeight(cellHeight)
+	, r(r)
+	, g(g)
+	, b(b)
+{
+	Renderable::setLayer(layer);
+	constructVAO();
 	shader = Res::loadShader("res/shader/simple/color");
+}
+
+SolidGrid::~SolidGrid()
+{
+	delete vao;
+}
+
+void SolidGrid::setLayer(double layer)
+{
+	Renderable::setLayer(layer);
+	delete vao;
+	constructVAO();
 }
 
 void SolidGrid::render()
