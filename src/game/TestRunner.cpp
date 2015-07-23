@@ -31,13 +31,18 @@ void createLevel()
 
 	int sizeX = 50, sizeY = 50;
 	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
-	GridManip::fillRandom(map, 0.45);
-	GridManip::cellularGenerate(map, {4, 5, 6, 7, 8}, {0, 5, 6, 7, 8}, 5);
-	GridManip::cellularGenerate(map, {4, 5, 6, 7, 8}, {5, 6, 7, 8}, 5);
-	GridManip::removeSingles(map);
-	GridManip::unifyRegions(map);
-	GridManip::surround(map, 10);
 
+	bool isUnified = false;
+	while(!isUnified)
+	{
+		GridManip::fillRandom(map, 0.45);
+		GridManip::cellularGenerate(map, {4, 5, 6, 7, 8}, {0, 5, 6, 7, 8}, 5);
+		GridManip::cellularGenerate(map, {4, 5, 6, 7, 8}, {5, 6, 7, 8}, 5);
+		GridManip::removeSingles(map);
+		isUnified = GridManip::unifyRegions(map);
+	}
+
+	GridManip::surround(map, 10);
 	Entity *grid = new Entity(new SolidGrid(map, map.size(), map[0].size(), 0, 0, 2, 2));
 	grid->addTag("wall");
 	Scene::add(*grid);

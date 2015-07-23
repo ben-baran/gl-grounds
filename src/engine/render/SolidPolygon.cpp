@@ -3,6 +3,7 @@
 
 #include <src/engine/physics/RectangleCollider.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <src/engine/physics/PolygonCollider.hpp>
 
 int SolidPolygon::attributes[] = {3, 3};
 
@@ -69,5 +70,5 @@ void SolidPolygon::render(glm::mat4 transformMatrix)
 
 Collider &SolidPolygon::provideCollider()
 {
-	return *(new RectangleCollider(0.0, 0.0, 0.0, 0.0));
+	return *(new PolygonCollider(points));
 }
