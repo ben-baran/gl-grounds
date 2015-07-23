@@ -5,6 +5,7 @@
 
 class RectangleCollider;
 class GridCollider;
+class Entity;
 
 class Collider
 {
@@ -17,4 +18,5 @@ public:
 
 	static const int LOW_ITERATIONS, HIGH_ITERATIONS;
 	static std::pair<double, double> intersection(Collider &a, glm::mat4 &mA, Collider &b, glm::mat4 &mB);
+	static std::pair<double, double> intersection(Entity &a, Entity &b);
 };

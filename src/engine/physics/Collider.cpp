@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <src/engine/util/KeyHandler.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <src/engine/Entity.hpp>
 #include "Collider.hpp"
 #include "RectangleCollider.hpp"
 #include "GridCollider.hpp"
@@ -104,4 +105,11 @@ std::pair<double, double> Collider::intersection(Collider &a, glm::mat4 &mA, Col
 	{
 		return intersection(static_cast<RectangleCollider &>(a), mA, static_cast<GridCollider &>(b), mB);
 	}
+
+	return std::make_pair(0.0, 0.0);
 }
+
+std::pair<double, double> Collider::intersection(Entity &a, Entity &b)
+{
+	return intersection(a.getCollider(), a.getTransform().getMatrix(), b.getCollider(), b.getTransform().getMatrix());
+};
