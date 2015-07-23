@@ -55,7 +55,7 @@ void TestRunner::update(double dt)
 
 	if(KeyHandler::pressed(GLFW_KEY_SPACE))
 	{
-//		Scene::removeAll("wall");
+		Scene::removeAll("wall");
 
 		for(int i = 0; i < 10; i++)
 		{
