@@ -109,11 +109,12 @@ std::pair<double, double> Collider::intersection(RectangleCollider &a, glm::mat4
 
 	for(int i = 0; i < nb - 1; i++)
 	{
-		axes[i + 2][0] = {bCoords[i][0] - bCoords[i + 1][0]};
-		axes[i + 2][1] = {bCoords[i][1] - bCoords[i + 1][1]};
+		axes[i + 2][0] = {bCoords[i][1] - bCoords[i + 1][1]};
+		axes[i + 2][1] = {bCoords[i + 1][0] - bCoords[i][0]};
 	}
-	axes[1 + nb][0] = {bCoords[nb - 1][0] - bCoords[0][0]};
-	axes[1 + nb][1] = {bCoords[nb - 1][1] - bCoords[0][1]};
+
+	axes[nb + 1][0] = {bCoords[nb - 1][1] - bCoords[0][1]};
+	axes[nb + 1][1] = {bCoords[0][0] - bCoords[nb - 1][0]};
 
 	return intersection(aCoords, 4, bCoords, nb, axes, nb + 2);
 }
@@ -134,18 +135,18 @@ std::pair<double, double> Collider::intersection(PolygonCollider &a, glm::mat4 &
 	double axes[na + nb][2];
 	for(int i = 0; i < na - 1; i++)
 	{
-		axes[i][0] = {aCoords[i][0] - aCoords[i + 1][0]};
-		axes[i][1] = {aCoords[i][1] - aCoords[i + 1][1]};
+		axes[i][0] = {aCoords[i][1] - aCoords[i + 1][1]};
+		axes[i][1] = {aCoords[i + 1][0] - aCoords[i][0]};
 	}
 	for(int i = 0; i < nb - 1; i++)
 	{
-		axes[i + na][0] = {bCoords[i][0] - bCoords[i + 1][0]};
-		axes[i + na][1] = {bCoords[i][1] - bCoords[i + 1][1]};
+		axes[i + na][0] = {bCoords[i][1] - bCoords[i + 1][1]};
+		axes[i + na][1] = {bCoords[i + 1][0] - bCoords[i][0]};
 	}
-	axes[na - 1][0] = {aCoords[nb - 1][0] - aCoords[0][0]};
-	axes[na - 1][1] = {aCoords[nb - 1][1] - aCoords[0][1]};
-	axes[na + nb - 1][0] = {bCoords[nb - 1][0] - bCoords[0][0]};
-	axes[na + nb - 1][1] = {bCoords[nb - 1][1] - bCoords[0][1]};
+	axes[na - 1][0] = {aCoords[nb - 1][1] - aCoords[0][1]};
+	axes[na - 1][1] = {aCoords[0][0] - aCoords[nb - 1][0]};
+	axes[na + nb - 1][0] = {bCoords[nb - 1][1] - bCoords[0][1]};
+	axes[na + nb - 1][1] = {bCoords[0][0] - bCoords[nb - 1][0]};
 
 	return intersection(aCoords, na, bCoords, nb, axes, na + nb);
 }

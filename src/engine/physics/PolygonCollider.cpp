@@ -11,12 +11,7 @@ void PolygonCollider::getCoordinates(glm::mat4 &matrix, double (*coords)[2])
 {
 	for(int i = 0; i < points.size(); i++)
 	{
-		glm::vec4 point;
-		point.x = points[i].first;
-		point.y = points[i].second;
-		point.w = 1;
-
-		point = matrix * point;
+		glm::vec4 point = matrix * glm::vec4(points[i].first, points[i].second, 0, 1);
 		coords[i][0] = point.x;
 		coords[i][1] = point.y;
 	}
