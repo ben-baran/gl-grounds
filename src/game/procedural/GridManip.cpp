@@ -204,3 +204,35 @@ std::pair<int, int> GridManip::emptyLocOtherQuadrant(std::vector<std::vector<boo
 		if(!map[x][y]) return std::make_pair(x, y);
 	}
 }
+
+std::pair<int, int> GridManip::emptyLoc(std::vector<std::vector<int>> &map)
+{
+	int nx = map.size(), ny = map[0].size();
+
+	while(true)
+	{
+		int x = rand() % nx, y = rand() % ny;
+		if(!map[x][y]) return std::make_pair(x, y);
+	}
+}
+
+std::pair<int, int> GridManip::emptyLocOtherQuadrant(std::vector<std::vector<int>> &map, std::pair<int, int> &other)
+{
+	int nx = map.size(), ny = map[0].size(), qx = other.first * 2 / nx, qy = other.second * 2 / ny;
+	while(true)
+	{
+		int curQx = qx, curQy = qy, chosen = rand() % 3;
+		if(chosen == 0)
+		{
+			curQx = 1 - qx;
+			curQy = 1 - qy;
+		}
+		else if(chosen == 1) curQx = 1 - qx;
+		else if(chosen == 2) curQy = 1 - qy;
+
+		int x = rand() % (nx / 2), y = rand() % (ny / 2);
+		x += curQx * nx / 2;
+		y += curQy * ny / 2;
+		if(!map[x][y]) return std::make_pair(x, y);
+	}
+}

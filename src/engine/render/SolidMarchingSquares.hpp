@@ -31,4 +31,6 @@ public:
 	void render();
 	void render(glm::mat4 transformMatrix);
 	Collider &provideCollider();
+
+	std::vector<std::vector<int>> &getMap();
 };

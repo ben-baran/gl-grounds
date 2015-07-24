@@ -20,4 +20,6 @@ public:
 
 	static std::pair<int, int> emptyLoc(std::vector<std::vector<bool>> &map);
 	static std::pair<int, int> emptyLocOtherQuadrant(std::vector<std::vector<bool>> &map, std::pair<int, int> &other);
+	static std::pair<int, int> emptyLoc(std::vector<std::vector<int>> &map);
+	static std::pair<int, int> emptyLocOtherQuadrant(std::vector<std::vector<int>> &map, std::pair<int, int> &other);
 };

@@ -45,14 +45,15 @@ void createLevel()
 
 	GridManip::surround(map, 10);
 //	Entity *grid = new Entity(new SolidGrid(map, map.size(), map[0].size(), 0, 0, 2, 2));
-	Entity *grid = new Entity(new SolidMarchingSquares(map, map.size(), map[0].size(), 0, 0, 2, 2));
+	SolidMarchingSquares *sms = new SolidMarchingSquares(map, map.size(), map[0].size(), 0, 0, 2, 2);
+	Entity *grid = new Entity(sms);
 	grid->addTag("wall");
 	Scene::add(*grid);
 
-	auto pCoords = GridManip::emptyLoc(map);
+	auto pCoords = GridManip::emptyLoc(sms->getMap());
 	transform.setTranslation(pCoords.first * 2 + 0.5, pCoords.second * 2 + 0.5);
 
-	auto eCoords = GridManip::emptyLocOtherQuadrant(map, pCoords);
+	auto eCoords = GridManip::emptyLocOtherQuadrant(sms->getMap(), pCoords);
 	Entity *end = new Entity(new SolidRectangle(eCoords.first * 2 + 0.5, eCoords.second * 2 + 0.5, 1, 1, 0.9f, 0.5f, 0.6f));
 	end->getRenderable().setLayerBelow({"player"});
 	Scene::add("end", *end);

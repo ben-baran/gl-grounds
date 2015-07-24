@@ -151,3 +151,8 @@ Collider &SolidMarchingSquares::provideCollider()
 {
 	return *(new RectangleCollider(0.0, 0.0, 0.0, 0.0));
 }
+
+vector<vector<int>> &SolidMarchingSquares::getMap()
+{
+	return map;
+}
