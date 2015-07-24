@@ -59,7 +59,6 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
     int pixelX, pixelY;
     glfwGetFramebufferSize(window, &pixelX, &pixelY);
     glViewport(0, 0, pixelX, pixelY);
-//	glOrtho(0, pixelX, pixelY, 0, -1, 1);
 
 	Window::pixelX = pixelX;
 	Window::pixelY = pixelY;

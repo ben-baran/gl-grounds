@@ -7,6 +7,7 @@
 #include <src/engine/render/SolidGrid.hpp>
 #include <src/game/procedural/GridManip.hpp>
 #include <src/engine/render/SolidPolygon.hpp>
+#include <src/engine/render/SolidMarchingSquares.hpp>
 #include "TestRunner.hpp"
 
 using std::vector;
@@ -29,7 +30,7 @@ void createLevel()
 	Scene::remove("end");
 	Scene::removeAll("wall");
 
-	int sizeX = 50, sizeY = 50;
+	int sizeX = 50, sizeY = 100;
 	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
 
 	bool isUnified = false;
@@ -43,7 +44,8 @@ void createLevel()
 	}
 
 	GridManip::surround(map, 10);
-	Entity *grid = new Entity(new SolidGrid(map, map.size(), map[0].size(), 0, 0, 2, 2));
+//	Entity *grid = new Entity(new SolidGrid(map, map.size(), map[0].size(), 0, 0, 2, 2));
+	Entity *grid = new Entity(new SolidMarchingSquares(map, map.size(), map[0].size(), 0, 0, 2, 2));
 	grid->addTag("wall");
 	Scene::add(*grid);
 

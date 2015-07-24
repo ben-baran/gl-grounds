@@ -25,7 +25,7 @@ public:
 	SolidMarchingSquares(std::vector<std::vector<bool>> &baseMap, int nx, int ny,
 						 double startX, double startY, double cellWidth, double cellHeight,
 						 float r = 1.0f, float g = 1.0f, float b = 1.0f, double layer = 0);
-	~SolidMarchingSquares()();
+	~SolidMarchingSquares();
 
 	void setLayer(double layer);
 	void render();
