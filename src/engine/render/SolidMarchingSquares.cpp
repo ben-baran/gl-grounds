@@ -1,9 +1,34 @@
 #include <src/engine/util/Res.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "SolidMarchingSquares.hpp"
+#include <src/engine/physics/RectangleCollider.hpp>
 
 using std::vector;
 
+inline std::pair<double, double> mp(double a, double b)
+{
+	return std::make_pair(a, b);
+};
+
 int SolidMarchingSquares::attributes[] = {3, 3};
+
+std::vector<std::vector<std::pair<double, double>>> SolidMarchingSquares::partCoordinates
+{
+		{},
+		{mp(0.0, 1.0), mp(0.0, 0.5), mp(0.5, 1.0)},
+		{mp(0.5, 1.0), mp(1.0, 0.5), mp(1.0, 1.0)},
+		{mp(0.0, 1.0), mp(0.0, 0.5), mp(1.0, 0.5), mp(1.0, 1.0)},
+		{mp(0.5, 0.0), mp(1.0, 0.5), mp(1.0, 0.0)}
+};
+
+std::vector<std::vector<int>> SolidMarchingSquares::partIndices
+{
+		{},
+		{0, 1, 2},
+		{0, 1, 2},
+		{0, 1, 2, 2, 3, 0},
+		{0, 1, 2}
+};
 
 void SolidMarchingSquares::constructVAO()
 {
@@ -46,19 +71,24 @@ SolidMarchingSquares::~SolidMarchingSquares()
 void SolidMarchingSquares::setLayer(double layer)
 {
 	Renderable::setLayer(layer);
+	delete vao;
+	constructVAO();
 }
 
 void SolidMarchingSquares::render()
 {
-
+	shader->use();
+	vao->draw();
 }
 
 void SolidMarchingSquares::render(glm::mat4 transformMatrix)
 {
-
+	shader->use();
+	glUniformMatrix4fv(shader->getLocation("transform"), 1, GL_FALSE, glm::value_ptr(transformMatrix));
+	vao->draw();
 }
 
 Collider &SolidMarchingSquares::provideCollider()
 {
-	return <#initializer#>;
+	return *(new RectangleCollider(0.0, 0.0, 0.0, 0.0));
 }
