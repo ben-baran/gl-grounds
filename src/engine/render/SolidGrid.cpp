@@ -4,6 +4,8 @@
 #include <src/engine/physics/GridCollider.hpp>
 #include "SolidGrid.hpp"
 
+using std::vector;
+
 int SolidGrid::attributes[] = {3, 3};
 
 void SolidGrid::constructVAO()

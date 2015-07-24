@@ -60,16 +60,16 @@ void TestRunner::setup()
 {
 	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9));
 	Scene::add("player", *player);
-//	createLevel();
+	createLevel();
 
-	std::vector<std::pair<float, float>> points;
-	points.push_back(std::make_pair(1.0f, 1.0f));
-	points.push_back(std::make_pair(3.0f, 3.0f));
-	points.push_back(std::make_pair(8.0f, 1.5f));
-	points.push_back(std::make_pair(7.0f, 0.8f));
-	Entity *poly = new Entity(new SolidPolygon(points));
-	poly->addTag("wall");
-	Scene::add(*poly);
+//	std::vector<std::pair<float, float>> points;
+//	points.push_back(std::make_pair(1.0f, 1.0f));
+//	points.push_back(std::make_pair(3.0f, 3.0f));
+//	points.push_back(std::make_pair(8.0f, 1.5f));
+//	points.push_back(std::make_pair(7.0f, 0.8f));
+//	Entity *poly = new Entity(new SolidPolygon(points));
+//	poly->addTag("wall");
+//	Scene::add(*poly);
 }
 
 void TestRunner::update(double dt)
@@ -97,11 +97,11 @@ void TestRunner::update(double dt)
 	if(KeyHandler::held(GLFW_KEY_R)) Scene::getCamera().getInverseTransform().scale(0.97, 0.97);
 	if(KeyHandler::held(GLFW_KEY_F)) Scene::getCamera().getInverseTransform().scale(1.03, 1.03);
 
-//	auto collision = Collider::intersection(Scene::get("player"), Scene::get("end"));
-//	if(collision.first != 0 && collision.second != 0)
-//	{
-//		createLevel();
-//	}
+	auto collision = Collider::intersection(Scene::get("player"), Scene::get("end"));
+	if(collision.first != 0 && collision.second != 0)
+	{
+		createLevel();
+	}
 
 	Scene::get("player").collideByTag("wall");
 

@@ -78,7 +78,9 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/render/SolidPolygon.cpp
                  src/engine/render/SolidPolygon.hpp
                  src/engine/physics/PolygonCollider.cpp
-                 src/engine/physics/PolygonCollider.hpp)
+                 src/engine/physics/PolygonCollider.hpp
+                 src/engine/render/SolidMarchingSquares.cpp
+                 src/engine/render/SolidMarchingSquares.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
