@@ -11,8 +11,8 @@
 - [X] Add collision bounding boxes
 - [ ] Add camera culling
 - [ ] Marching squares
-- [ ] Randomly select spawn and end point
-- [ ] Polygon render and collision
+- [X] Randomly select spawn and end point
+- [X] Polygon render and collision
 - [ ] Basic enemy AI
 
 ### List of requirements for v0.0.1 ("Disgusting Filth Release")
