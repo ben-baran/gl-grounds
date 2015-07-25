@@ -47,9 +47,12 @@ void Scene::add(Entity &entity)
 void Scene::remove(std::string name)
 {
 	Entity *entity = &get(name);
-	nameRemoveBuffer[name] = entity;
-	nameAddBuffer.erase(name);
-	for(const auto &tag : entity->getTags()) removeEntityFromTag(*entity, tag);
+	if(entity)
+	{
+		nameRemoveBuffer[name] = entity;
+		nameAddBuffer.erase(name);
+		for(const auto &tag : entity->getTags()) removeEntityFromTag(*entity, tag);
+	}
 }
 
 void Scene::removeAll(std::string tag)
@@ -86,7 +89,15 @@ void Scene::updateBuffers()
 	}
 
 	for(auto &pair : tagAddBuffer) entitiesByTag[pair.first].insert(pair.second.begin(), pair.second.end());
-	for(auto &pair : tagRemoveBuffer) entitiesByTag[pair.first].erase(pair.second.begin(), pair.second.end());
+	for(auto &pair : tagRemoveBuffer)
+	{
+		for(Entity *entity : pair.second) entitiesByTag[pair.first].erase(entity);
+	}
+
+	nameAddBuffer.clear();
+	nameRemoveBuffer.clear();
+	tagAddBuffer.clear();
+	tagRemoveBuffer.clear();
 }
 
 std::unordered_set<Entity*> &Scene::getAll(std::string tag)
