@@ -14,7 +14,7 @@ public:
 								 int iterations = 5);
 	static void removeSingles(std::vector<std::vector<bool>> &map);
 	static void surround(std::vector<std::vector<bool>> &map, int layers);
-	static bool unifyRegions(std::vector<std::vector<bool>> &map, double fillPerc = 0.15);
+	static bool unifyRegions(std::vector<std::vector<bool>> &map, double fillPerc = 0.3);
 	static int floodFill(std::vector<std::vector<bool>> &map, std::vector<std::vector<int>> &regions, int x, int y, int fill);
 	static int floodFill(std::vector<std::vector<bool>> &map, int x, int y, bool fill = true);
 

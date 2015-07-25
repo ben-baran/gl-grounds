@@ -7,8 +7,8 @@ int MarchingSquaresCollider::getClassID()
 	return CLASS_ID;
 }
 
-MarchingSquaresCollider::MarchingSquaresCollider(std::vector<std::vector<int>> &map, int nx, int ny, double startX,
-												 double startY, double cellWidth, double cellHeight)
+MarchingSquaresCollider::MarchingSquaresCollider(std::vector<std::vector<int>> &map, int nx, int ny,
+												 double startX, double startY, double cellWidth, double cellHeight)
 	: map(map)
 	, nx(nx)
 	, ny(ny)

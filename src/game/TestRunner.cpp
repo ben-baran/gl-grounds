@@ -30,7 +30,7 @@ void createLevel()
 	Scene::remove("end");
 	Scene::removeAll("wall");
 
-	int sizeX = 50, sizeY = 100;
+	int sizeX = 50, sizeY = 300;
 	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
 
 	bool isUnified = false;
@@ -52,9 +52,11 @@ void createLevel()
 	Scene::add(*grid);
 
 	auto pCoords = GridManip::emptyLoc(sms->getMap());
+//	auto pCoords = GridManip::emptyLoc(map);
 	transform.setTranslation(pCoords.first * 2 + 0.5, pCoords.second * 2 + 0.5);
 
 	auto eCoords = GridManip::emptyLocOtherQuadrant(sms->getMap(), pCoords);
+//	auto eCoords = GridManip::emptyLocOtherQuadrant(map, pCoords);
 	Entity *end = new Entity(new SolidRectangle(eCoords.first * 2 + 0.5, eCoords.second * 2 + 0.5, 1, 1, 0.9f, 0.5f, 0.6f,
 												Renderable::layerBelow({"player"})));
 	Scene::add("end", *end);

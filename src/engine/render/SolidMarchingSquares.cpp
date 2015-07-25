@@ -1,7 +1,7 @@
 #include <src/engine/util/Res.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "SolidMarchingSquares.hpp"
-#include <src/engine/physics/RectangleCollider.hpp>
+#include <src/engine/physics/MarchingSquaresCollider.hpp>
 #include <iostream>
 
 using std::vector;
@@ -149,7 +149,7 @@ void SolidMarchingSquares::render(glm::mat4 transformMatrix)
 
 Collider &SolidMarchingSquares::provideCollider()
 {
-	return *(new RectangleCollider(0.0, 0.0, 0.0, 0.0));
+	return *(new MarchingSquaresCollider(map, nx, ny, startX, startY, cellWidth, cellHeight));
 }
 
 vector<vector<int>> &SolidMarchingSquares::getMap()

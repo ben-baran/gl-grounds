@@ -16,11 +16,11 @@ private:
 	double startX, startY, cellWidth, cellHeight;
 	float r, g, b;
 
-	static std::vector<std::vector<std::pair<double, double>>> partCoordinates;
-	static std::vector<std::vector<int>> partIndices;
-
 	void constructVAO();
 public:
+
+	static std::vector<std::vector<std::pair<double, double>>> partCoordinates;
+	static std::vector<std::vector<int>> partIndices;
 
 	SolidMarchingSquares(std::vector<std::vector<bool>> &baseMap, int nx, int ny,
 						 double startX, double startY, double cellWidth, double cellHeight,
