@@ -14,6 +14,7 @@
 - [X] Randomly select spawn and end point
 - [X] Polygon render and collision
 - [ ] Basic enemy AI
+- [ ] Create distance fields
 
 ### List of requirements for v0.0.1 ("Disgusting Filth Release")
 
