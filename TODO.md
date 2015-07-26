@@ -1,6 +1,6 @@
-# Current Version: 0.0.1
+# Next Versions (Current Version: 0.0.1)
 
-## List of requirements for v0.0.2 ("Amateur Stupidity Release")
+#### List of requirements for v0.0.2 ("Amateur Stupidity Release")
 
 - [X] Fix camera coordinate system to work with "retina" displays
 - [X] Create basic random generation system
@@ -16,7 +16,14 @@
 - [ ] Basic enemy AI
 - [ ] Create distance fields
 
-### List of requirements for v0.0.1 ("Disgusting Filth Release")
+#### Far future optimizations
+
+- [ ] Memory pools
+- [ ] Multi-threading
+
+# Previous Verions
+
+#### List of requirements for v0.0.1 ("Disgusting Filth Release")
 
 - [X] Implement VAO
 - [X] Implement Texture

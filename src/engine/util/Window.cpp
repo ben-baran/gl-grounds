@@ -66,6 +66,11 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 //	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     glfwSetKeyCallback(window, KeyHandler::callback);
     glfwSetMouseButtonCallback(window, MouseHandler::buttonCallback);
