@@ -8,6 +8,7 @@
 #include <src/game/procedural/GridManip.hpp>
 #include <src/engine/render/SolidPolygon.hpp>
 #include <src/engine/render/SolidMarchingSquares.hpp>
+#include <src/engine/render/TexturedRectangle.hpp>
 #include "TestRunner.hpp"
 
 using std::vector;
@@ -64,7 +65,7 @@ void createLevel()
 
 void TestRunner::setup()
 {
-	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9));
+	Entity *player = new Entity(new TexturedRectangle(-0.5, -0.5, 1, 1, "res/brick_wall.png"));
 	Scene::add("player", *player);
 	createLevel();
 

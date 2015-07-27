@@ -28,8 +28,8 @@ public:
 	float getTX1();
 	float getTY1();
 
-	TexturedRectangle(float width, float height, std::string &textureName);
-	TexturedRectangle(float x, float y, float width, float height, std::string &textureName,
+	TexturedRectangle(float width, float height, std::string textureName);
+	TexturedRectangle(float x, float y, float width, float height, std::string textureName,
 				   float tx0 = 0, float ty0 = 0, float tx1 = 1, float ty1 = 1,
 				   double layer = 0);
 	~TexturedRectangle();
