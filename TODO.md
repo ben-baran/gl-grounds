@@ -4,19 +4,24 @@
 
 - [X] Fix camera coordinate system to work with "retina" displays
 - [X] Create basic random generation system
+- [X] Create renderable textures
 - [ ] Implement basic logger
 - [ ] Implement gestures
 - [X] Create grid based collision
 - [X] Create grid based solid renderable
 - [X] Add collision bounding boxes
 - [ ] Add camera culling
-- [ ] Marching squares
+- [X] Marching squares
 - [X] Randomly select spawn and end point
 - [X] Polygon render and collision
 - [ ] Basic enemy AI
 - [ ] Create distance fields
 
-#### Far future optimizations
+##### Far future features
+
+- [ ] Signed distance field fonts
+
+##### Far future optimizations
 
 - [ ] Memory pools
 - [ ] Multi-threading
