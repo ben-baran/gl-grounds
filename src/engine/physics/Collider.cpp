@@ -43,19 +43,19 @@ std::pair<double, double> Collider::intersection(RectangleCollider &a, glm::mat4
 
 	glm::mat4 correctedMatrix = mA;
 	for(int i = minX; i <= maxX; i++) for(int j = minY; j <= maxY; j++) if(b.map[i][j])
-			{
-				RectangleCollider currentCollider(b.startX + b.cellWidth * i,
-												  b.startY + b.cellHeight * j,
-												  b.cellWidth, b.cellHeight);
-				auto curIntersection = intersection(a, correctedMatrix, currentCollider, mB);
-				intersect.first += curIntersection.first;
-				intersect.second += curIntersection.second;
-				correctedMatrix = glm::translate(glm::mat4(),
-												 glm::vec3((float) curIntersection.first,
-														   (float) curIntersection.second,
-														   0.0f))
-								  * correctedMatrix;
-			}
+	{
+		RectangleCollider currentCollider(b.startX + b.cellWidth * i,
+										  b.startY + b.cellHeight * j,
+										  b.cellWidth, b.cellHeight);
+		auto curIntersection = intersection(a, correctedMatrix, currentCollider, mB);
+		intersect.first += curIntersection.first;
+		intersect.second += curIntersection.second;
+		correctedMatrix = glm::translate(glm::mat4(),
+										 glm::vec3((float) curIntersection.first,
+												   (float) curIntersection.second,
+												   0.0f))
+						  * correctedMatrix;
+	}
 
 	return intersect;
 }
