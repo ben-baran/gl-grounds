@@ -82,7 +82,11 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/render/SolidMarchingSquares.cpp
                  src/engine/render/SolidMarchingSquares.hpp
                  src/engine/physics/MarchingSquaresCollider.cpp
-                 src/engine/physics/MarchingSquaresCollider.hpp)
+                 src/engine/physics/MarchingSquaresCollider.hpp
+                 src/engine/render/TexturedRectangle.cpp
+                 src/engine/render/TexturedRectangle.hpp
+                 src/engine/render/TextRenderable.cpp
+                 src/engine/render/TextRenderable.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
