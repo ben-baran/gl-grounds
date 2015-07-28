@@ -9,6 +9,7 @@
 #include <src/engine/render/SolidPolygon.hpp>
 #include <src/engine/render/SolidMarchingSquares.hpp>
 #include <src/engine/render/TexturedRectangle.hpp>
+#include <src/engine/render/TextRenderable.hpp>
 #include "TestRunner.hpp"
 
 using std::vector;
@@ -31,7 +32,7 @@ void createLevel()
 	Scene::remove("end");
 	Scene::removeAll("wall");
 
-	int sizeX = 50, sizeY = 300;
+	int sizeX = 40, sizeY = 80;
 	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
 
 	bool isUnified = false;
@@ -61,6 +62,10 @@ void createLevel()
 	Entity *end = new Entity(new SolidRectangle(eCoords.first * 2 + 0.5, eCoords.second * 2 + 0.5, 1, 1, 0.9f, 0.5f, 0.6f,
 												Renderable::layerBelow({"player"})));
 	Scene::add("end", *end);
+
+	Entity *text = new Entity(new TextRenderable(transform.getDX(), transform.getDY(), 1, 2,
+												 "hello world", Renderable::layerAbove({"player"})));
+	Scene::add(*text);
 }
 
 void TestRunner::setup()

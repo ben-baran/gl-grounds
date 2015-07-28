@@ -17,6 +17,8 @@
 - [ ] Basic enemy AI
 - [ ] Create distance fields
 
+---
+
 ##### Far future features
 
 - [ ] Signed distance field fonts
