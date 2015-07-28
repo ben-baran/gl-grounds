@@ -44,8 +44,6 @@ Texture *Res::loadTex(const string &name, const string &file)
         glBindTexture(GL_TEXTURE_2D, tex.id);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex.width, tex.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
         SOIL_free_image_data(data);
         glBindTexture(GL_TEXTURE_2D, 0);
