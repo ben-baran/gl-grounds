@@ -65,6 +65,9 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
 
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_ALPHA_TEST);
+//	glDisable(GL_POLYGON_OFFSET_FILL);
+//	glDepthMask(GL_FALSE);
 //	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glEnable(GL_BLEND);
@@ -98,7 +101,7 @@ void Window::start(void (*handler)(double))
         {
             double time = glfwGetTime();
 
-			glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
+			glClearColor(0.2f, 0.18f, 0.2f, 0.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             handler(time - lastTime);

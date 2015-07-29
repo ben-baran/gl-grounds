@@ -10,6 +10,8 @@
 #include <src/engine/render/SolidMarchingSquares.hpp>
 #include <src/engine/render/TexturedRectangle.hpp>
 #include <src/engine/render/TextRenderable.hpp>
+#include <src/game/procedural/GridWalk.hpp>
+#include <src/engine/anim/Ease.hpp>
 #include "TestRunner.hpp"
 
 using std::vector;
@@ -31,8 +33,9 @@ void createLevel()
 	Transform &transform = Scene::get("player").getTransform();
 	Scene::remove("end");
 	Scene::removeAll("wall");
+	Scene::removeAll("text");
 
-	int sizeX = 40, sizeY = 80;
+	int sizeX = 20, sizeY = 20;
 	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
 
 	bool isUnified = false;
@@ -51,7 +54,7 @@ void createLevel()
 														 Renderable::layerBelow({"player"}));
 	Entity *grid = new Entity(sms);
 	grid->addTag("wall");
-	Scene::add(*grid);
+	Scene::add("grid", *grid);
 
 	auto pCoords = GridManip::emptyLoc(sms->getMap());
 //	auto pCoords = GridManip::emptyLoc(map);
@@ -63,9 +66,18 @@ void createLevel()
 												Renderable::layerBelow({"player"})));
 	Scene::add("end", *end);
 
-	Entity *text = new Entity(new TextRenderable(transform.getDX(), transform.getDY(), 1, 2,
-												 "hello world", Renderable::layerAbove({"player"})));
-	Scene::add(*text);
+	vector<vector<int>> dMap(sizeX + 20, vector<int>(sizeY + 20, 0));
+	GridWalk::generateDistanceField(sms->getMap(), dMap, pCoords.first, pCoords.second);
+	for(int i = 0; i < sizeX + 20; i++)
+	{
+		for(int j = 0; j < sizeY + 20; j++) if(dMap[i][j] != -1)
+		{
+			Entity *text = new Entity(new TextRenderable(i * 2 + 0.5, j * 2 + 0.5, 0.5, 1,
+														 std::to_string(dMap[i][j]), 0.99));
+			text->addTag("text");
+			Scene::add(*text);
+		}
+	}
 }
 
 void TestRunner::setup()
@@ -95,7 +107,7 @@ void TestRunner::update(double dt)
 	{
 		std::cout << coords.first << " " << coords.second << std::endl;
 		std::cout << transform.getDX() << " " << transform.getDY() << std::endl;
-		//transform.queueAnimation(1.0, Ease::backInOut).addComponent(1, &Transform::translateX);
+		transform.queueAnimation(1.0, Ease::backInOut).addComponent(1, &Transform::translateX);
 	}
 	transform.setRotation(std::atan2(coords.second - transform.getDY(), coords.first - transform.getDX()));
 

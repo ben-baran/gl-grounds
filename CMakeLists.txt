@@ -86,7 +86,9 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/render/TexturedRectangle.cpp
                  src/engine/render/TexturedRectangle.hpp
                  src/engine/render/TextRenderable.cpp
-                 src/engine/render/TextRenderable.hpp)
+                 src/engine/render/TextRenderable.hpp
+                 src/game/procedural/GridWalk.cpp
+                 src/game/procedural/GridWalk.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

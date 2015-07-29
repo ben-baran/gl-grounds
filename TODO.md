@@ -5,6 +5,7 @@
 - [X] Fix camera coordinate system to work with "retina" displays
 - [X] Create basic random generation system
 - [X] Create renderable textures
+- [X] Create simple text rendering
 - [ ] Implement basic logger
 - [ ] Implement gestures
 - [X] Create grid based collision

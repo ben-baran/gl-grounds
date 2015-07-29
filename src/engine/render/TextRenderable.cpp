@@ -23,8 +23,6 @@ void TextRenderable::constructVAO()
 		float tx0 = (charIndex % nx) / float(nx), ty0 = (charIndex / nx) / float(ny);
 		float tx1 = tx0 + 1.0f / nx, ty1 = ty0 + 1.0f / ny;
 
-		std::cout << i << ": " << tx0 * 512 << ", " << ty0 * 512 << ", " << tx1 * 512 << ", " << ty1 * 512 << std::endl;
-
 		int off = i * 20;
 		vertices[off] = vertices[off + 5] = x + (i + 1) * width;
 		vertices[off + 1] = vertices[off + 16] = y + height;
@@ -43,6 +41,8 @@ void TextRenderable::constructVAO()
 		indices[i * 6 + 4] = i * 4 + 2;
 		indices[i * 6 + 2] = indices[i * 6 + 5] = i * 4 + 3;
 	}
+
+	std::cout << vertices[3] << std::endl;
 
 	vao = new VAO(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
 }
