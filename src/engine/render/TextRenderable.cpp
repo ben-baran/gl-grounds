@@ -42,8 +42,6 @@ void TextRenderable::constructVAO()
 		indices[i * 6 + 2] = indices[i * 6 + 5] = i * 4 + 3;
 	}
 
-	std::cout << vertices[3] << std::endl;
-
 	vao = new VAO(vertices, sizeof(vertices), indices, sizeof(indices), attributes, sizeof(attributes) / sizeof(int), GL_STATIC_DRAW);
 }
 

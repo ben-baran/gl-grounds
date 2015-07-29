@@ -85,8 +85,6 @@ void SolidMarchingSquares::constructVAO()
 			vertices[curVOffset + 5] = b;
 		}
 
-		std::cout << std::endl;
-
 		iOffset += curISize;
 		vOffset += 6 * curVSize;
 	}
