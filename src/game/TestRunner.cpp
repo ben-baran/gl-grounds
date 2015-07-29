@@ -21,13 +21,6 @@ int main()
 	Run::start(new TestRunner());
 }
 
-void placeWall(int x, int y)
-{
-	Entity *wall = new Entity(new SolidRectangle(x, y, 2, 2));
-	wall->addTag("wall");
-	Scene::add(*wall);
-}
-
 void createLevel()
 {
 	Transform &transform = Scene::get("player").getTransform();
@@ -35,7 +28,7 @@ void createLevel()
 	Scene::removeAll("wall");
 	Scene::removeAll("text");
 
-	int sizeX = 20, sizeY = 20;
+	int sizeX = 30, sizeY = 30;
 	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
 
 	bool isUnified = false;
@@ -68,12 +61,16 @@ void createLevel()
 
 	vector<vector<int>> dMap(sizeX + 20, vector<int>(sizeY + 20, 0));
 	GridWalk::generateDistanceField(sms->getMap(), dMap, pCoords.first, pCoords.second);
+	vector<vector<int>> regions(sizeX + 20, vector<int>(sizeY + 20, 0));
+	vector<vector<std::pair<int, int>>> regionList;
+	GridWalk::createRegions(dMap, regions, regionList);
+
 	for(int i = 0; i < sizeX + 20; i++)
 	{
 		for(int j = 0; j < sizeY + 20; j++) if(dMap[i][j] != -1)
 		{
 			Entity *text = new Entity(new TextRenderable(i * 2 + 0.5, j * 2 + 0.5, 0.5, 1,
-														 std::to_string(dMap[i][j]), 0.99));
+														 std::to_string(regions[i][j]), 0.99));
 			text->addTag("text");
 			Scene::add(*text);
 		}

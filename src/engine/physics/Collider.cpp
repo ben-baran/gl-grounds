@@ -225,61 +225,61 @@ std::pair<double, double> Collider::intersection(RectangleCollider &a, glm::mat4
 
 	glm::mat4 correctedMatrix = mA;
 	for(int i = minX; i <= maxX; i++) for(int j = minY; j <= maxY; j++) if(b.map[i][j])
+	{
+		vector<std::pair<float, float>> points;
+		vector<std::pair<double, double>> &originalPoints = SolidMarchingSquares::partCoordinates[b.map[i][j]];
+
+		if(originalPoints.size() == 6)
+		{
+			for(int k = 0; k < 3; k++)
 			{
-				vector<std::pair<float, float>> points;
-				vector<std::pair<double, double>> &originalPoints = SolidMarchingSquares::partCoordinates[b.map[i][j]];
-
-				if(originalPoints.size() == 6)
-				{
-					for(int k = 0; k < 3; k++)
-					{
-						points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
-														(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
-					}
-					PolygonCollider firstCollider(points);
-					auto firstIntersection = intersection(a, correctedMatrix, firstCollider, mB);
-					intersect.first += firstIntersection.first;
-					intersect.second += firstIntersection.second;
-					correctedMatrix = glm::translate(glm::mat4(),
-													 glm::vec3((float) firstIntersection.first,
-															   (float) firstIntersection.second,
-															   0.0f))
-									  * correctedMatrix;
-
-					points.clear();
-					for(int k = 3; k < 6; k++)
-					{
-						points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
-														(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
-					}
-					PolygonCollider secondCollider(points);
-					auto secondIntersection = intersection(a, correctedMatrix, secondCollider, mB);
-					intersect.first += secondIntersection.first;
-					intersect.second += secondIntersection.second;
-					correctedMatrix = glm::translate(glm::mat4(),
-													 glm::vec3((float) secondIntersection.first,
-															   (float) secondIntersection.second,
-															   0.0f))
-									  * correctedMatrix;
-				}
-				else
-				{
-					for(int k = 0; k < originalPoints.size(); k++)
-					{
-						points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
-														(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
-					}
-					PolygonCollider currentCollider(points);
-					auto curIntersection = intersection(a, correctedMatrix, currentCollider, mB);
-					intersect.first += curIntersection.first;
-					intersect.second += curIntersection.second;
-					correctedMatrix = glm::translate(glm::mat4(),
-													 glm::vec3((float) curIntersection.first,
-															   (float) curIntersection.second,
-															   0.0f))
-									  * correctedMatrix;
-				}
+				points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
+												(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
 			}
+			PolygonCollider firstCollider(points);
+			auto firstIntersection = intersection(a, correctedMatrix, firstCollider, mB);
+			intersect.first += firstIntersection.first;
+			intersect.second += firstIntersection.second;
+			correctedMatrix = glm::translate(glm::mat4(),
+											 glm::vec3((float) firstIntersection.first,
+													   (float) firstIntersection.second,
+													   0.0f))
+							  * correctedMatrix;
+
+			points.clear();
+			for(int k = 3; k < 6; k++)
+			{
+				points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
+												(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
+			}
+			PolygonCollider secondCollider(points);
+			auto secondIntersection = intersection(a, correctedMatrix, secondCollider, mB);
+			intersect.first += secondIntersection.first;
+			intersect.second += secondIntersection.second;
+			correctedMatrix = glm::translate(glm::mat4(),
+											 glm::vec3((float) secondIntersection.first,
+													   (float) secondIntersection.second,
+													   0.0f))
+							  * correctedMatrix;
+		}
+		else
+		{
+			for(int k = 0; k < originalPoints.size(); k++)
+			{
+				points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
+												(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
+			}
+			PolygonCollider currentCollider(points);
+			auto curIntersection = intersection(a, correctedMatrix, currentCollider, mB);
+			intersect.first += curIntersection.first;
+			intersect.second += curIntersection.second;
+			correctedMatrix = glm::translate(glm::mat4(),
+											 glm::vec3((float) curIntersection.first,
+													   (float) curIntersection.second,
+													   0.0f))
+							  * correctedMatrix;
+		}
+	}
 
 	return intersect;
 }
@@ -297,61 +297,61 @@ std::pair<double, double> Collider::intersection(PolygonCollider &a, glm::mat4 &
 
 	glm::mat4 correctedMatrix = mA;
 	for(int i = minX; i <= maxX; i++) for(int j = minY; j <= maxY; j++) if(b.map[i][j])
+	{
+		vector<std::pair<float, float>> points;
+		vector<std::pair<double, double>> &originalPoints = SolidMarchingSquares::partCoordinates[b.map[i][j]];
+
+		if(originalPoints.size() == 6)
+		{
+			for(int k = 0; k < 3; k++)
 			{
-				vector<std::pair<float, float>> points;
-				vector<std::pair<double, double>> &originalPoints = SolidMarchingSquares::partCoordinates[b.map[i][j]];
-
-				if(originalPoints.size() == 6)
-				{
-					for(int k = 0; k < 3; k++)
-					{
-						points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
-														(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
-					}
-					PolygonCollider firstCollider(points);
-					auto firstIntersection = intersection(a, correctedMatrix, firstCollider, mB);
-					intersect.first += firstIntersection.first;
-					intersect.second += firstIntersection.second;
-					correctedMatrix = glm::translate(glm::mat4(),
-													 glm::vec3((float) firstIntersection.first,
-															   (float) firstIntersection.second,
-															   0.0f))
-									  * correctedMatrix;
-
-					points.clear();
-					for(int k = 3; k < 6; k++)
-					{
-						points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
-														(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
-					}
-					PolygonCollider secondCollider(points);
-					auto secondIntersection = intersection(a, correctedMatrix, secondCollider, mB);
-					intersect.first += secondIntersection.first;
-					intersect.second += secondIntersection.second;
-					correctedMatrix = glm::translate(glm::mat4(),
-													 glm::vec3((float) secondIntersection.first,
-															   (float) secondIntersection.second,
-															   0.0f))
-									  * correctedMatrix;
-				}
-				else
-				{
-					for(int k = 0; k < originalPoints.size(); k++)
-					{
-						points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
-														(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
-					}
-					PolygonCollider currentCollider(points);
-					auto curIntersection = intersection(a, correctedMatrix, currentCollider, mB);
-					intersect.first += curIntersection.first;
-					intersect.second += curIntersection.second;
-					correctedMatrix = glm::translate(glm::mat4(),
-													 glm::vec3((float) curIntersection.first,
-															   (float) curIntersection.second,
-															   0.0f))
-									  * correctedMatrix;
-				}
+				points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
+												(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
 			}
+			PolygonCollider firstCollider(points);
+			auto firstIntersection = intersection(a, correctedMatrix, firstCollider, mB);
+			intersect.first += firstIntersection.first;
+			intersect.second += firstIntersection.second;
+			correctedMatrix = glm::translate(glm::mat4(),
+											 glm::vec3((float) firstIntersection.first,
+													   (float) firstIntersection.second,
+													   0.0f))
+							  * correctedMatrix;
+
+			points.clear();
+			for(int k = 3; k < 6; k++)
+			{
+				points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
+												(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
+			}
+			PolygonCollider secondCollider(points);
+			auto secondIntersection = intersection(a, correctedMatrix, secondCollider, mB);
+			intersect.first += secondIntersection.first;
+			intersect.second += secondIntersection.second;
+			correctedMatrix = glm::translate(glm::mat4(),
+											 glm::vec3((float) secondIntersection.first,
+													   (float) secondIntersection.second,
+													   0.0f))
+							  * correctedMatrix;
+		}
+		else
+		{
+			for(int k = 0; k < originalPoints.size(); k++)
+			{
+				points.push_back(std::make_pair((float) (b.startX + b.cellWidth * (originalPoints[k].first + i)),
+												(float) (b.startY + b.cellHeight * (originalPoints[k].second + j))));
+			}
+			PolygonCollider currentCollider(points);
+			auto curIntersection = intersection(a, correctedMatrix, currentCollider, mB);
+			intersect.first += curIntersection.first;
+			intersect.second += curIntersection.second;
+			correctedMatrix = glm::translate(glm::mat4(),
+											 glm::vec3((float) curIntersection.first,
+													   (float) curIntersection.second,
+													   0.0f))
+							  * correctedMatrix;
+		}
+	}
 
 	return intersect;
 }
