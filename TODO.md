@@ -6,7 +6,6 @@
 - [X] Create basic random generation system
 - [X] Create renderable textures
 - [X] Create simple text rendering
-- [ ] Implement basic logger
 - [ ] Implement gestures
 - [X] Create grid based collision
 - [X] Create grid based solid renderable
@@ -15,14 +14,19 @@
 - [X] Marching squares
 - [X] Randomly select spawn and end point
 - [X] Polygon render and collision
+- [ ] AI placement
 - [ ] Basic enemy AI
 - [ ] Create distance fields
 
 ---
 
-##### Far future features
+##### Future features
 
-- [ ] Signed distance field fonts
+- [ ] Signed distance field fonts (with tool)
+- [ ] Refactor out of source
+- [ ] Add Atlas tool
+- [ ] Add PixelRender tool
+- [ ] Create SpriteBatch and DynamicSpriteBatch
 
 ##### Far future optimizations
 

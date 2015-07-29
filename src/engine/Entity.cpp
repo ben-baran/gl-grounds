@@ -148,7 +148,7 @@ Entity *&Entity::eProperty(std::string name)
 
 void Entity::collideByName(std::string name)
 {
-	Entity other = Scene::get(name);
+	Entity &other = Scene::get(name);
 	auto coords = Collider::intersection(*collider, transform->getMatrix(),
 										 other.getCollider(), other.getTransform().getMatrix());
 
@@ -158,7 +158,7 @@ void Entity::collideByName(std::string name)
 void Entity::collideByTag(std::string tag, int iterations)
 {
 	auto entities = Scene::getAll(tag);
-	for(int i = 0; i < iterations; i++) for(auto entity : entities)
+	for(int i = 0; i < iterations; i++) for(auto entity : entities) if(entity != this)
 	{
 		auto coords = Collider::intersection(*collider, transform->getMatrix(),
 											 entity->getCollider(), entity->getTransform().getMatrix());

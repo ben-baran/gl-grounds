@@ -27,6 +27,7 @@ void createLevel()
 	Scene::remove("end");
 	Scene::removeAll("wall");
 	Scene::removeAll("text");
+	Scene::removeAll("gold");
 
 	int sizeX = 30, sizeY = 30;
 	vector<vector<bool>> map(sizeX, vector<bool>(sizeY));
@@ -61,19 +62,41 @@ void createLevel()
 
 	vector<vector<int>> dMap(sizeX + 20, vector<int>(sizeY + 20, 0));
 	GridWalk::generateDistanceField(sms->getMap(), dMap, pCoords.first, pCoords.second);
-	vector<vector<int>> regions(sizeX + 20, vector<int>(sizeY + 20, 0));
 	vector<vector<std::pair<int, int>>> regionList;
-	GridWalk::createRegions(dMap, regions, regionList);
+	GridWalk::createRegions(dMap, regionList);
 
-	for(int i = 0; i < sizeX + 20; i++)
+	std::vector<int> ends;
+	GridWalk::endRegions(dMap, regionList, ends);
+
+//	for(int i = 0; i < sizeX + 20; i++)
+//	{
+//		for(int j = 0; j < sizeY + 20; j++) if(dMap[i][j] != -1)
+//		{
+//			Entity *text = new Entity(new TextRenderable(i * 2 + 0.5, j * 2 + 0.5, 0.5, 1,
+//														 std::to_string(dMap[i][j]), 0.99));
+//			text->addTag("text");
+//			Scene::add(*text);
+//		}
+//	}
+
+	for(int end : ends) for(auto &point : regionList[end]) for(int i = 0; i < 5; i++)
 	{
-		for(int j = 0; j < sizeY + 20; j++) if(dMap[i][j] != -1)
-		{
-			Entity *text = new Entity(new TextRenderable(i * 2 + 0.5, j * 2 + 0.5, 0.5, 1,
-														 std::to_string(regions[i][j]), 0.99));
-			text->addTag("text");
-			Scene::add(*text);
-		}
+		int x = point.first, y = point.second;
+		Entity *gold = new Entity(new TexturedRectangle(x * 2 + rand() % 1000 / 1000.0, y * 2 + rand() % 1000 / 1000.0, 0.5, 0.5,
+													 "res/coin.png", 0, 1, 1, 0, Renderable::layerBelow({"grid"})));
+
+		gold->collideByTag("wall");
+		gold->collideByTag("gold");
+
+		gold->addTag("gold");
+		Scene::add(*gold);
+	}
+
+	Scene::updateBuffers();
+	for(int i = 0; i < 30; i++) for(auto entity : Scene::getAll("gold"))
+	{
+		entity->collideByTag("gold");
+		entity->collideByTag("wall");
 	}
 }
 
