@@ -16,6 +16,8 @@
 
 using std::vector;
 
+int nGold = 0;
+
 int main()
 {
 	Run::start(new TestRunner());
@@ -106,6 +108,9 @@ void TestRunner::setup()
 	Scene::add("player", *player);
 	createLevel();
 
+	Entity *goldText = new Entity(new TextRenderable(-1, 0.8, 0.1, 0.2, "Gold: 0", Renderable::layerAboveTag("wall")));
+	Scene::add("goldText", *goldText);
+
 //	std::vector<std::pair<float, float>> points;
 //	points.push_back(std::make_pair(1.0f, 1.0f));
 //	points.push_back(std::make_pair(3.0f, 3.0f));
@@ -147,7 +152,21 @@ void TestRunner::update(double dt)
 		createLevel();
 	}
 
-	Scene::get("player").collideByTag("wall");
+	Entity &player = Scene::get("player");
+	player.collideByTag("wall");
+
+	for(auto coin : Scene::getAll("gold"))
+	{
+		auto intersection = Collider::intersection(*coin, player);
+		if(intersection.first != 0 || intersection.second != 0)
+		{
+			nGold++;
+			std::cout << "Gold: " << nGold << std::endl;
+			Scene::remove(coin->getName());
+		}
+	}
+	((TextRenderable &) Scene::get("goldText").getRenderable()).setText("Gold: " + std::to_string(nGold));
+	Scene::get("goldText").getTransform().setTranslation(transform.getDX() - 9, transform.getDY() + 6);
 
 	Scene::getCamera().getInverseTransform().setTranslation(transform.getDX(), transform.getDY());
 }

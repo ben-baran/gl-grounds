@@ -9,6 +9,6 @@ public:
 	static void createRegions(std::vector<std::vector<int>> &field, std::vector<std::vector<std::pair<int, int>>> &regionList);
 	static void endRegions(std::vector<std::vector<int>> &field, std::vector<std::vector<std::pair<int, int>>> &regionList,
 					       std::vector<int> &ends);
-	static void lowerRegions(std::vector<std::vector<int>> &field, std::vector<std::vector<std::pair<int, int>>> &regionList,
+	static void lowerRegions(std::vector<std::vector<int>> &field, std::vector<std::pair<int, int>> &regionList,
 							 int upperRegion, std::vector<int> &lowerRegions);
 };

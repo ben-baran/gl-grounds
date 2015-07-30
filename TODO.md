@@ -24,8 +24,10 @@
 
 - [ ] Signed distance field fonts (with tool)
 - [ ] Refactor out of source
+- [ ] Create UI Library
 - [ ] Add Atlas tool
 - [ ] Add PixelRender tool
+- [ ] Add DataPack tool
 - [ ] Create SpriteBatch and DynamicSpriteBatch
 
 ##### Far future optimizations
