@@ -108,7 +108,7 @@ void TestRunner::setup()
 	Scene::add("player", *player);
 	createLevel();
 
-	Entity *goldText = new Entity(new TextRenderable(-1, 0.8, 0.1, 0.2, "Gold: 0", Renderable::layerAboveTag("wall")));
+	Entity *goldText = new Entity(new TextRenderable(-1, 0.8, 0.5, 1.0, "Gold: 0", Renderable::layerAboveTag("wall")));
 	Scene::add("goldText", *goldText);
 
 //	std::vector<std::pair<float, float>> points;

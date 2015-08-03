@@ -89,7 +89,7 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/render/TextRenderable.hpp
                  src/game/procedural/GridWalk.cpp
                  src/game/procedural/GridWalk.hpp)
-add_executable(OpenGL_Test ${SOURCE_FILES})
+add_executable(OpenGL_Test ${SOURCE_FILES} src/ui/UIC.cpp src/ui/UIC.hpp src/game/UIRunner.cpp src/game/UIRunner.hpp)
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
 add_custom_target(copy_shaders ALL
