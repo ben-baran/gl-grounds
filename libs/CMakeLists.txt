@@ -39,7 +39,7 @@ add_library(
     GLEW_1120
     ${GLEW_SOURCE}
     ${GLEW_INCLUDE}
-)
+../src/ui/UICLayout.cpp ../src/ui/UICLayout.hpp)
 
 target_link_libraries(GLEW_1120
     ${OPENGL_LIBRARY}
