@@ -20,6 +20,10 @@ private:
 	static std::unordered_map<std::string, std::unordered_set<Entity*>> tagAddBuffer;
 	static std::unordered_map<std::string, std::unordered_set<Entity*>> tagRemoveBuffer;
 
+	static std::unordered_map<std::string, Entity*> uiEntities;
+	static std::unordered_map<std::string, Entity*> uiAddBuffer;
+	static std::unordered_map<std::string, Entity*> uiRemoveBuffer;
+
 	static void addEntityToTag(Entity &entity, std::string tag);
 	static void removeEntityFromTag(Entity &entity, std::string tag);
 
@@ -38,4 +42,8 @@ public:
 
 	friend void Entity::addTag(std::string tag);
 	friend void Entity::removeTag(std::string tag);
+
+	static Entity &getUI(std::string name);
+	static void addUI(std::string name, Entity &entity);
+	static void removeUI(std::string name);
 };

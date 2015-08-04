@@ -9,6 +9,7 @@ void UIRunner::setup()
 	w0.add(new DropdownUIC({"Look", "at", "these", "options"}));
 	w0.add(new SplitLayout(0.4));
 
+	Scene::addUI("window", w0);
 }
 
 void UIRunner::update(double dt)
