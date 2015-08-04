@@ -1,15 +1,6 @@
-//
-// Created by Benjamin Barantschik on 8/3/15.
-//
-
-#ifndef OPENGL_TEST_UICLAYOUT_HPP
-#define OPENGL_TEST_UICLAYOUT_HPP
-
+#pragma once
 
 class UICLayout
 {
 
 };
-
-
-#endif //OPENGL_TEST_UICLAYOUT_HPP

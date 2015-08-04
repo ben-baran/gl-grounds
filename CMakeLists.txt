@@ -92,7 +92,11 @@ set(SOURCE_FILES #src/main.cpp
                  src/ui/UIC.cpp
                  src/ui/UIC.hpp
                  #src/game/UIRunner.cpp
-                 #src/game/UIRunner.hpp)
+                 #src/game/UIRunner.hpp
+                 src/ui/UICLayout.cpp
+                 src/ui/UICLayout.hpp
+                 src/ui/ListLayout.cpp
+                 src/ui/ListLayout.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
