@@ -56,7 +56,7 @@ public:
 	Entity(Renderable *renderable, Collider *collider, Transform *transform = new Transform());
 
 	virtual void update(double dt);
-	void draw();
+	virtual void draw();
 
 	struct PairCompare
 	{

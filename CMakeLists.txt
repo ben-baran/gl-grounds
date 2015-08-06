@@ -96,7 +96,7 @@ set(SOURCE_FILES #src/main.cpp
                  src/ui/UICLayout.cpp
                  src/ui/UICLayout.hpp
                  src/ui/ListLayout.cpp
-                 src/ui/ListLayout.hpp)
+                 src/ui/ListLayout.hpp src/ui/SingleLayout.cpp src/ui/SingleLayout.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
