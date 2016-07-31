@@ -343,7 +343,7 @@ JavaServer Faces
     extension jsf
     extension xhtml
     3rd_gen_scale 1.50
-JavaScript
+Javascript
     filter remove_matches ^\s*//
     filter call_regexp_common C
     filter remove_inline //.*$
@@ -396,7 +396,7 @@ MATLAB
     filter remove_inline %.*$
     3rd_gen_scale 4.00
     end_of_line_continuation \.\.\.\s*$
-MSBuild script
+MSBuild scripts
     filter remove_html_comments
     filter call_regexp_common HTML
     extension csproj
@@ -438,7 +438,7 @@ NASTRAN DMAP
     filter remove_inline \$.*$
     extension dmap
     3rd_gen_scale 2.35
-NAnt script
+NAnt scripts
     filter remove_html_comments
     filter call_regexp_common HTML
     extension build
