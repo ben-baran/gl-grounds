@@ -24,10 +24,17 @@ void TestRunner::setup()
 	placeWall(-2, -2);
 	Entity *player = new Entity(new SolidRectangle(-0.5, -0.5, 1, 1, 0.5, 0.5, 0.9));
 	Scene::add("player", *player);
+	placeWall(-2, -3);
+	placeWall(-3, -3);
+	placeWall(-3, -4);
+
 }
 
 void TestRunner::update(double dt)
 {
+	if (dt > 0.05) {
+		std::cout << "dt: " << dt << std::endl;
+	}
 	if(KeyHandler::pressed(GLFW_KEY_ESCAPE)) end();
 
 	Transform &transform = Scene::get("player").getTransform();
@@ -37,7 +44,7 @@ void TestRunner::update(double dt)
 	{
 		std::cout << coords.first << " " << coords.second << std::endl;
 		std::cout << transform.getDX() << " " << transform.getDY() << std::endl;
-		//transform.queueAnimation(1.0, Ease::backInOut).addComponent(1, &Transform::translateX);
+		transform.queueAnimation(1.0, Ease::backInOut).addComponent(1, &Transform::translateX);
 	}
 	transform.setRotation(std::atan2(coords.second - transform.getDY(), coords.first - transform.getDX()));
 
