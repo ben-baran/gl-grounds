@@ -53,8 +53,6 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/Scene.hpp
                  src/engine/Entity.cpp
                  src/engine/Entity.hpp
-                 #src/game/Prototype.cpp
-                 #src/game/Prototype.hpp
                  src/engine/Run.cpp
                  src/engine/Run.hpp
                  src/engine/render/Renderable.cpp
@@ -65,10 +63,12 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/physics/RectangleCollider.hpp
                  src/engine/render/Camera.cpp
                  src/engine/render/Camera.hpp
-                 src/game/TestRunner.cpp
-                 src/game/TestRunner.hpp
+                 #src/game/TestRunner.cpp
+                 #src/game/TestRunner.hpp
                  src/engine/anim/Ease.cpp
-                 src/engine/anim/Ease.hpp)
+                 src/engine/anim/Ease.hpp
+		         src/game/Simple3D.cpp
+		         src/game/Simple3D.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 
