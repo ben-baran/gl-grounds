@@ -68,7 +68,9 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/anim/Ease.cpp
                  src/engine/anim/Ease.hpp
 		         src/game/Simple3D.cpp
-		         src/game/Simple3D.hpp)
+		         src/game/Simple3D.hpp
+                 src/engine/render/Triangle.cpp
+                 src/engine/render/Triangle.hpp)
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

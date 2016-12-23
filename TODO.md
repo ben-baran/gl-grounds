@@ -1,6 +1,6 @@
-# Current Version: 0.0.0
+# Current Version: 0.0.3
 
-## List of requirements for v0.0.1 ("Disgusting Filth Release")
+## List of requirements for v0.1.0 (Basic 3D)
 
 - [X] Implement VAO
 - [X] Implement Texture
