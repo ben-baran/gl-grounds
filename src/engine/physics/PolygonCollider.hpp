@@ -13,4 +13,5 @@ public:
 	glm::vec4 boundingBox(glm::mat4 &matrix);
 
 	PolygonCollider(std::vector<std::pair<float, float>> &points);
+	~PolygonCollider(){};
 };

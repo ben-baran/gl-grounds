@@ -17,4 +17,5 @@ public:
 							double startX, double startY, double cellWidth, double cellHeight);
 
 	glm::vec4 boundingBox(glm::mat4 &matrix);
+	~MarchingSquaresCollider(){};
 };

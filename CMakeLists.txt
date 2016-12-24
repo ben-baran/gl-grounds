@@ -63,8 +63,10 @@ set(SOURCE_FILES #src/main.cpp
                  src/engine/physics/RectangleCollider.hpp
                  src/engine/render/Camera.cpp
                  src/engine/render/Camera.hpp
-                 #src/game/TestRunner.cpp
-                 #src/game/TestRunner.hpp
+
+                 src/game/TestRunner.cpp
+                 src/game/TestRunner.hpp
+
                  src/engine/anim/Ease.cpp
                  src/engine/anim/Ease.hpp
 
@@ -97,7 +99,7 @@ set(SOURCE_FILES #src/main.cpp
                  src/ui/UIC.hpp
                  #src/game/UIRunner.cpp
                  #src/game/UIRunner.hpp
-                 src/ui/UICLayout.cpp
+		         src/ui/UICLayout.cpp
                  src/ui/UICLayout.hpp
                  src/ui/ListLayout.cpp
                  src/ui/ListLayout.hpp

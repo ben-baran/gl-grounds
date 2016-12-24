@@ -32,32 +32,15 @@ void Entity::setImportanceAfter(std::initializer_list<string> names) {
 	importance = max + 1;
 }
 
-string Entity::getName()
-{
+string Entity::getName() {
 	return name;
 }
 
-void Entity::setName(std::string &name)
-{
+void Entity::setName(std::string &name) {
 	this->name = name;
 }
 
-Renderable &Entity::getRenderable()
-{
-	return *renderable;
-}
-
-Collider &Entity::getCollider()
-{
-	return *collider;
-}
-
-Transform &Entity::getTransform()
-{
-	return *transform;
-}
-
-const std::unordered_set<std::string> &Entity::getTags()
+Renderable &Entity::getRenderable() {
 	return *renderable;
 }
 
@@ -118,7 +101,7 @@ bool Entity::PairCompare::operator()(const std::pair<std::string, Entity *> &lef
 
 void Entity::collideByName(std::string name) {
 	Entity other = Scene::get(name);
-	auto coords = Collider::intersection(*collider, *transform, other.getCollider(), other.getTransform());
+	auto coords = Collider::intersection(*collider, transform->getMatrix(), other.getCollider(), other.getTransform().getMatrix());
 
 	transform->translate(coords.first, coords.second);
 }

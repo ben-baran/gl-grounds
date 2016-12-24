@@ -9,8 +9,7 @@ class MarchingSquaresCollider;
 class PolygonCollider;
 class Entity;
 
-class Collider
-{
+class Collider {
 private:
 	static std::pair<double, double> intersection(RectangleCollider &a, glm::mat4 &mA, RectangleCollider &b, glm::mat4 &mB);
 	static std::pair<double, double> intersection(RectangleCollider &a, glm::mat4 &mA, GridCollider &b, glm::mat4 &mB);
@@ -25,6 +24,7 @@ private:
 public:
 	virtual int getClassID() = 0;
 	virtual glm::vec4 boundingBox(glm::mat4 &transform) = 0;
+	virtual ~Collider(){};
 
 	static const int LOW_ITERATIONS, HIGH_ITERATIONS;
 	static std::pair<double, double> intersection(Collider &a, glm::mat4 &mA, Collider &b, glm::mat4 &mB);

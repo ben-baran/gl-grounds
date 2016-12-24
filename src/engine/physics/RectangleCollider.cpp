@@ -7,16 +7,13 @@ RectangleCollider::RectangleCollider(double x, double y, double width, double he
 	: x(x)
 	, y(y)
 	, width(width)
-	, height(height)
-{}
+	, height(height) {}
 
-int RectangleCollider::getClassID()
-{
+int RectangleCollider::getClassID() {
 	return CLASS_ID;
 }
 
-void RectangleCollider::getCoordinates(glm::mat4 &matrix, double (*coords)[2])
-{
+void RectangleCollider::getCoordinates(glm::mat4 &matrix, double (*coords)[2]) {
 	glm::vec4 p1 = matrix * glm::vec4(x, y, 0, 1);
 	glm::vec4 p2 = matrix * glm::vec4(x, y + height, 0, 1);
 	glm::vec4 p3 = matrix * glm::vec4(x + width, y + height, 0, 1);
@@ -32,13 +29,11 @@ void RectangleCollider::getCoordinates(glm::mat4 &matrix, double (*coords)[2])
 	coords[3][1] = p4.y;
 }
 
-glm::vec4 RectangleCollider::boundingBox(glm::mat4 &matrix)
-{
+glm::vec4 RectangleCollider::boundingBox(glm::mat4 &matrix) {
 	double coords[4][2];
 	getCoordinates(matrix, coords);
 	double minX = INFINITY, minY = INFINITY, maxX = -INFINITY, maxY = -INFINITY;
-	for(int i = 0; i < 4; i++)
-	{
+	for(int i = 0; i < 4; i++) {
 		minX = std::min(minX, coords[i][0]);
 		maxX = std::max(maxX, coords[i][0]);
 		minY = std::min(minY, coords[i][1]);
@@ -53,3 +48,4 @@ glm::vec4 RectangleCollider::boundingBox(glm::mat4 &matrix)
 
 	return v;
 }
+
