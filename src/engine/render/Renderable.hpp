@@ -11,12 +11,11 @@ private:
 public:
 	double getLayer();
 	virtual void setLayer(double layer);
-	void setLayerBelow(std::initializer_list<std::string> names);
-	void setLayerBetween(std::string bottom, std::string top);
-	void setLayerAbove(std::initializer_list<std::string> names);
-
-	void setLayerBelowTag(std::string tag);
-	void setLayerAboveTag(std::string tag);
+	static double layerBelow(std::initializer_list<std::string> names);
+	static double layerBetween(std::string bottom, std::string top);
+	static double layerAbove(std::initializer_list<std::string> names);
+	static double layerBelowTag(std::string tag);
+	static double layerAboveTag(std::string tag);
 
 	virtual void render() = 0;
 	virtual void render(glm::mat4 transformMatrix) = 0;

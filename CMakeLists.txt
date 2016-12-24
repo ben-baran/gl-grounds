@@ -67,8 +67,43 @@ set(SOURCE_FILES #src/main.cpp
                  #src/game/TestRunner.hpp
                  src/engine/anim/Ease.cpp
                  src/engine/anim/Ease.hpp
-		         src/game/Simple3D.cpp
-		         src/game/Simple3D.hpp)
+
+		         #src/game/Simple3D.cpp
+		         #src/game/Simple3D.hpp
+                 #src/engine/render/Triangle.cpp
+                 #src/engine/render/Triangle.hpp
+
+                 src/game/procedural/GridManip.cpp
+                 src/game/procedural/GridManip.hpp
+                 src/engine/render/SolidGrid.cpp
+                 src/engine/render/SolidGrid.hpp
+                 src/engine/physics/GridCollider.cpp
+                 src/engine/physics/GridCollider.hpp
+                 src/engine/render/SolidPolygon.cpp
+                 src/engine/render/SolidPolygon.hpp
+                 src/engine/physics/PolygonCollider.cpp
+                 src/engine/physics/PolygonCollider.hpp
+                 src/engine/render/SolidMarchingSquares.cpp
+                 src/engine/render/SolidMarchingSquares.hpp
+                 src/engine/physics/MarchingSquaresCollider.cpp
+                 src/engine/physics/MarchingSquaresCollider.hpp
+                 src/engine/render/TexturedRectangle.cpp
+                 src/engine/render/TexturedRectangle.hpp
+                 src/engine/render/TextRenderable.cpp
+                 src/engine/render/TextRenderable.hpp
+                 src/game/procedural/GridWalk.cpp
+                 src/game/procedural/GridWalk.hpp
+                 src/ui/UIC.cpp
+                 src/ui/UIC.hpp
+                 #src/game/UIRunner.cpp
+                 #src/game/UIRunner.hpp
+                 src/ui/UICLayout.cpp
+                 src/ui/UICLayout.hpp
+                 src/ui/ListLayout.cpp
+                 src/ui/ListLayout.hpp
+		         src/ui/SingleLayout.cpp
+		         src/ui/SingleLayout.hpp)
+
 add_executable(OpenGL_Test ${SOURCE_FILES})
 target_link_libraries(OpenGL_Test ${ALL_LIBS})
 

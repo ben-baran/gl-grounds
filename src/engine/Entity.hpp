@@ -13,6 +13,8 @@ class Entity
 private:
 	double importance;
 
+	std::string name;
+
 	std::unordered_set<std::string> tags;
 	std::unordered_map<std::string, void *> properties;
 
@@ -25,6 +27,9 @@ public:
 	void setImportanceBefore(std::initializer_list<std::string> names);
 	void setImportanceBetween(std::string before, std::string after);
 	void setImportanceAfter(std::initializer_list<std::string> names);
+
+	std::string getName();
+	void setName(std::string &name);
 
 	Renderable &getRenderable();
 	Collider &getCollider();
@@ -51,7 +56,7 @@ public:
 	Entity(Renderable *renderable, Collider *collider, Transform *transform = new Transform());
 
 	virtual void update(double dt);
-	void draw();
+	virtual void draw();
 
 	struct PairCompare
 	{

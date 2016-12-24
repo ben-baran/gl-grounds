@@ -1,3 +1,7 @@
+#include <string>
+#include <memory>
+#include "Entity.hpp"
+
 #include "Entity.hpp"
 
 #include "Scene.hpp"
@@ -28,7 +32,32 @@ void Entity::setImportanceAfter(std::initializer_list<string> names) {
 	importance = max + 1;
 }
 
-Renderable &Entity::getRenderable() {
+string Entity::getName()
+{
+	return name;
+}
+
+void Entity::setName(std::string &name)
+{
+	this->name = name;
+}
+
+Renderable &Entity::getRenderable()
+{
+	return *renderable;
+}
+
+Collider &Entity::getCollider()
+{
+	return *collider;
+}
+
+Transform &Entity::getTransform()
+{
+	return *transform;
+}
+
+const std::unordered_set<std::string> &Entity::getTags()
 	return *renderable;
 }
 
@@ -96,9 +125,10 @@ void Entity::collideByName(std::string name) {
 
 void Entity::collideByTag(std::string tag, int iterations) {
 	auto entities = Scene::getAll(tag);
-	for(int i = 0; i < iterations; i++) for(auto entity : entities)
+	for(int i = 0; i < iterations; i++) for(auto entity : entities) if(entity != this)
 	{
-		auto coords = Collider::intersection(*collider, *transform, entity->getCollider(), entity->getTransform());
+		auto coords = Collider::intersection(*collider, transform->getMatrix(),
+											 entity->getCollider(), entity->getTransform().getMatrix());
 		transform->translate(coords.first, coords.second);
 	}
 }
