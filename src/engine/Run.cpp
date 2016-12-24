@@ -9,9 +9,10 @@ Run *Run::currentRun;
 
 void Run::start(Run *run)
 {
+	srand(time(nullptr));
 	currentRun = run;
-	Window::init("Title", false, 600, 600);
-//	Scene::getCamera().getInverseTransform().setScale(3, 3);
+	Window::init("Title", true, -1, -1);
+	Scene::getCamera().getInverseTransform().setScale(9 * Window::getPixelX() / ((double) Window::getPixelY()), 9);
 
 	run->setup();
 
@@ -26,8 +27,8 @@ void Run::baseUpdate(double dt)
 {
 	Scene::update(dt);
 	currentRun->update(dt);
-	Scene::draw();
 	Scene::updateBuffers();
+	Scene::draw();
 }
 
 void Run::end()

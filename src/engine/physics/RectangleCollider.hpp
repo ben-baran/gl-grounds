@@ -10,5 +10,6 @@ public:
 	double x, y, width, height;
 
 	RectangleCollider(double x, double y, double width, double height);
-	void getCoordinates(Transform &t, double coords[4][2]);
+	void getCoordinates(glm::mat4 &matrix, double coords[4][2]);
+	glm::vec4 boundingBox(glm::mat4 &matrix);
 };

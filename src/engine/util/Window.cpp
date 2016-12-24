@@ -59,13 +59,24 @@ GLFWwindow *Window::init(const std::string &title, bool fullscreen, int resX, in
     int pixelX, pixelY;
     glfwGetFramebufferSize(window, &pixelX, &pixelY);
     glViewport(0, 0, pixelX, pixelY);
-//	glOrtho(0, pixelX, pixelY, 0, -1, 1);
 
 	Window::pixelX = pixelX;
 	Window::pixelY = pixelY;
 
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_ALPHA_TEST);
+//	glDisable(GL_POLYGON_OFFSET_FILL);
+//	glDepthMask(GL_FALSE);
+//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     glfwSetKeyCallback(window, KeyHandler::callback);
     glfwSetMouseButtonCallback(window, MouseHandler::buttonCallback);
@@ -90,7 +101,7 @@ void Window::start(void (*handler)(double))
         {
             double time = glfwGetTime();
 
-			glClearColor(0.2f, 0.2f, 0.2f, 0.2f);
+			glClearColor(0.2f, 0.18f, 0.2f, 0.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             handler(time - lastTime);

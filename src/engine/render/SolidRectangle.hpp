@@ -27,8 +27,7 @@ public:
 	float getB();
 
 	SolidRectangle(float width, float height);
-    SolidRectangle(float x, float y, float width, float height);
-    SolidRectangle(float x, float y, float width, float height, float r, float g, float b, float layer = 0);
+    SolidRectangle(float x, float y, float width, float height, float r = 1.0f, float g = 1.0f, float b = 1.0f, double layer = 0);
     ~SolidRectangle();
 	void setLayer(double layer);
 
